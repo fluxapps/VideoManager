@@ -27,19 +27,25 @@ class ilVideoManagerVideo extends ilVideoManagerObject {
 	protected $width = 0;
 
 
-	/**
-	 * @param int $id
-	 */
-	public function __construct($id = 0) {
+	public function afterObjectLoad() {
 		$this->type = 'vid';
-		parent::__construct($id);
-		if ($id) {
+		if ($this->getId()) {
 			$dimensions = vmFFmpeg::getVideoDimension($this->getPath() . '/' . $this->getFileName());
 			$this->setHeight($dimensions['height']);
 			$this->setWidth($dimensions['width']);
 		}
 	}
 
+//
+//	/**
+//	 * @param array $data
+//	 */
+//	public function loadFromArray(array $data) {
+//		foreach ($data as $k => $v) {
+//			$this->{$k} = $v;
+//		}
+//	}
+//
 
 	/**
 	 * @param string $tmp_path
@@ -141,14 +147,13 @@ class ilVideoManagerVideo extends ilVideoManagerObject {
 		}
 	}
 
+
 	/**
 	 * @throws ilFFmpegException
 	 */
-	public function extractImage()
-	{
+	public function extractImage() {
 		try {
-			vmFFmpeg::extractImage($this->getAbsolutePath(), $this->getTitle()
-				. '_poster.png', $this->getPath(), $this->getImageAtSecond());
+			vmFFmpeg::extractImage($this->getAbsolutePath(), $this->getTitle() . '_poster.png', $this->getPath(), $this->getImageAtSecond());
 		} catch (ilFFmpegException $e) {
 			ilUtil::sendFailure($e->getMessage(), true);
 		}

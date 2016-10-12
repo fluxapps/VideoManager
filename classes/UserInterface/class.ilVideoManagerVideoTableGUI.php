@@ -90,6 +90,9 @@ class ilVideoManagerVideoTableGUI extends ilTable2GUI {
 	}
 
 
+	/**
+	 * @param array $row
+	 */
 	public function fillRow($row) {
 		//first row with id 0 is the title
 		if ($row['id'] == 0) {
@@ -105,6 +108,7 @@ class ilVideoManagerVideoTableGUI extends ilTable2GUI {
 			$this->tpl->setVariable('LINK', $row['link']);
 			$this->tpl->setVariable('TITLE', $row['title']);
 			$this->tpl->setVariable('DESCRIPTION', $row['description']);
+			$this->tpl->setVariable('VIEWS', $row['views']);
 			$this->tpl->parseCurrentBlock();
 		}
 	}
@@ -115,7 +119,7 @@ class ilVideoManagerVideoTableGUI extends ilTable2GUI {
 		if ($this->options['count']) {
 			$sql = 'SELECT COUNT(vidm_data.id) AS count';
 		} else {
-			$sql = 'SELECT *';
+			$sql = 'SELECT *, (SELECT COUNT(id) FROM vidm_views WHERE vidm_views.video_id = vidm_data.id) AS views';
 		}
 
 		$sql .= ' FROM vidm_data
@@ -129,7 +133,6 @@ class ilVideoManagerVideoTableGUI extends ilTable2GUI {
 
 		foreach ($this->options as $option => $value) {
 			switch ($option) {
-
 				case 'search':
 					switch ($value['method']) {
 						case '':
@@ -198,6 +201,7 @@ class ilVideoManagerVideoTableGUI extends ilTable2GUI {
 			$this->ctrl->setParameterByClass('ilvideomanagerusergui', 'node_id', $video->getId());
 			$row['link'] = $this->ctrl->getLinkTargetByClass('ilvideomanagerusergui', 'playVideo');
 			$row['description'] = $video->getDescription($this->max_desc_length);
+			$row['views'] = $result['views'];
 
 			$data[] = $row;
 		}

@@ -5,6 +5,8 @@ require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHoo
 require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/UserInterface/class.ilVideoManagerPlayVideoGUI.php');
 require_once('./Services/Form/classes/class.ilTextInputGUI.php');
 require_once("./Services/Rating/classes/class.ilRatingGUI.php");
+require_once('class.ilVideoManagerQueryBuilder.php');
+require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/UserInterface/class.xvidListGUI.php');
 
 /**
  * Class ilVideoManagerUserGUI
@@ -108,16 +110,14 @@ class ilVideoManagerUserGUI {
 
 	protected function view() {
 		$this->tpl->addCss('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/templates/css/search_table.css');
-
-		$options = array(
-			'cmd' => 'view',
-			'sort_create_date' => 'DESC',
-			'limit' => 10,
-		);
-
 		$this->tpl->setTitle('Recently Uploaded');
-		$starter_gui = new ilVideoManagerVideoTableGUI($this, $options);
-		$this->tpl->setContent($starter_gui->getHTML());
+		$ilVideoManagerQueryBuilder = new ilVideoManagerQueryBuilder(array(
+			'cmd'              => 'view',
+			'sort_create_date' => 'DESC',
+			'limit'            => 10,
+		));
+		$xvidListGUI = new xvidListGUI($ilVideoManagerQueryBuilder->getVideos());
+		$this->tpl->setContent($xvidListGUI->render());
 	}
 
 
@@ -132,7 +132,7 @@ class ilVideoManagerUserGUI {
 		$this->tpl->addCss('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/templates/css/video_player.css');
 
 		$textinput = new ilTextInputGUI('search_input', 'search_value');
-		if (! $_SESSION['search_method'] == 'category') {
+		if (!$_SESSION['search_method'] == 'category') {
 			$textinput->setValue($_SESSION['search_value']);
 		}
 
@@ -140,7 +140,7 @@ class ilVideoManagerUserGUI {
 		$this->toolbar->addFormButton($this->pl->txt('common_search'), 'search');
 		$this->toolbar->setFormAction($this->ctrl->getLinkTarget($this, 'search'));
 		global $ilUser;
-		if($ilUser->getId() == 6) {
+		if ($ilUser->getId() == 6) {
 			$this->toolbar->addButton('Recently Uploaded', $this->ctrl->getLinkTarget($this, 'view'));
 		}
 	}
@@ -160,10 +160,6 @@ class ilVideoManagerUserGUI {
 
 
 	public function performSearch() {
-		$this->tpl->addCss('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/templates/css/search_table.css');
-
-		$tpl = new ilTemplate('tpl.search_gui.html', true, true, 'Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager');
-		//		$tpl->setCurrentBlock('search_gui');
 		if ($_SESSION['search_method'] == 'category') {
 			/**
 			 * @var $cat ilVideoManagerFolder
@@ -174,10 +170,11 @@ class ilVideoManagerUserGUI {
 			$this->tpl->setTitle('Results for: ' . $_SESSION['search_value']);
 		}
 
+		// Search
 		if (array_key_exists('search_value', $_SESSION)) {
 			$search = array(
-				'value' => $_SESSION['search_value'],
-				'method' => $_SESSION['search_method']
+				'value'  => $_SESSION['search_value'],
+				'method' => $_SESSION['search_method'],
 			);
 		} else {
 			ilUtil::sendFailure('Error: no search value given');
@@ -186,10 +183,20 @@ class ilVideoManagerUserGUI {
 		}
 
 		$options = array(
-			'cmd' => self::CMD_PERFORM_SEARCH,
-			'search' => $search,
+			'cmd'              => self::CMD_PERFORM_SEARCH,
+			'search'           => $search,
 			'sort_create_date' => 'ASC',
 		);
+
+		$ilVideoManagerQueryBuilder = new ilVideoManagerQueryBuilder($options);
+		$xvidListGUI = new xvidListGUI($ilVideoManagerQueryBuilder->getVideos());
+		$this->tpl->setContent($xvidListGUI->render());
+
+		return;
+		//		$this->tpl->addCss('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/templates/css/search_table.css');
+		$tpl = new ilTemplate('tpl.search_gui.html', true, true, 'Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager');
+		//		$tpl->setCurrentBlock('search_gui');
+
 
 		unset($_SESSION['table']);
 		$search_results = new ilVideoManagerVideoTableGUI($this, $options);

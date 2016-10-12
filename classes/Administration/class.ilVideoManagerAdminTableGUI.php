@@ -23,9 +23,9 @@ class ilVideoManagerAdminTableGUI extends ilTable2GUI{
      */
     protected $tree;
     /**
-     * @var array
+     * @var ilVideoManagerObject[]
      */
-    protected $objects;
+    protected $objects = array();
     /**
      * @var ilVideoManagerPlugin
      */
