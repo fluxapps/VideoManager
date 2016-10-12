@@ -5,7 +5,7 @@
  *
  * @author Fabian Schmid <fs@studer-raimann.ch>
  */
-class xvidListGUI {
+class xvidListGUI implements xvidUIComponent {
 
 	/**
 	 * @var xvidListItemGUI[]
@@ -53,6 +53,14 @@ class xvidListGUI {
 	public function render() {
 		$tpl = new ilTemplate('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/templates/default/tpl.card_list.html', true, false);
 		$this->loadItems();
+		if (count($this->items) === 0) {
+			$no_items = '<div class="panel panel-default">
+				  <div class="panel-body">
+				    No Items
+				  </div>
+				</div>';
+			return $no_items;
+		}
 		$html = "";
 		foreach ($this->items as $xvidListItemGUI) {
 			$html .= $xvidListItemGUI->render();
@@ -112,7 +120,7 @@ class xvidListGUI {
 /**
  * Class xvidListItemGUI
  */
-class xvidListItemGUI {
+class xvidListItemGUI implements xvidUIComponent {
 
 	/**
 	 * @var string

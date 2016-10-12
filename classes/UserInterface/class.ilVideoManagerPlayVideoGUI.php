@@ -65,10 +65,11 @@ class ilVideoManagerPlayVideoGUI {
 //		$this->tpl->addJavaScript('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/templates/js/video_player.js');
 //		$this->tpl->setCurrentBlock('video_player');
 		$this->initMediaPlayer();
-		$this->initRelatedVideosTable();
+
 		$this->initDescription();
 		global $tpl;
 		$tpl->setContent($this->tpl->get());
+		$tpl->setRightContent($this->getRelatedVideosTableHTML());
 		$tpl->setTitle('Play Video');
 	}
 
@@ -81,7 +82,7 @@ class ilVideoManagerPlayVideoGUI {
 	}
 
 
-	protected function initRelatedVideosTable() {
+	protected function getRelatedVideosTableHTML() {
 		$options = array(
 			'cmd' => 'related_videos',
 			'search' => array(
@@ -90,7 +91,8 @@ class ilVideoManagerPlayVideoGUI {
 			'limit' => 10
 		);
 		$related_vids = new ilVideoManagerVideoTableGUI($this, $options, $this->video);
-		$this->tpl->setVariable('RELATED_VIDEOS_TABLE', $related_vids->getHTML());
+//		$this->tpl->setVariable('RELATED_VIDEOS_TABLE', );
+		return $related_vids->getHTML();
 	}
 
 

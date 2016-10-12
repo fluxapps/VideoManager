@@ -1,18 +1,8 @@
-#maincontainer {
-  text-align: center;
-  width: 100%;
-  min-height: 100%;
-  margin: 0 auto;
-}
 .mejs-container {
   background: #000000;
 }
-#il_center_col {
-  width: 100%;
-  padding: 0;
-}
-.il_ColumnLayout.ilClearFloat {
-  width: auto;
+#xvidm_channel_list {
+  margin-top: -1px;
 }
 #videoplayer {
   box-shadow: 3px 3px 4px #D0D0D0;

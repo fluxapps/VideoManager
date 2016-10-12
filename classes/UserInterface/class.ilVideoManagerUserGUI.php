@@ -6,6 +6,7 @@ require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHoo
 require_once('./Services/Form/classes/class.ilTextInputGUI.php');
 require_once("./Services/Rating/classes/class.ilRatingGUI.php");
 require_once('class.ilVideoManagerQueryBuilder.php');
+require_once('class.xvidChannelListGUI.php');
 require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/UserInterface/class.xvidListGUI.php');
 
 /**
@@ -118,6 +119,7 @@ class ilVideoManagerUserGUI {
 		));
 		$xvidListGUI = new xvidListGUI($ilVideoManagerQueryBuilder->getVideos());
 		$this->tpl->setContent($xvidListGUI->render());
+		$this->initLeftContent();
 	}
 
 
@@ -191,12 +193,11 @@ class ilVideoManagerUserGUI {
 		$ilVideoManagerQueryBuilder = new ilVideoManagerQueryBuilder($options);
 		$xvidListGUI = new xvidListGUI($ilVideoManagerQueryBuilder->getVideos());
 		$this->tpl->setContent($xvidListGUI->render());
-
+		$this->initLeftContent();
 		return;
 		//		$this->tpl->addCss('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/templates/css/search_table.css');
 		$tpl = new ilTemplate('tpl.search_gui.html', true, true, 'Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager');
 		//		$tpl->setCurrentBlock('search_gui');
-
 
 		unset($_SESSION['table']);
 		$search_results = new ilVideoManagerVideoTableGUI($this, $options);
@@ -255,5 +256,13 @@ class ilVideoManagerUserGUI {
 		} else {
 			$this->ctrl->redirect($this, self::CMD_PERFORM_SEARCH);
 		}
+	}
+
+
+	protected function initLeftContent() {
+		// Left Content
+		$xvidChannelListGUI = new xvidChannelListGUI(ilVideoManagerFolder::where(array( 'hidden' => false, 'type' => 'fld' ))->get());
+		$xvidChannelListGUI->setId('xvidm_channel_list');
+		$this->tpl->setLeftContent($xvidChannelListGUI->render());
 	}
 } 

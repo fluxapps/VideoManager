@@ -25,10 +25,17 @@ class ilVideoManagerVideo extends ilVideoManagerObject {
 	 * @var int
 	 */
 	protected $width = 0;
+	/**
+	 * @var String
+	 *
+	 * @db_has_field        true
+	 * @db_fieldtype        text
+	 * @db_length           4
+	 */
+	protected $type = 'vid';
 
 
 	public function afterObjectLoad() {
-		$this->type = 'vid';
 		if ($this->getId()) {
 			$dimensions = vmFFmpeg::getVideoDimension($this->getPath() . '/' . $this->getFileName());
 			$this->setHeight($dimensions['height']);
