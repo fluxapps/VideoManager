@@ -45,6 +45,7 @@ msg;deletion_failed;"Die Dateien konnten nicht gelöscht werden, da eine oder me
 msg;edit_vid_failed;"Dieses Video kann momentan nicht bearbeitet werden, da es zurzeit konvertiert wird.";"This video can not be edited, as it is being converted currently."
 msg;fld_created;"Ordner wurde erfolgreich erstellt";"Folder was created"
 msg;move_failed;"Die Dateien konnten nicht verschoben werden, da eine oder mehrere Dateien momentan konvertiert werden.";"File(s) could not be moved; One or more files are still being converted."
+msg;no_ctrlmm;"Es konnte kein Menü-Eintrag erstellt werden: CtrlMainMenu ist nicht aktiv. Um einen Eintrag zu erstellen, installieren/aktivieren Sie CtrlMainMenu und deaktivieren & aktivieren Sie das VideoManager Plugin erneut.";"No menu entry could be created, since there is no active CtrlMainMenu Plugin. To create an entry, install and/or activate CtrlMainMenu and deactive & reactivate the VideoManager Plugin again."
 msg;no_permission;"Zugriff verweigert.";"Permission denied."
 msg;subscribed_successfully;"Kategorie erfolgreich abonniert.";"Subscribed successfully."
 msg;unsubscribed_successfully;"Kategorie erfolgreich abbestellt.";"Unsubscribed successfully."

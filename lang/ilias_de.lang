@@ -48,6 +48,7 @@ msg_deletion_failed#:#Die Dateien konnten nicht gelöscht werden, da eine oder m
 msg_edit_vid_failed#:#Dieses Video kann momentan nicht bearbeitet werden, da es zurzeit konvertiert wird.
 msg_fld_created#:#Ordner wurde erfolgreich erstellt
 msg_move_failed#:#Die Dateien konnten nicht verschoben werden, da eine oder mehrere Dateien momentan konvertiert werden.
+msg_no_ctrlmm#:#Es konnte kein Menü-Eintrag erstellt werden: CtrlMainMenu ist nicht aktiv. Um einen Eintrag zu erstellen, installieren/aktivieren Sie CtrlMainMenu und deaktivieren & aktivieren Sie das VideoManager Plugin erneut.
 msg_no_permission#:#Zugriff verweigert.
 msg_subscribed_successfully#:#Kategorie erfolgreich abonniert.
 msg_unsubscribed_successfully#:#Kategorie erfolgreich abbestellt.

@@ -21,7 +21,9 @@
 #videoplayer {
   margin: 4px;
 }
-#mep_0 {
+div#mep_0 {
+  max-height: 450px;
+  width: 100%;
   right: -2px;
   margin: -2px;
 }

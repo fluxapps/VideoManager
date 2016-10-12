@@ -48,6 +48,7 @@ msg_deletion_failed#:#File(s) could not be deleted; One or more files are still 
 msg_edit_vid_failed#:#This video can not be edited, as it is being converted currently.
 msg_fld_created#:#Folder was created
 msg_move_failed#:#File(s) could not be moved; One or more files are still being converted.
+msg_no_ctrlmm#:#No menu entry could be created, since there is no active CtrlMainMenu Plugin. To create an entry, install and/or activate CtrlMainMenu and deactive & reactivate the VideoManager Plugin again.
 msg_no_permission#:#Permission denied.
 msg_subscribed_successfully#:#Subscribed successfully.
 msg_unsubscribed_successfully#:#Unsubscribed successfully.

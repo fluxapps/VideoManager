@@ -13,10 +13,16 @@
     width:100%;
 }
 
+div#mep_0 {
+    max-height: 450px;
+    width: 100%;
+    right: -2px;
+    margin: -2px;
+}
+
 #videoplayer {
 	box-shadow: 3px 3px 4px #D0D0D0;
 	width:      inherit;
-	height:     390px;
 	max-width:  720px;
 }
 /*#videoplayer {*/
