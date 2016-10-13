@@ -7,6 +7,8 @@
  */
 class xvidListGUI implements xvidUIComponent {
 
+	const SIZE_LARGE = 'large';
+	const SIZE_SMALL = 'small';
 	/**
 	 * @var xvidListItemGUI[]
 	 */
@@ -15,6 +17,17 @@ class xvidListGUI implements xvidUIComponent {
 	 * @var ilVideoManagerVideo[]
 	 */
 	protected $videos = array();
+	/**
+	 * @var string
+	 */
+	protected $size = self::SIZE_LARGE;
+	/**
+	 * @var array
+	 */
+	protected static $class_map = array(
+		self::SIZE_LARGE => 'col-lg-3 col-md-3 col-sm-4 col-xs-6',
+		self::SIZE_SMALL => 'col-lg-6 col-md-12 col-sm-12 col-xs-6',
+	);
 
 
 	/**
@@ -61,10 +74,12 @@ class xvidListGUI implements xvidUIComponent {
 				    No Items
 				  </div>
 				</div>';
+
 			return $no_items;
 		}
 		$html = "";
 		foreach ($this->items as $xvidListItemGUI) {
+			$xvidListItemGUI->setClasses(self::$class_map[$this->getSize()]);
 			$html .= $xvidListItemGUI->render();
 		}
 		$html .= "";
@@ -84,6 +99,22 @@ class xvidListGUI implements xvidUIComponent {
 
 	public function clearItems() {
 		$this->items = array();
+	}
+
+
+	/**
+	 * @return string
+	 */
+	public function getSize() {
+		return $this->size;
+	}
+
+
+	/**
+	 * @param string $size
+	 */
+	public function setSize($size) {
+		$this->size = $size;
 	}
 
 
@@ -148,6 +179,10 @@ class xvidListItemGUI implements xvidUIComponent {
 	 * @var int
 	 */
 	protected $counter = 0;
+	/**
+	 * @var string
+	 */
+	protected $classes = 'col-lg-3 col-md-3 col-sm-4 col-xs-6';
 
 
 	/**
@@ -246,12 +281,28 @@ class xvidListItemGUI implements xvidUIComponent {
 	}
 
 
+	/**
+	 * @return string
+	 */
+	public function getClasses() {
+		return $this->classes;
+	}
+
+
+	/**
+	 * @param string $classes
+	 */
+	public function setClasses($classes) {
+		$this->classes = $classes;
+	}
+
 
 	/**
 	 * @return string
 	 */
 	public function render() {
 		$tpl = new ilTemplate('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/templates/default/tpl.card.html', true, false);
+		$tpl->setVariable('CLASSES', $this->getClasses());
 		$tpl->setVariable('TITLE', $this->getTitle());
 		$tpl->setVariable('DESCRIPTION', $this->getDescription());
 		$tpl->setVariable('SRC', $this->getImgSrc());

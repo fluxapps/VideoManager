@@ -90,19 +90,16 @@ class ilVideoManagerPlayVideoGUI {
 		$options = array(
 			'cmd'    => 'related_videos',
 			'search' => array(
-				'method' => 'related'
+				'method' => 'related',
 			),
-			'limit'  => 10
+			'limit'  => 6,
 		);
 		$ilVideoManagerQueryBuilder = new ilVideoManagerQueryBuilder($options, $this->video);
 
-//		$xvidListGUI = new xvidListGUI($ilVideoManagerQueryBuilder->getVideos());
+		$xvidListGUI = new xvidListGUI($ilVideoManagerQueryBuilder->getVideos());
+		$xvidListGUI->setSize(xvidListGUI::SIZE_SMALL);
 
-//		return $xvidListGUI->render();
-
-		$related_vids = new ilVideoManagerVideoTableGUI($this, $options, $this->video);
-//		$this->tpl->setVariable('RELATED_VIDEOS_TABLE', );
-		return $related_vids->getHTML();
+		return $xvidListGUI->render();
 	}
 
 

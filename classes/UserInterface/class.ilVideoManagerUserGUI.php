@@ -1,7 +1,6 @@
 <?php
 require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/class.ilVideoManagerPlugin.php');
 require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/Subscription/class.vidmSubscription.php');
-require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/UserInterface/class.ilVideoManagerVideoTableGUI.php');
 require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/UserInterface/class.ilVideoManagerPlayVideoGUI.php');
 require_once('./Services/Form/classes/class.ilTextInputGUI.php');
 require_once("./Services/Rating/classes/class.ilRatingGUI.php");
@@ -119,7 +118,7 @@ class ilVideoManagerUserGUI {
 			'limit'            => self::LIMIT_RECENTLY_UPLOADED,
 		));
 		$xvidListGUI = new xvidListGUI($ilVideoManagerQueryBuilder->getVideos());
-		$this->tpl->setContent($this->pl->txt('common_recently_uploaded') . '<br>' . $xvidListGUI->render());
+		$this->tpl->setContent('<h2>' . $this->pl->txt('common_recently_uploaded') . '</h2><br>' . $xvidListGUI->render());
 		$this->initLeftContent();
 	}
 

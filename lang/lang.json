@@ -209,8 +209,8 @@
             },
             "recently_uploaded": {
                 "translations": {
-                    "de": "Zurück zu Channels",
-                    "en": "Back to Channels"
+                    "de": "Letzte Uploads:",
+                    "en": "Recently uploaded:"
                 },
                 "last_used": "13.10.2016"
             },
