@@ -1,4 +1,3 @@
-<!-- language file start -->
 admin_activate_subscription#:#Activate channel subscriptions
 admin_activate_view_log#:#Log View Count
 admin_add_folder#:#Add new Folder
@@ -32,6 +31,9 @@ common_tags#:#Tags
 common_title#:#Title
 common_upload_date#:#Upload Date
 common_video#:#Video
+common_recently_uploaded#:#Back to Channels
+common_title_home#:#Channels
+common_back_to_channels#:#Back to Channels
 form_add_folder#:#Add Folder
 form_edit_vid#:#Edit Video
 form_tags#:#Tags
@@ -40,8 +42,8 @@ form_vid#:#Video(s)
 form_wrong_filetype#:#Wrong Filetype
 form_image_at_sec#:#Extract image at
 form_image_at_sec_info#:#Amount of seconds, at which point the poster image should be extracted<br>Default: 1/3 of the video's length
-mail_new_upload#:#A new video was uploaded in a category to which you have subscribed: 
-mail_subject#:#New video-upload in category 
+mail_new_upload#:#A new video was uploaded in a category to which you have subscribed:
+mail_subject#:#New video-upload in category
 mail_view_video#:#Direct link
 msg_choose_folder#:#Please choose a destination folder, to which the file(s) should be moved.
 msg_deletion_failed#:#File(s) could not be deleted; One or more files are still being converted.

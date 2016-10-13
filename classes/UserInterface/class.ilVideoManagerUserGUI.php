@@ -22,6 +22,7 @@ class ilVideoManagerUserGUI {
 	const CMD_PLAY_VIDEO = 'playVideo';
 	const CMD_SUBSCRIBE = 'subscribe';
 	const CMD_UNSUBSCRIBE = 'unsubscribe';
+	const LIMIT_RECENTLY_UPLOADED = 12;
 	/**
 	 * @var ilCtrl
 	 */
@@ -111,14 +112,14 @@ class ilVideoManagerUserGUI {
 
 	protected function view() {
 		$this->tpl->addCss('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/templates/css/search_table.css');
-		$this->tpl->setTitle('Recently Uploaded');
+		$this->tpl->setTitle($this->pl->txt('common_title_home'));
 		$ilVideoManagerQueryBuilder = new ilVideoManagerQueryBuilder(array(
 			'cmd'              => 'view',
 			'sort_create_date' => 'DESC',
-			'limit'            => 10,
+			'limit'            => self::LIMIT_RECENTLY_UPLOADED,
 		));
 		$xvidListGUI = new xvidListGUI($ilVideoManagerQueryBuilder->getVideos());
-		$this->tpl->setContent($xvidListGUI->render());
+		$this->tpl->setContent($this->pl->txt('common_recently_uploaded') . '<br>' . $xvidListGUI->render());
 		$this->initLeftContent();
 	}
 
@@ -143,7 +144,7 @@ class ilVideoManagerUserGUI {
 		$this->toolbar->setFormAction($this->ctrl->getLinkTarget($this, 'search'));
 		global $ilUser;
 		if ($ilUser->getId() == 6) {
-			$this->toolbar->addButton('Recently Uploaded', $this->ctrl->getLinkTarget($this, 'view'));
+			$this->toolbar->addButton($this->pl->txt('common_back_to_channels'), $this->ctrl->getLinkTarget($this, 'view'));
 		}
 	}
 
@@ -184,40 +185,14 @@ class ilVideoManagerUserGUI {
 			return false;
 		}
 
-		$options = array(
+		$ilVideoManagerQueryBuilder = new ilVideoManagerQueryBuilder(array(
 			'cmd'              => self::CMD_PERFORM_SEARCH,
 			'search'           => $search,
 			'sort_create_date' => 'ASC',
-		);
-
-		$ilVideoManagerQueryBuilder = new ilVideoManagerQueryBuilder($options);
+		));
 		$xvidListGUI = new xvidListGUI($ilVideoManagerQueryBuilder->getVideos());
 		$this->tpl->setContent($xvidListGUI->render());
 		$this->initLeftContent();
-		return;
-		//		$this->tpl->addCss('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/templates/css/search_table.css');
-		$tpl = new ilTemplate('tpl.search_gui.html', true, true, 'Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager');
-		//		$tpl->setCurrentBlock('search_gui');
-
-		unset($_SESSION['table']);
-		$search_results = new ilVideoManagerVideoTableGUI($this, $options);
-		$tpl->setVariable('TABLE', $search_results->getHTML());
-
-		if ($_SESSION['search_method'] == 'category') {
-			/**
-			 * @var $channel ilVideoManagerFolder
-			 */
-			$channel = ilVideoManagerFolder::find($_SESSION['search_value']);
-			$tpl->setVariable('CHANNEL', $this->pl->txt('common_category') . ": '" . $channel->getTitle() . "'");
-
-			if (vidmConfig::get(vidmConfig::F_ACTIVATE_SUBSCRIPTION)) {
-				$button = new vidmSubscriptionButtonGUI();
-				$button->generate($channel);
-				$tpl->setVariable('SUBSCRIPTION', $button->getHTML());
-			}
-		}
-
-		$this->tpl->setContent($tpl->get());
 	}
 
 
@@ -261,7 +236,8 @@ class ilVideoManagerUserGUI {
 
 	protected function initLeftContent() {
 		// Left Content
-		$xvidChannelListGUI = new xvidChannelListGUI(ilVideoManagerFolder::where(array( 'type' => 'fld' ))->where('( hidden IS NULL OR hidden = 0)')->get());
+		$xvidChannelListGUI = new xvidChannelListGUI(ilVideoManagerFolder::where(array( 'type' => 'fld' ))->where('( hidden IS NULL OR hidden = 0)')
+		                                                                 ->get());
 		$xvidChannelListGUI->setId('xvidm_channel_list');
 		$this->tpl->setLeftContent($xvidChannelListGUI->render());
 	}

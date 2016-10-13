@@ -3,27 +3,10 @@
 @boder-color: #D0D0D0;
 @il-vidm-box-height: 130px;
 @il-vidm-box-width: 200px;
-//#maincontainer {
-//  text-align: center;
-//  width:      100%;
-//  min-height: 100%;
-//  //  padding:    0 40px;
-//  //  overflow:   hidden;
-//  margin:     0 auto;
-//}
 
 .mejs-container {
   background: #000000;
 }
-
-//#il_center_col {
-//  width:   100%;
-//  padding: 0;
-//}
-
-//.il_ColumnLayout.ilClearFloat {
-//  width: auto;
-//}
 
 #xvidm_channel_list {
   margin-top: -1px;
@@ -156,7 +139,6 @@ div.ilTableOuter {
   border:           none;
   text-align:       center;
   vertical-align:   middle !important;
-  background-color: black !important;
 }
 
 thead {
@@ -262,4 +244,10 @@ tr.tblheader {
   }
 }
 
+// -- GOLD
+@import "../../../../../../../../../Services/UICore/lib/bootstrap-3.2.0/less/mixins/labels.less";
+.label-gold {
+  .label-variant(rgb(177, 156, 99));
+  float: right;
+}
 

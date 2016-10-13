@@ -19,6 +19,10 @@ class ilVideoManagerQueryBuilder {
 	 * @var array
 	 */
 	protected $videos = array();
+	/**
+	 * @var int
+	 */
+	protected $limit = null;
 
 
 	/**
@@ -30,9 +34,9 @@ class ilVideoManagerQueryBuilder {
 	public function __construct(array $options, $video = null) {
 		$this->options = $options;
 		$this->video = $video;
+		$this->setLimit($options['limit']);
 		if ($options['cmd'] == 'related_videos') {
 			$this->max_desc_length = 70;
-			$this->options['limit'] = 5;
 		} else {
 			$this->max_desc_length = 320;
 		}
@@ -59,6 +63,10 @@ class ilVideoManagerQueryBuilder {
 
 		if ($hidden_nodes = $tree->getHiddenNodes()) {
 			$sql .= ' AND vidm_data.id NOT IN (' . implode(',', $hidden_nodes) . ')';
+		}
+
+		if ($this->getLimit()) {
+			$this->options['limit'] = $this->getLimit();
 		}
 
 		foreach ($this->options as $option => $value) {
@@ -111,7 +119,7 @@ class ilVideoManagerQueryBuilder {
 					break;
 			}
 		}
-//		ilUtil::sendInfo($sql);
+		//		ilUtil::sendInfo($sql);
 		$query = $ilDB->query($sql);
 		if ($this->options['count']) {
 			return (int)$ilDB->fetchObject($query)->count;
@@ -134,6 +142,7 @@ class ilVideoManagerQueryBuilder {
 			$this->videos[] = $video;
 		}
 	}
+
 
 	/**
 	 * @return array
@@ -180,5 +189,21 @@ class ilVideoManagerQueryBuilder {
 	 */
 	public function setVideos($videos) {
 		$this->videos = $videos;
+	}
+
+
+	/**
+	 * @return int
+	 */
+	public function getLimit() {
+		return $this->limit;
+	}
+
+
+	/**
+	 * @param int $limit
+	 */
+	public function setLimit($limit) {
+		$this->limit = $limit;
 	}
 }

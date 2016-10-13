@@ -154,7 +154,7 @@ class xvidChannelListItemGUI implements xvidUIComponent {
 		$item = <<<EOL
 	<li class="list-group-item">
 		<a href="{$this->getLink()}">{$this->getTitle()}</a>
-		<span class="badge badge-primary">{$this->getCounter()}</span>
+		<span class="label label-gold">{$this->getCounter()}</span>
 	</li> 
 EOL;
 
