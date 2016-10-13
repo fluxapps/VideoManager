@@ -111,7 +111,7 @@ class ilVideoManagerQueryBuilder {
 					break;
 			}
 		}
-
+//		ilUtil::sendInfo($sql);
 		$query = $ilDB->query($sql);
 		if ($this->options['count']) {
 			return (int)$ilDB->fetchObject($query)->count;

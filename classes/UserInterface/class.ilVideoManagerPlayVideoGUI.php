@@ -5,6 +5,7 @@ require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHoo
 require_once("./Services/Rating/classes/class.ilRatingGUI.php");
 require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/Count/class.vidmCount.php');
 require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/Subscription/class.vidmSubscriptionButtonGUI.php');
+require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/UserInterface/class.ilVideoManagerQueryBuilder.php');
 
 /**
  * Class ilVideoManagerPlayVideoGUI
@@ -82,14 +83,23 @@ class ilVideoManagerPlayVideoGUI {
 	}
 
 
+	/**
+	 * @return string
+	 */
 	protected function getRelatedVideosTableHTML() {
 		$options = array(
-			'cmd' => 'related_videos',
+			'cmd'    => 'related_videos',
 			'search' => array(
 				'method' => 'related'
 			),
-			'limit' => 10
+			'limit'  => 10
 		);
+		$ilVideoManagerQueryBuilder = new ilVideoManagerQueryBuilder($options, $this->video);
+
+//		$xvidListGUI = new xvidListGUI($ilVideoManagerQueryBuilder->getVideos());
+
+//		return $xvidListGUI->render();
+
 		$related_vids = new ilVideoManagerVideoTableGUI($this, $options, $this->video);
 //		$this->tpl->setVariable('RELATED_VIDEOS_TABLE', );
 		return $related_vids->getHTML();

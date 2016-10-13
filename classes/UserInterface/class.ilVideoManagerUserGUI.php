@@ -261,7 +261,7 @@ class ilVideoManagerUserGUI {
 
 	protected function initLeftContent() {
 		// Left Content
-		$xvidChannelListGUI = new xvidChannelListGUI(ilVideoManagerFolder::where(array( 'hidden' => false, 'type' => 'fld' ))->get());
+		$xvidChannelListGUI = new xvidChannelListGUI(ilVideoManagerFolder::where(array( 'type' => 'fld' ))->where('( hidden IS NULL OR hidden = 0)')->get());
 		$xvidChannelListGUI->setId('xvidm_channel_list');
 		$this->tpl->setLeftContent($xvidChannelListGUI->render());
 	}

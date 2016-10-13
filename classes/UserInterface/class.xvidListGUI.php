@@ -42,6 +42,8 @@ class xvidListGUI implements xvidUIComponent {
 			$xvidListItemGUI->setDescription($ilVideoManagerVideo->getDescription($this->max_desc_length));
 			$xvidListItemGUI->setLink($ilCtrl->getLinkTargetByClass('ilvideomanagerusergui', 'playVideo'));
 			$xvidListItemGUI->setImgSrc($ilVideoManagerVideo->getPosterHttp());
+			$xvidListItemGUI->setCounter($ilVideoManagerVideo->getViews());
+
 			$this->addItem($xvidListItemGUI);
 		}
 	}
@@ -142,6 +144,10 @@ class xvidListItemGUI implements xvidUIComponent {
 	 * @var string
 	 */
 	protected $link_title = '';
+	/**
+	 * @var int
+	 */
+	protected $counter = 0;
 
 
 	/**
@@ -225,6 +231,23 @@ class xvidListItemGUI implements xvidUIComponent {
 
 
 	/**
+	 * @return int
+	 */
+	public function getCounter() {
+		return $this->counter;
+	}
+
+
+	/**
+	 * @param int $counter
+	 */
+	public function setCounter($counter) {
+		$this->counter = $counter;
+	}
+
+
+
+	/**
 	 * @return string
 	 */
 	public function render() {
@@ -233,6 +256,7 @@ class xvidListItemGUI implements xvidUIComponent {
 		$tpl->setVariable('DESCRIPTION', $this->getDescription());
 		$tpl->setVariable('SRC', $this->getImgSrc());
 		$tpl->setVariable('HREF', $this->getLink());
+		$tpl->setVariable('COUNTER', $this->getCounter());
 
 		return $tpl->get();
 	}

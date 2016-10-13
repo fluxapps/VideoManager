@@ -39,7 +39,7 @@ class ilVideoManagerTree extends ilTree {
 		if ($childs = $this->getChildIds($node_id)) {
 			foreach($childs as $id => $child) {
 				$folder = ilVideoManagerFolder::findOrGetInstance($child);
-				if($folder->getType() == 'fld') {
+				if (1 == 2 && $folder->getType() == 'fld') {
 					if ($folder->getHidden()) {
 						$hidden_folders[] = $child;
 						$hidden_folders = array_merge($hidden_folders, $this->getSubTreeIds($child));

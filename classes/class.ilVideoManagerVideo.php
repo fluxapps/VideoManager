@@ -33,6 +33,10 @@ class ilVideoManagerVideo extends ilVideoManagerObject {
 	 * @db_length           4
 	 */
 	protected $type = 'vid';
+	/**
+	 * @var int
+	 */
+	protected $views = 0;
 
 
 	public function afterObjectLoad() {
@@ -43,16 +47,6 @@ class ilVideoManagerVideo extends ilVideoManagerObject {
 		}
 	}
 
-//
-//	/**
-//	 * @param array $data
-//	 */
-//	public function loadFromArray(array $data) {
-//		foreach ($data as $k => $v) {
-//			$this->{$k} = $v;
-//		}
-//	}
-//
 
 	/**
 	 * @param string $tmp_path
@@ -136,6 +130,22 @@ class ilVideoManagerVideo extends ilVideoManagerObject {
 	 */
 	public function setWidth($width) {
 		$this->width = $width;
+	}
+
+
+	/**
+	 * @return int
+	 */
+	public function getViews() {
+		return $this->views;
+	}
+
+
+	/**
+	 * @param int $views
+	 */
+	public function setViews($views) {
+		$this->views = $views;
 	}
 
 
