@@ -94,6 +94,12 @@ class ilVideoManagerPlayVideoGUI {
 			),
 			'limit'  => 6,
 		);
+
+		require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/UserInterface/class.ilVideoManagerVideoTableGUI.php');
+		$ilVideoManagerVideoTableGUI = new ilVideoManagerVideoTableGUI($this, $options, $this->video);
+		return $ilVideoManagerVideoTableGUI->getHTML();
+
+		// implemented but not used new version of gui
 		$ilVideoManagerQueryBuilder = new ilVideoManagerQueryBuilder($options, $this->video);
 
 		$xvidListGUI = new xvidListGUI($ilVideoManagerQueryBuilder->getVideos());
