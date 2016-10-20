@@ -1,6 +1,7 @@
 <?php
 require_once('class.videoman.php');
 videoman::loadActiveRecord();
+require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/class.ilVideoManagerTree.php');
 
 /**
  * Class ilVideoManagerObject
@@ -205,41 +206,43 @@ class ilVideoManagerObject extends ActiveRecord {
 		return $this->tags;
 	}
 
+
 	/**
 	 * @return int
 	 */
-	public function getHidden()
-	{
+	public function getHidden() {
 		return $this->hidden;
 	}
+
 
 	/**
 	 * @param int $hidden
 	 */
-	public function setHidden($hidden)
-	{
+	public function setHidden($hidden) {
 		$this->hidden = $hidden;
 	}
+
 
 	/**
 	 * @return int
 	 */
-	public function getImageAtSecond()
-	{
+	public function getImageAtSecond() {
 		$video_duration = vmFFmpeg::getDuration($this->getAbsolutePath());
-		if (!is_numeric($this->image_at_second) || $this->image_at_second < 0 || $this->image_at_second > $video_duration){
+		if (!is_numeric($this->image_at_second) || $this->image_at_second < 0 || $this->image_at_second > $video_duration) {
 			$this->image_at_second = $video_duration / 3;
 		}
-		return (int) $this->image_at_second;
+
+		return (int)$this->image_at_second;
 	}
+
 
 	/**
 	 * @param int $image_at_second
 	 */
-	public function setImageAtSecond($image_at_second)
-	{
+	public function setImageAtSecond($image_at_second) {
 		$this->image_at_second = $image_at_second;
 	}
+
 
 	public function getIcon() {
 		if ($this->getType() == self::TYPE_FLD) {
@@ -277,7 +280,7 @@ class ilVideoManagerObject extends ActiveRecord {
 	 */
 	public static function __checkConverting($ids) {
 		$tree = new ilVideoManagerTree(1);
-		if (! is_array($ids)) {
+		if (!is_array($ids)) {
 			$ids = array( $ids );
 		}
 		foreach ($ids as $id) {
@@ -288,7 +291,7 @@ class ilVideoManagerObject extends ActiveRecord {
 				}
 			} elseif (ilVideoManagerObject::__getTypeForId($id) == self::TYPE_FLD) {
 				$childs = $tree->getSubTreeIds($id);
-				if (! ilVideoManagerObject::__checkConverting($childs)) {
+				if (!ilVideoManagerObject::__checkConverting($childs)) {
 					return false;
 				}
 			}
@@ -372,8 +375,8 @@ class ilVideoManagerObject extends ActiveRecord {
 			if ($t <> "." && $t <> "..") {
 				$currentFile = $cleanPath . $t;
 				if (is_dir($currentFile)) {
-//					$size = foldersize($currentFile);
-//					$total_size += $size;
+					//					$size = foldersize($currentFile);
+					//					$total_size += $size;
 				} else {
 					$size = filesize($currentFile);
 					$total_size += $size;
@@ -400,7 +403,7 @@ class ilVideoManagerObject extends ActiveRecord {
 			} else {
 				$path .= $dirs[$i];
 			}
-			if (! is_dir($path)) {
+			if (!is_dir($path)) {
 				ilUtil::makeDir(($path));
 			}
 		}
@@ -432,13 +435,13 @@ class ilVideoManagerObject extends ActiveRecord {
 	 */
 	protected function getTreePath() {
 		$path = '';
-		if (! $this->getId()) {
+		if (!$this->getId()) {
 			return $path;
 		}
 		$tree = new ilVideoManagerTree(1);
 		$parent_id = $tree->getParentId($this->getId());
 
-		if (! $parent_id) {
+		if (!$parent_id) {
 			return $path;
 		}
 		foreach ($tree->getPathFull($parent_id, ilVideoManagerObject::__getRootFolder()->getId()) as $node) {
@@ -461,7 +464,7 @@ class ilVideoManagerObject extends ActiveRecord {
 				break;
 		}
 
-		return NULL;
+		return null;
 	}
 
 

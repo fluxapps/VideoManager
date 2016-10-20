@@ -25,15 +25,22 @@ class ilVideoManagerVideo extends ilVideoManagerObject {
 	 * @var int
 	 */
 	protected $width = 0;
-
-
 	/**
-	 * @param int $id
+	 * @var String
+	 *
+	 * @db_has_field        true
+	 * @db_fieldtype        text
+	 * @db_length           4
 	 */
-	public function __construct($id = 0) {
-		$this->type = 'vid';
-		parent::__construct($id);
-		if ($id) {
+	protected $type = 'vid';
+	/**
+	 * @var int
+	 */
+	protected $views = 0;
+
+
+	public function afterObjectLoad() {
+		if ($this->getId()) {
 			$dimensions = vmFFmpeg::getVideoDimension($this->getPath() . '/' . $this->getFileName());
 			$this->setHeight($dimensions['height']);
 			$this->setWidth($dimensions['width']);
@@ -127,6 +134,22 @@ class ilVideoManagerVideo extends ilVideoManagerObject {
 
 
 	/**
+	 * @return int
+	 */
+	public function getViews() {
+		return $this->views;
+	}
+
+
+	/**
+	 * @param int $views
+	 */
+	public function setViews($views) {
+		$this->views = $views;
+	}
+
+
+	/**
 	 * @return bool
 	 */
 	public function getStatusConvert() {
@@ -141,14 +164,13 @@ class ilVideoManagerVideo extends ilVideoManagerObject {
 		}
 	}
 
+
 	/**
 	 * @throws ilFFmpegException
 	 */
-	public function extractImage()
-	{
+	public function extractImage() {
 		try {
-			vmFFmpeg::extractImage($this->getAbsolutePath(), $this->getTitle()
-				. '_poster.png', $this->getPath(), $this->getImageAtSecond());
+			vmFFmpeg::extractImage($this->getAbsolutePath(), $this->getTitle() . '_poster.png', $this->getPath(), $this->getImageAtSecond());
 		} catch (ilFFmpegException $e) {
 			ilUtil::sendFailure($e->getMessage(), true);
 		}

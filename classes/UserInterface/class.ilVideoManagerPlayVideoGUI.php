@@ -5,6 +5,7 @@ require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHoo
 require_once("./Services/Rating/classes/class.ilRatingGUI.php");
 require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/Count/class.vidmCount.php');
 require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/Subscription/class.vidmSubscriptionButtonGUI.php');
+require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/UserInterface/class.ilVideoManagerQueryBuilder.php');
 
 /**
  * Class ilVideoManagerPlayVideoGUI
@@ -62,12 +63,10 @@ class ilVideoManagerPlayVideoGUI {
 		if (! ilVideoManagerObject::__checkConverting($this->video->getId())) {
 			ilUtil::sendInfo($this->pl->txt('msg_vid_converting'), true);
 		}
-//		$this->tpl->addJavaScript('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/templates/js/video_player.js');
-//		$this->tpl->setCurrentBlock('video_player');
 		$this->initMediaPlayer();
-		$this->initRelatedVideosTable();
 		$this->initDescription();
 		global $tpl;
+		$this->tpl->setVariable('RELATED_VIDEOS_TABLE', $this->getRelatedVideosTableHTML());
 		$tpl->setContent($this->tpl->get());
 		$tpl->setTitle('Play Video');
 	}
@@ -81,16 +80,29 @@ class ilVideoManagerPlayVideoGUI {
 	}
 
 
-	protected function initRelatedVideosTable() {
+	/**
+	 * @return string
+	 */
+	protected function getRelatedVideosTableHTML() {
 		$options = array(
-			'cmd' => 'related_videos',
+			'cmd'    => 'related_videos',
 			'search' => array(
-				'method' => 'related'
+				'method' => 'related',
 			),
-			'limit' => 10
+			'limit'  => 6,
 		);
-		$related_vids = new ilVideoManagerVideoTableGUI($this, $options, $this->video);
-		$this->tpl->setVariable('RELATED_VIDEOS_TABLE', $related_vids->getHTML());
+
+		require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/UserInterface/class.ilVideoManagerVideoTableGUI.php');
+		$ilVideoManagerVideoTableGUI = new ilVideoManagerVideoTableGUI($this, $options, $this->video);
+		return $ilVideoManagerVideoTableGUI->getHTML();
+
+		// implemented but not used new version of gui
+		$ilVideoManagerQueryBuilder = new ilVideoManagerQueryBuilder($options, $this->video);
+
+		$xvidListGUI = new xvidListGUI($ilVideoManagerQueryBuilder->getVideos());
+		$xvidListGUI->setSize(xvidListGUI::SIZE_SMALL);
+
+		return $xvidListGUI->render();
 	}
 
 

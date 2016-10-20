@@ -1,0 +1,91 @@
+@il-xvid-card-max-height: 120px;
+@il-xvid-boder-radius: 3px;
+
+.aspect-ratio(@ratio-width, @ratio-height, @height) {
+  max-height: @height;
+  height:     @height;
+  width:      auto;
+  max-width:  @height /@ratio-height*@ratio-width;
+
+}
+
+.dotted() {
+  overflow:      hidden;
+  text-overflow: ellipsis;
+  white-space:   nowrap;
+}
+
+.il-xvid-card {
+  box-shadow:       0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  margin-top:       10px;
+  box-sizing:       border-box;
+  border-radius:    @il-xvid-boder-radius;
+  background-clip:  padding-box;
+  background-color: white;
+  span.card-title {
+	color:          #FFFFFF;
+	font-size:      24px;
+	font-weight:    300;
+	text-transform: uppercase;
+  }
+
+  .il-xvid-card-image {
+	border-radius:    @il-xvid-boder-radius @il-xvid-boder-radius 0 0;
+	position:         relative;
+	overflow:         hidden;
+	height:           @il-xvid-card-max-height;
+	background-color: white;
+	width:            100%;
+
+	img {
+	  position:     relative;
+	  top:          50%;
+	  margin-left:  auto;
+	  margin-right: auto;
+	  display:      block;
+	  .aspect-ratio(16, 9, @il-xvid-card-max-height);
+	}
+	&.wide {
+	  width:  100%;
+	  height: auto;
+	}
+	&.tall {
+	  height: 100%;
+	  width:  auto;
+	}
+
+  }
+  .il-xvid-card-content {
+	background-color: #F4F4F4;
+	padding:          10px;
+	border-radius:    0 0 @il-xvid-boder-radius @il-xvid-boder-radius;
+	background-clip:  padding-box;
+	box-sizing:       border-box;
+	overflow-wrap:    break-word;
+
+	p {
+	  .dotted();
+	  margin:      0;
+	  color:       inherit;
+	  line-height: 26px;
+	}
+	&.il-xvid-card-title {
+	  .dotted();
+	  line-height: 48px;
+	}
+  }
+  .il-xvid-card-action {
+	border-top: 1px solid rgba(160, 160, 160, 0.2);
+	padding:    16px;
+	a {
+	  color:          #FFAB40;
+	  margin-right:   16px;
+	  transition:     color 0.3s ease;
+	  text-transform: uppercase;
+	}
+	a:hover {
+	  color:           #FFD8A6;
+	  text-decoration: none;
+	}
+  }
+}

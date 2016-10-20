@@ -1,0 +1,448 @@
+{
+    "plugin_prefix": "ui_uihk_video_man",
+    "languages": [
+        "de",
+        "en"
+    ],
+    "entries": {
+        "admin": {
+            "activate_subscription": {
+                "translations": {
+                    "de": "Channel abonnieren aktivieren",
+                    "en": "Activate channel subscriptions"
+                }
+            },
+            "activate_view_log": {
+                "translations": {
+                    "de": "Anzahl Views loggen",
+                    "en": "Log View Count"
+                }
+            },
+            "add_folder": {
+                "translations": {
+                    "de": "Ordner hinzufügen",
+                    "en": "Add new Folder"
+                }
+            },
+            "add_new_item": {
+                "translations": {
+                    "de": "Objekt hinzufügen",
+                    "en": "Add new item"
+                }
+            },
+            "add_video": {
+                "translations": {
+                    "de": "Video hinzufügen",
+                    "en": "Add new video"
+                }
+            },
+            "confirm_delete": {
+                "translations": {
+                    "de": "Sind Sie sicher, dass sie folgende Elemente löschen möchten?",
+                    "en": "Are you sure you want to delete the following items?"
+                }
+            },
+            "form_button_cancel": {
+                "translations": {
+                    "de": "Abbrechen",
+                    "en": "Cancel"
+                }
+            },
+            "form_button_save": {
+                "translations": {
+                    "de": "Speichern",
+                    "en": "Save"
+                }
+            },
+            "form_title": {
+                "translations": {
+                    "de": "Einstellungen",
+                    "en": "Settings"
+                }
+            },
+            "roles": {
+                "translations": {
+                    "de": "Berechtigte Rollen für Administration",
+                    "en": "Allowed roles for administration"
+                }
+            },
+            "view_statistics": {
+                "translations": {
+                    "de": "Statistik anzeigen",
+                    "en": "Show Statistics"
+                }
+            }
+        },
+        "common": {
+            "actions": {
+                "translations": {
+                    "de": "Aktionen",
+                    "en": "Actions"
+                }
+            },
+            "add": {
+                "translations": {
+                    "de": "Hinzufügen",
+                    "en": "Add"
+                }
+            },
+            "back": {
+                "translations": {
+                    "de": "Zurück",
+                    "en": "Back"
+                }
+            },
+            "cancel": {
+                "translations": {
+                    "de": "Abbrechen",
+                    "en": "Cancel"
+                }
+            },
+            "category": {
+                "translations": {
+                    "de": "Kategorie",
+                    "en": "Category"
+                }
+            },
+            "confirm": {
+                "translations": {
+                    "de": "Bestätigen",
+                    "en": "Confirm"
+                }
+            },
+            "delete": {
+                "translations": {
+                    "de": "Löschen",
+                    "en": "Delete"
+                }
+            },
+            "description": {
+                "translations": {
+                    "de": "Beschreibung",
+                    "en": "Description"
+                }
+            },
+            "duration": {
+                "translations": {
+                    "de": "Dauer",
+                    "en": "Duration"
+                }
+            },
+            "edit": {
+                "translations": {
+                    "de": "Bearbeiten",
+                    "en": "Edit"
+                }
+            },
+            "filesize": {
+                "translations": {
+                    "de": "Grösse",
+                    "en": "Filesize"
+                }
+            },
+            "hidden": {
+                "translations": {
+                    "de": "In Video-Portal verstecken",
+                    "en": "Hide in video portal"
+                }
+            },
+            "less": {
+                "translations": {
+                    "de": "weniger",
+                    "en": "less"
+                }
+            },
+            "more": {
+                "translations": {
+                    "de": "mehr",
+                    "en": "more"
+                }
+            },
+            "move": {
+                "translations": {
+                    "de": "Verschieben",
+                    "en": "Move"
+                }
+            },
+            "rating": {
+                "translations": {
+                    "de": "Bewertung",
+                    "en": "Rating"
+                }
+            },
+            "save": {
+                "translations": {
+                    "de": "Speichern",
+                    "en": "Save"
+                }
+            },
+            "search": {
+                "translations": {
+                    "de": "Suchen",
+                    "en": "Search"
+                },
+                "last_used": "13.10.2016"
+            },
+            "tags": {
+                "translations": {
+                    "de": "Tags",
+                    "en": "Tags"
+                }
+            },
+            "title": {
+                "translations": {
+                    "de": "Titel",
+                    "en": "Title"
+                }
+            },
+            "upload_date": {
+                "translations": {
+                    "de": "Hochgeladen am",
+                    "en": "Upload Date"
+                }
+            },
+            "video": {
+                "translations": {
+                    "de": "Video",
+                    "en": "Video"
+                }
+            },
+            "recently_uploaded": {
+                "translations": {
+                    "de": "Letzte Uploads:",
+                    "en": "Recently uploaded:"
+                },
+                "last_used": "13.10.2016"
+            },
+            "title_home": {
+                "translations": {
+                    "de": "Channels",
+                    "en": "Channels"
+                },
+                "last_used": "13.10.2016"
+            },
+            "back_to_channels": {
+                "translations": {
+                    "de": "Zurück",
+                    "en": "Back to Channels"
+                },
+                "last_used": "13.10.2016"
+            }
+        },
+        "form": {
+            "add_folder": {
+                "translations": {
+                    "de": "Ordner hinzufügen",
+                    "en": "Add Folder"
+                }
+            },
+            "edit_vid": {
+                "translations": {
+                    "de": "Video Bearbeiten",
+                    "en": "Edit Video"
+                }
+            },
+            "tags": {
+                "translations": {
+                    "de": "Tags",
+                    "en": "Tags"
+                }
+            },
+            "upload_vid": {
+                "translations": {
+                    "de": "Video(s) Hochladen",
+                    "en": "Upload Video(s)"
+                }
+            },
+            "vid": {
+                "translations": {
+                    "de": "Video(s)",
+                    "en": "Video(s)"
+                }
+            },
+            "wrong_filetype": {
+                "translations": {
+                    "de": "Dateityp ungültig",
+                    "en": "Wrong Filetype"
+                }
+            },
+            "image_at_sec": {
+                "translations": {
+                    "de": "Bild bei Sekunde",
+                    "en": "Extract image at"
+                }
+            },
+            "image_at_sec_info": {
+                "translations": {
+                    "de": "Anzahl Sekunden der Stelle, an der das Vorschaubild extrahiert werden soll<br>Bei keiner Eingabe: 1/3 der Länge des Videos",
+                    "en": "Amount of seconds, at which point the poster image should be extracted<br>Default: 1/3 of the video's length"
+                }
+            }
+        },
+        "mail": {
+            "new_upload": {
+                "translations": {
+                    "de": "In einer Ihrer abonnierten Kategorien wurde ein neues Video hochgeladen:",
+                    "en": "A new video was uploaded in a category to which you have subscribed:"
+                }
+            },
+            "subject": {
+                "translations": {
+                    "de": "Neuer Video-Upload in Kategorie",
+                    "en": "New video-upload in category"
+                }
+            },
+            "view_video": {
+                "translations": {
+                    "de": "Video-Link:",
+                    "en": "Direct link"
+                }
+            }
+        },
+        "msg": {
+            "choose_folder": {
+                "translations": {
+                    "de": "Bitte wählen Sie einen Zielordner, in welchen Sie die Datei(en) verschieben möchten.",
+                    "en": "Please choose a destination folder, to which the file(s) should be moved."
+                }
+            },
+            "deletion_failed": {
+                "translations": {
+                    "de": "Die Dateien konnten nicht gelöscht werden, da eine oder mehrere Dateien momentan konvertiert werden.",
+                    "en": "File(s) could not be deleted; One or more files are still being converted."
+                }
+            },
+            "edit_vid_failed": {
+                "translations": {
+                    "de": "Dieses Video kann momentan nicht bearbeitet werden, da es zurzeit konvertiert wird.",
+                    "en": "This video can not be edited, as it is being converted currently."
+                }
+            },
+            "fld_created": {
+                "translations": {
+                    "de": "Ordner wurde erfolgreich erstellt",
+                    "en": "Folder was created"
+                }
+            },
+            "move_failed": {
+                "translations": {
+                    "de": "Die Dateien konnten nicht verschoben werden, da eine oder mehrere Dateien momentan konvertiert werden.",
+                    "en": "File(s) could not be moved; One or more files are still being converted."
+                }
+            },
+            "no_ctrlmm": {
+                "translations": {
+                    "de": "Es konnte kein Menü-Eintrag erstellt werden: CtrlMainMenu ist nicht aktiv. Um einen Eintrag zu erstellen, installieren/aktivieren Sie CtrlMainMenu und deaktivieren & aktivieren Sie das VideoManager Plugin erneut.",
+                    "en": "No menu entry could be created, since there is no active CtrlMainMenu Plugin. To create an entry, install and/or activate CtrlMainMenu and deactive & reactivate the VideoManager Plugin again."
+                }
+            },
+            "no_permission": {
+                "translations": {
+                    "de": "Zugriff verweigert.",
+                    "en": "Permission denied."
+                }
+            },
+            "subscribed_successfully": {
+                "translations": {
+                    "de": "Kategorie erfolgreich abonniert.",
+                    "en": "Subscribed successfully."
+                }
+            },
+            "unsubscribed_successfully": {
+                "translations": {
+                    "de": "Kategorie erfolgreich abbestellt.",
+                    "en": "Unsubscribed successfully."
+                }
+            },
+            "vid_converting": {
+                "translations": {
+                    "de": "Dieses Video wird zurzeit konvertiert. Versuchen Sie es gegebenfalls in einigen Minuten noch einmal.",
+                    "en": "This video is probably not available, as it is being converted currently. If so, please try again in a few minutes."
+                }
+            }
+        },
+        "player": {
+            "category_key": {
+                "translations": {
+                    "de": "Channel:",
+                    "en": "Channel:"
+                },
+                "last_used": "13.10.2016"
+            },
+            "sub_tooltip": {
+                "translations": {
+                    "de": "Nach dem Abonnieren erhalten Sie automatisch eine E-mail, wenn ein neues Video zu diesem Channel hinzugefügt wurde.",
+                    "en": "After your subscription, you will receive an automatic e-mail every time a new video is uploaded to this channel."
+                },
+                "last_used": "13.10.2016"
+            },
+            "tags_key": {
+                "translations": {
+                    "de": "Tags:",
+                    "en": "Tags:"
+                },
+                "last_used": "13.10.2016"
+            },
+            "views_key": {
+                "translations": {
+                    "de": "Views:",
+                    "en": "Views:"
+                },
+                "last_used": "13.10.2016"
+            }
+        },
+        "stats": {
+            "views": {
+                "translations": {
+                    "de": "Views",
+                    "en": "Views"
+                }
+            }
+        },
+        "tbl": {
+            "performSearch": {
+                "translations": {
+                    "de": "Suchergebnisse",
+                    "en": "Searchresults"
+                }
+            },
+            "related_videos": {
+                "translations": {
+                    "de": "Verwandte Videos",
+                    "en": "Related Videos"
+                }
+            },
+            "subscribe": {
+                "translations": {
+                    "de": "Diese Kategorie abonnieren",
+                    "en": "Subscribe to this category"
+                }
+            },
+            "subscribe_action": {
+                "translations": {
+                    "de": "Abonnieren",
+                    "en": "Subscribe"
+                },
+                "last_used": "13.10.2016"
+            },
+            "unsubscribe": {
+                "translations": {
+                    "de": "(abonniert) Diese Kategorie abbestellen",
+                    "en": "(subscribed) Unsubscribe from this category"
+                }
+            },
+            "unsubscribe_action": {
+                "translations": {
+                    "de": "Abbestellen",
+                    "en": "Unsubscribe"
+                }
+            },
+            "view": {
+                "translations": {
+                    "de": "Zuletzt Hochgeladen",
+                    "en": "Latest Uploads"
+                }
+            }
+        }
+    }
+}

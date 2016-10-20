@@ -49,10 +49,10 @@ class ilVideoManagerVideoTableGUI extends ilTable2GUI {
 
 	/**
 	 * @param                     $parent_gui
-	 * @param array               $options
+	 * @param array $options
 	 * @param ilVideoManagerVideo $video
 	 */
-	public function __construct($parent_gui, $options, ilVideoManagerVideo $video = NULL) {
+	public function __construct($parent_gui, $options, ilVideoManagerVideo $video = null) {
 		global $ilDB, $ilCtrl;
 		parent::__construct($parent_gui, $options['cmd']);
 		$this->db = $ilDB;
@@ -90,6 +90,9 @@ class ilVideoManagerVideoTableGUI extends ilTable2GUI {
 	}
 
 
+	/**
+	 * @param array $row
+	 */
 	public function fillRow($row) {
 		//first row with id 0 is the title
 		if ($row['id'] == 0) {
@@ -105,6 +108,7 @@ class ilVideoManagerVideoTableGUI extends ilTable2GUI {
 			$this->tpl->setVariable('LINK', $row['link']);
 			$this->tpl->setVariable('TITLE', $row['title']);
 			$this->tpl->setVariable('DESCRIPTION', $row['description']);
+			$this->tpl->setVariable('VIEWS', $row['views']);
 			$this->tpl->parseCurrentBlock();
 		}
 	}
@@ -115,7 +119,7 @@ class ilVideoManagerVideoTableGUI extends ilTable2GUI {
 		if ($this->options['count']) {
 			$sql = 'SELECT COUNT(vidm_data.id) AS count';
 		} else {
-			$sql = 'SELECT *';
+			$sql = 'SELECT *, (SELECT COUNT(id) FROM vidm_views WHERE vidm_views.video_id = vidm_data.id) AS views';
 		}
 
 		$sql .= ' FROM vidm_data
@@ -123,20 +127,19 @@ class ilVideoManagerVideoTableGUI extends ilTable2GUI {
 
 		$sql .= ' WHERE vidm_data.type = ' . $this->db->quote('vid', 'text');
 
-		if($hidden_nodes = $tree->getHiddenNodes()) {
+		if ($hidden_nodes = $tree->getHiddenNodes()) {
 			$sql .= ' AND vidm_data.id NOT IN (' . implode(',', $hidden_nodes) . ')';
 		}
 
 		foreach ($this->options as $option => $value) {
 			switch ($option) {
-
 				case 'search':
 					switch ($value['method']) {
 						case '':
 						case 'all':
 							$sql .= ' AND (';
 							$or = '';
-							if (! is_array($value['value'])) {
+							if (!is_array($value['value'])) {
 								$value['value'] = array( $value['value'] );
 							}
 							foreach ($value['value'] as $word) {
@@ -190,7 +193,7 @@ class ilVideoManagerVideoTableGUI extends ilTable2GUI {
 			$row = array();
 			$video = new ilVideoManagerVideo($result['id']);
 			$row['sort'] = $x;
-			$x++;
+			$x ++;
 			$row['img'] = $video->getPreviewImageHttp();
 			$row['title'] = $video->getTitle();
 			$row['id'] = $video->getId();
@@ -198,6 +201,7 @@ class ilVideoManagerVideoTableGUI extends ilTable2GUI {
 			$this->ctrl->setParameterByClass('ilvideomanagerusergui', 'node_id', $video->getId());
 			$row['link'] = $this->ctrl->getLinkTargetByClass('ilvideomanagerusergui', 'playVideo');
 			$row['description'] = $video->getDescription($this->max_desc_length);
+			$row['views'] = $result['views'];
 
 			$data[] = $row;
 		}

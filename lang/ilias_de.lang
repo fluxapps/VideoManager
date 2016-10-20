@@ -1,4 +1,3 @@
-<!-- language file start -->
 admin_activate_subscription#:#Channel abonnieren aktivieren
 admin_activate_view_log#:#Anzahl Views loggen
 admin_add_folder#:#Ordner hinzufügen
@@ -32,6 +31,9 @@ common_tags#:#Tags
 common_title#:#Titel
 common_upload_date#:#Hochgeladen am
 common_video#:#Video
+common_recently_uploaded#:#Letzte Uploads:
+common_title_home#:#Channels
+common_back_to_channels#:#Zurück
 form_add_folder#:#Ordner hinzufügen
 form_edit_vid#:#Video Bearbeiten
 form_tags#:#Tags
@@ -40,9 +42,9 @@ form_vid#:#Video(s)
 form_wrong_filetype#:#Dateityp ungültig
 form_image_at_sec#:#Bild bei Sekunde
 form_image_at_sec_info#:#Anzahl Sekunden der Stelle, an der das Vorschaubild extrahiert werden soll<br>Bei keiner Eingabe: 1/3 der Länge des Videos
-mail_new_upload#:#In einer Ihrer abonnierten Kategorien wurde ein neues Video hochgeladen: 
-mail_subject#:#Neuer Video-Upload in Kategorie 
-mail_view_video#:#Video-Link: 
+mail_new_upload#:#In einer Ihrer abonnierten Kategorien wurde ein neues Video hochgeladen:
+mail_subject#:#Neuer Video-Upload in Kategorie
+mail_view_video#:#Video-Link:
 msg_choose_folder#:#Bitte wählen Sie einen Zielordner, in welchen Sie die Datei(en) verschieben möchten.
 msg_deletion_failed#:#Die Dateien konnten nicht gelöscht werden, da eine oder mehrere Dateien momentan konvertiert werden.
 msg_edit_vid_failed#:#Dieses Video kann momentan nicht bearbeitet werden, da es zurzeit konvertiert wird.

@@ -1,26 +1,58 @@
 @video-width: 800px;
 @video-height: 450px;
 @boder-color: #D0D0D0;
-#maincontainer {
+@il-vidm-box-height: 130px;
+@il-vidm-box-width: 200px;
+.xvid-border() {
+  border: 1px solid #D6D6D6;
+}
+
+#xvid-maincontainer {
   text-align: center;
-  width:      100%;
+  width:      90%;
   min-height: 100%;
-  //  padding:    0 40px;
-  //  overflow:   hidden;
+  padding:    20px 0;
+  //overflow:   hidden;
   margin:     0 auto;
+  #xvid-leftcontent {
+	vertical-align: top;
+	width:          100%;
+	max-width:      @video-width+2;
+	margin-right:   15px;
+	margin-top:     5px;
+	display:        inline-block;
+	#videoplayer {
+	  .xvid-border()
+	}
+  }
+  #xvid-related_videos {
+	margin:     9px 0 0 1px;
+	width:      100%;
+	max-width:  402px;
+	display:    inline-block;
+	//overflow:   hidden;
+	text-align: left;
+	table.table {
+	  .xvid-border();
+	  .vidm_fluid:first-child {
+		margin-top: -1px;
+	  }
+	}
+	.vidm_row_content, .vidm_img_container {
+	  width:   50%;
+	  display: block;
+	  float:   left;
+	}
+
+  }
 }
 
 .mejs-container {
   background: #000000;
 }
 
-#il_center_col {
-  width:   100%;
-  padding: 0;
-}
-
-.il_ColumnLayout.ilClearFloat {
-  width: auto;
+#xvidm_channel_list {
+  margin-top: -1px;
 }
 
 #videoplayer {
@@ -35,9 +67,9 @@
 
 div#mep_0 {
   max-height: @video-height;
-  width: 100%;
-  right: -2px;
-  margin: -2px;
+  width:      100%;
+  right:      -2px;
+  margin:     -2px;
 }
 
 #videoplayer video {
@@ -56,10 +88,6 @@ div.ilTableOuter {
   display:   inline-block;
 }
 
-#related_videos table.table, #videoplayer {
-  border: 1px solid #D6D6D6;
-}
-
 #tbl_row {
   padding:   4px 0 0 7px;
   width:     100%;
@@ -69,29 +97,19 @@ div.ilTableOuter {
 }
 
 #video_tbl {
-  box-shadow:       3px 3px 4px @boder-color;
-  padding:          0 0 20px 0;
-  border-collapse:  separate;
-  overflow:         hidden;
-  background-color: transparent;
+  //box-shadow:       3px 3px 4px @boder-color;
+  //padding:          0 0 20px 0;
+  //border-collapse:  separate;
+  //overflow:         hidden;
+  //background-color: transparent;
 
-}
-
-#leftcontent {
-  vertical-align: top;
-  width:          100%;
-  max-width:      @video-width+2;
-  //  padding:        5px 5px 15px 15px;
-  margin-right:   15px;
-  margin-top:     5px;
-  display:        inline-block;
 }
 
 #description_container {
   border:           1px solid @boder-color;
   text-align:       left;
   width:            100%;
-  max-width:        @video-width+2;
+  max-width:        @video-width+(2*-1);
   min-height:       100px;
   margin:           12px 0;
   background-color: #FFFFFF;
@@ -103,7 +121,7 @@ div.ilTableOuter {
   height:  auto;
 }
 
-#title {
+.vidm_title {
   font-weight: bold;
   display:     inline-block;
   white-space: normal;
@@ -142,26 +160,25 @@ div.ilTableOuter {
   margin:     0;
 }
 
-#img_container {
-  //  background-color: #000000;
-  text-align:      left;
+.vidm_img_container {
   padding:         12px 15px 10px 20px;
-  /*max-width: 178px;*/
-  //  height:          100%;
-  //  max-height:      100px;
+  height:          @il-vidm-box-height;
+  width:           @il-vidm-box-width;
   background-clip: content-box;
   border:          none;
+  text-align:      center;
+  vertical-align:  middle !important;
 }
 
 thead {
   display: none;
 }
 
-#row_content {
-  padding:   15px 15px 15px 15px;
-  width:     100%;
-  max-width: 180px;
-  border:    none;
+.vidm_row_content {
+  padding: 15px 15px 15px 15px;
+  height:  @il-vidm-box-height;
+  //width:   @il-vidm-box-width+50px;
+  border:  none;
 }
 
 tr.tblheader {
@@ -178,7 +195,7 @@ tr.tblheader {
   text-align: left;
 }
 
-#tbl_title {
+.vidm_tbl_title {
   padding:     12px 0px 2px 15px;
   font-weight: bold;
   font-size:   20px;
@@ -196,7 +213,7 @@ tr.tblheader {
 	border:        none;
   }
 
-  #img {
+  .vidm_img {
 	max-width:  117px;
 	max-height: 80px;
   }
@@ -212,11 +229,7 @@ tr.tblheader {
 	width: 200px;
   }
 
-  #row_content {
-	max-width: 125px;
-  }
-
-  #title {
+  .vidm_title {
 	font-size: 10px;
   }
 
@@ -242,18 +255,28 @@ tr.tblheader {
   }
 }
 
+.vidm_fluid {
+  //background-color: green;
+  //border:           1px solid red;
+  float:     left;
+  display:   inline-block;
+  min-width: @il-vidm-box-width * 2;
+  //max-width: @il-vidm-box-width * 2;
+  width:     33%;
+}
+
 @media (max-width: 1251px) {
   #related_videos {
 	width:        100%;
 	max-width:    @video-width+2;
 	margin-right: 15px;
   }
-
-  #related_videos * {
-	/*width: 100%;*/
-
-  }
-
 }
 
+// -- GOLD
+@import "../../../../../../../../../Services/UICore/lib/bootstrap-3.2.0/less/mixins/labels.less";
+.label-gold {
+  .label-variant(rgb(177, 156, 99));
+  float: right;
+}
 

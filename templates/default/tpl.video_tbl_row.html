@@ -1,17 +1,17 @@
-<tr id=row_{ID} class="tbl_row">
+<tr id=row_{ID} class="tbl_row vidm_fluid">
 
     <!-- BEGIN tbl_title -->
-    <td id="tbl_title">{TBL_TITLE}</td>
+    <td class="vidm_tbl_title">{TBL_TITLE}</td>
     <!-- END tbl_title -->
 
     <!-- BEGIN td -->
-    <td id="img_container">
-        <a href="{LINK}"><img id="img" src="{IMAGE}"></a>
+    <td class="vidm_img_container">
+        <a href="{LINK}"><img class="vidm_img" src="{IMAGE}"></a>
     </td>
-    <td id="row_content" class="std">
-        <a id="title" href="{LINK}">{TITLE}</a>
-        <p id="desc">{DESCRIPTION}</p>
-
+    <td class="vidm_row_content">
+        <a class="vidm_title" href="{LINK}">{TITLE}</a>
+        <p class="vidm_desc">{DESCRIPTION}</p>
+        <p>Views: <span class="label label-primary">{VIEWS}</span></p>
     </td>
     <!-- END td -->
 </tr>
