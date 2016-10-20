@@ -70,7 +70,7 @@ class ilVideoManagerPlayVideoGUI {
 		$this->initDescription();
 		global $tpl;
 		$tpl->setContent($this->tpl->get());
-		$tpl->setRightContent($this->getRelatedVideosTableHTML());
+		$this->tpl->setVariable('RELATED_VIDEOS_TABLE', $this->getRelatedVideosTableHTML());
 		$tpl->setTitle('Play Video');
 	}
 
