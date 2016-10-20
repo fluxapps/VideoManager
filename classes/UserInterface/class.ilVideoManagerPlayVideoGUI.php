@@ -63,14 +63,11 @@ class ilVideoManagerPlayVideoGUI {
 		if (! ilVideoManagerObject::__checkConverting($this->video->getId())) {
 			ilUtil::sendInfo($this->pl->txt('msg_vid_converting'), true);
 		}
-//		$this->tpl->addJavaScript('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/templates/js/video_player.js');
-//		$this->tpl->setCurrentBlock('video_player');
 		$this->initMediaPlayer();
-
 		$this->initDescription();
 		global $tpl;
-		$tpl->setContent($this->tpl->get());
 		$this->tpl->setVariable('RELATED_VIDEOS_TABLE', $this->getRelatedVideosTableHTML());
+		$tpl->setContent($this->tpl->get());
 		$tpl->setTitle('Play Video');
 	}
 

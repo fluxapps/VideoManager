@@ -1,3 +1,40 @@
+#xvid-maincontainer {
+  text-align: center;
+  width: 90%;
+  min-height: 100%;
+  padding: 20px 0;
+  margin: 0 auto;
+}
+#xvid-maincontainer #xvid-leftcontent {
+  vertical-align: top;
+  width: 100%;
+  max-width: 802px;
+  margin-right: 15px;
+  margin-top: 5px;
+  display: inline-block;
+}
+#xvid-maincontainer #xvid-leftcontent #videoplayer {
+  border: 1px solid #D6D6D6;
+}
+#xvid-maincontainer #xvid-related_videos {
+  margin: 9px 0 0 1px;
+  width: 100%;
+  max-width: 402px;
+  display: inline-block;
+  text-align: left;
+}
+#xvid-maincontainer #xvid-related_videos table.table {
+  border: 1px solid #D6D6D6;
+}
+#xvid-maincontainer #xvid-related_videos table.table .vidm_fluid:first-child {
+  margin-top: -1px;
+}
+#xvid-maincontainer #xvid-related_videos .vidm_row_content,
+#xvid-maincontainer #xvid-related_videos .vidm_img_container {
+  width: 50%;
+  display: block;
+  float: left;
+}
 .mejs-container {
   background: #000000;
 }
@@ -26,10 +63,6 @@ div.ilTableOuter {
   max-width: 400px;
   display: inline-block;
 }
-#related_videos table.table,
-#videoplayer {
-  border: 1px solid #D6D6D6;
-}
 #tbl_row {
   padding: 4px 0 0 7px;
   width: 100%;
@@ -37,19 +70,11 @@ div.ilTableOuter {
   display: inline-block;
   overflow: hidden;
 }
-#leftcontent2 {
-  vertical-align: top;
-  width: 100%;
-  max-width: 802px;
-  margin-right: 15px;
-  margin-top: 5px;
-  display: inline-block;
-}
 #description_container {
   border: 1px solid #D0D0D0;
   text-align: left;
   width: 100%;
-  max-width: 802px;
+  max-width: 798px;
   min-height: 100px;
   margin: 12px 0;
   background-color: #FFFFFF;

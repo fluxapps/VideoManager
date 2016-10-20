@@ -3,6 +3,49 @@
 @boder-color: #D0D0D0;
 @il-vidm-box-height: 130px;
 @il-vidm-box-width: 200px;
+.xvid-border() {
+  border: 1px solid #D6D6D6;
+}
+
+#xvid-maincontainer {
+  text-align: center;
+  width:      90%;
+  min-height: 100%;
+  padding:    20px 0;
+  //overflow:   hidden;
+  margin:     0 auto;
+  #xvid-leftcontent {
+	vertical-align: top;
+	width:          100%;
+	max-width:      @video-width+2;
+	margin-right:   15px;
+	margin-top:     5px;
+	display:        inline-block;
+	#videoplayer {
+	  .xvid-border()
+	}
+  }
+  #xvid-related_videos {
+	margin:     9px 0 0 1px;
+	width:      100%;
+	max-width:  402px;
+	display:    inline-block;
+	//overflow:   hidden;
+	text-align: left;
+	table.table {
+	  .xvid-border();
+	  .vidm_fluid:first-child {
+		margin-top: -1px;
+	  }
+	}
+	.vidm_row_content, .vidm_img_container {
+	  width:   50%;
+	  display: block;
+	  float:   left;
+	}
+
+  }
+}
 
 .mejs-container {
   background: #000000;
@@ -45,10 +88,6 @@ div.ilTableOuter {
   display:   inline-block;
 }
 
-#related_videos table.table, #videoplayer {
-  border: 1px solid #D6D6D6;
-}
-
 #tbl_row {
   padding:   4px 0 0 7px;
   width:     100%;
@@ -66,21 +105,11 @@ div.ilTableOuter {
 
 }
 
-#leftcontent2 {
-  vertical-align: top;
-  width:          100%;
-  max-width:      @video-width+2;
-  //  padding:        5px 5px 15px 15px;
-  margin-right:   15px;
-  margin-top:     5px;
-  display:        inline-block;
-}
-
 #description_container {
   border:           1px solid @boder-color;
   text-align:       left;
   width:            100%;
-  max-width:        @video-width+2;
+  max-width:        @video-width+(2*-1);
   min-height:       100px;
   margin:           12px 0;
   background-color: #FFFFFF;
@@ -132,13 +161,13 @@ div.ilTableOuter {
 }
 
 .vidm_img_container {
-  padding:          12px 15px 10px 20px;
-  height:           @il-vidm-box-height;
-  width:            @il-vidm-box-width;
-  background-clip:  content-box;
-  border:           none;
-  text-align:       center;
-  vertical-align:   middle !important;
+  padding:         12px 15px 10px 20px;
+  height:          @il-vidm-box-height;
+  width:           @il-vidm-box-width;
+  background-clip: content-box;
+  border:          none;
+  text-align:      center;
+  vertical-align:  middle !important;
 }
 
 thead {
