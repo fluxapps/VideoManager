@@ -89,18 +89,18 @@ class ilVideoManagerPlayVideoGUI {
 			'search' => array(
 				'method' => 'related',
 			),
-			'limit'  => 6,
+			'limit'  => 4,
 		);
 
 		require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/UserInterface/class.ilVideoManagerVideoTableGUI.php');
 		$ilVideoManagerVideoTableGUI = new ilVideoManagerVideoTableGUI($this, $options, $this->video);
-		return $ilVideoManagerVideoTableGUI->getHTML();
+//		return $ilVideoManagerVideoTableGUI->getHTML();
 
 		// implemented but not used new version of gui
 		$ilVideoManagerQueryBuilder = new ilVideoManagerQueryBuilder($options, $this->video);
 
 		$xvidListGUI = new xvidListGUI($ilVideoManagerQueryBuilder->getVideos());
-		$xvidListGUI->setSize(xvidListGUI::SIZE_SMALL);
+		$xvidListGUI->setSize(xvidListGUI::SIZE_TINY);
 
 		return $xvidListGUI->render();
 	}

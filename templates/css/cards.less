@@ -1,5 +1,5 @@
 @il-xvid-card-max-height: 120px;
-@il-xvid-boder-radius: 3px;
+@il-xvid-boder-radius: 0px;
 
 .aspect-ratio(@ratio-width, @ratio-height, @height) {
   max-height: @height;
@@ -16,8 +16,8 @@
 }
 
 .il-xvid-card {
-  box-shadow:       0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  margin-top:       10px;
+  //box-shadow:       0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  margin-bottom:    40px;
   box-sizing:       border-box;
   border-radius:    @il-xvid-boder-radius;
   background-clip:  padding-box;
@@ -38,11 +38,11 @@
 	width:            100%;
 
 	img {
-	  position:     relative;
-	  top:          50%;
-	  margin-left:  auto;
-	  margin-right: auto;
-	  display:      block;
+	  position: relative;
+	  top:      50%;
+	  //margin-left:  auto;
+	  //margin-right: auto;
+	  display:  block;
 	  .aspect-ratio(16, 9, @il-xvid-card-max-height);
 	}
 	&.wide {
@@ -56,23 +56,31 @@
 
   }
   .il-xvid-card-content {
-	background-color: #F4F4F4;
-	padding:          10px;
-	border-radius:    0 0 @il-xvid-boder-radius @il-xvid-boder-radius;
-	background-clip:  padding-box;
-	box-sizing:       border-box;
-	overflow-wrap:    break-word;
+	//background-color: #F4F4F4;
+	padding-top:     10px;
+	border-radius:   0 0 @il-xvid-boder-radius @il-xvid-boder-radius;
+	background-clip: padding-box;
+	box-sizing:      border-box;
+	overflow-wrap:   break-word;
 
 	p {
-	  .dotted();
-	  margin:      0;
-	  color:       inherit;
-	  line-height: 26px;
+	  margin: 0;
+	  color:  inherit;
+	  //line-height: 26px;
+	  &.small {
+		.dotted();
+		font-size: 12px;
+	  }
+	  &.overflow {
+		overflow: visible;
+	  }
+	  &.il-xvid-card-title {
+		.dotted();
+		font-size: 18px;
+		//line-height: 48px;
+	  }
 	}
-	&.il-xvid-card-title {
-	  .dotted();
-	  line-height: 48px;
-	}
+
   }
   .il-xvid-card-action {
 	border-top: 1px solid rgba(160, 160, 160, 0.2);

@@ -8,7 +8,7 @@
 class xvidListGUI implements xvidUIComponent {
 
 	const SIZE_LARGE = 'large';
-	const SIZE_SMALL = 'small';
+	const SIZE_TINY = 'tiny';
 	/**
 	 * @var xvidListItemGUI[]
 	 */
@@ -26,7 +26,7 @@ class xvidListGUI implements xvidUIComponent {
 	 */
 	protected static $class_map = array(
 		self::SIZE_LARGE => 'col-lg-3 col-md-3 col-sm-4 col-xs-6',
-		self::SIZE_SMALL => 'col-lg-6 col-md-12 col-sm-12 col-xs-6',
+		self::SIZE_TINY  => 'col-lg-12 col-md-12 col-sm-12 col-xs-12',
 	);
 
 
@@ -52,7 +52,7 @@ class xvidListGUI implements xvidUIComponent {
 			$ilCtrl->setParameterByClass('ilvideomanagerusergui', 'node_id', $ilVideoManagerVideo->getId());
 			$xvidListItemGUI = new xvidListItemGUI();
 			$xvidListItemGUI->setTitle($ilVideoManagerVideo->getTitle());
-			$xvidListItemGUI->setDescription($ilVideoManagerVideo->getDescription($this->max_desc_length));
+			$xvidListItemGUI->setDescription($ilVideoManagerVideo->getDescription());
 			$xvidListItemGUI->setLink($ilCtrl->getLinkTargetByClass('ilvideomanagerusergui', 'playVideo'));
 			$xvidListItemGUI->setImgSrc($ilVideoManagerVideo->getPosterHttp());
 			$xvidListItemGUI->setCounter($ilVideoManagerVideo->getViews());

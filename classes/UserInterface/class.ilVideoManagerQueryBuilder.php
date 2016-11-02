@@ -119,25 +119,15 @@ class ilVideoManagerQueryBuilder {
 					break;
 			}
 		}
-		//		ilUtil::sendInfo($sql);
+
 		$query = $ilDB->query($sql);
 		if ($this->options['count']) {
 			return (int)$ilDB->fetchObject($query)->count;
 		}
 		while ($result = $ilDB->fetchAssoc($query)) {
-			$video = new ilVideoManagerVideo();
-			$video->buildFromArray($result);
-			//			$video->read();
-			//			$row['sort'] = $x;
-			//			$x ++;
-			//			$row['img'] = $video->getPreviewImageHttp();
-			//			$row['title'] = $video->getTitle();
-			//			$row['id'] = $video->getId();
-			//			$row['create_date'] = $video->getCreateDate();
-			//			$ilCtrl->setParameterByClass('ilvideomanagerusergui', 'node_id', $video->getId());
-			//			$row['link'] = $ilCtrl->getLinkTargetByClass('ilvideomanagerusergui', 'playVideo');
-			//			$row['description'] = $video->getDescription($this->max_desc_length);
-			//			$row['views'] = $result['views'];
+			$video = new ilVideoManagerVideo($result['id']);
+			$video->afterObjectLoad();
+			// $video->buildFromArray($result);
 
 			$this->videos[] = $video;
 		}
