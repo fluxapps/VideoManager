@@ -36,7 +36,7 @@ class ilVideoManagerVideo extends ilVideoManagerObject {
 	/**
 	 * @var int
 	 */
-	protected $views = 0;
+	protected $views = null;
 
 
 	public function afterObjectLoad() {
@@ -44,6 +44,10 @@ class ilVideoManagerVideo extends ilVideoManagerObject {
 			$dimensions = vmFFmpeg::getVideoDimension($this->getPath() . '/' . $this->getFileName());
 			$this->setHeight($dimensions['height']);
 			$this->setWidth($dimensions['width']);
+		}
+		if ($this->views === null) {
+			require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/Count/class.vidmCount.php');
+			$this->views = vidmCount::count($this->getId());
 		}
 	}
 

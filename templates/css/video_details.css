@@ -25,14 +25,6 @@ div#mep_0 {
 	width:      inherit;
 	max-width:  720px;
 }
-/*#videoplayer {*/
-    /*box-shadow: 3px 3px 4px #D0D0D0;*/
-    /*height:440px;*/
-    /*width: 100%;*/
-    /*max-width:450px;*/
-    /*margin-top:50px;*/
-    /*display: inline-block;*/
-/*}*/
 
 @media
 only screen and (max-width: 1220px){
