@@ -60,7 +60,7 @@ class ilVideoManagerFolderFormGUI extends ilPropertyFormGUI{
                 $this->addCommandButton('createFolder', $this->pl->txt('common_add'));
                 break;
             case 'edit':
-                $this->addCommandButton('saveFolder', $this->pl->txt('common_edit'));
+                $this->addCommandButton('saveFolder', $this->pl->txt('common_save'));
                 $this->fillForm();
                 break;
         }
