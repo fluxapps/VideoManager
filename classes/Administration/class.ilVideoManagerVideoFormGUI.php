@@ -63,6 +63,7 @@ class ilVideoManagerVideoFormGUI extends ilPropertyFormGUI {
 
 				$num_input = new ilNumberInputGUI($this->pl->txt('form_image_at_sec'), 'image_at_sec');
 				$num_input->setInfo($this->pl->txt('form_image_at_sec_info'));
+                $num_input->setRequired(true);
 				$this->addItem($num_input);
 
 				$this->addCommandButton('updateVideo', $this->pl->txt('common_save'));
@@ -86,6 +87,8 @@ class ilVideoManagerVideoFormGUI extends ilPropertyFormGUI {
 
 				$num_input = new ilNumberInputGUI($this->pl->txt('form_image_at_sec'), 'image_at_sec');
 				$num_input->setInfo($this->pl->txt('form_image_at_sec_info'));
+                $num_input->setRequired(true);
+                $num_input->setValue(1);
 				$this->addItem($num_input);
 
 				$this->addCommandButton('create', $this->pl->txt('common_add'));

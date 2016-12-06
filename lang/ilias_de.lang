@@ -41,7 +41,7 @@ form_upload_vid#:#Video(s) Hochladen
 form_vid#:#Video(s)
 form_wrong_filetype#:#Dateityp ungültig
 form_image_at_sec#:#Bild bei Sekunde
-form_image_at_sec_info#:#Anzahl Sekunden der Stelle, an der das Vorschaubild extrahiert werden soll<br>Bei keiner Eingabe: 1/3 der Länge des Videos
+form_image_at_sec_info#:#Anzahl Sekunden der Stelle, an der das Vorschaubild extrahiert werden soll
 mail_new_upload#:#In einer Ihrer abonnierten Kategorien wurde ein neues Video hochgeladen:
 mail_subject#:#Neuer Video-Upload in Kategorie
 mail_view_video#:#Video-Link:
