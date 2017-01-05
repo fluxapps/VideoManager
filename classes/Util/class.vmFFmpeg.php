@@ -51,7 +51,8 @@ class vmFFmpeg extends ilFFmpeg {
 		"video/webm"  => array(
 			"source"     => true,
 			"target"     => true,
-			"parameters" => "-c:v libvpx -crf 10 -b:v 1M -c:a libvorbis",
+//			"parameters" => "-c:v libvpx -crf 10 -b:v 1M -c:a libvorbis",
+			"parameters" => "-vcodec libvpx -crf 10 -b:v 1M -acodec libvorbis",
 			"suffix"     => "webm",
 		),
 	);
@@ -67,14 +68,15 @@ class vmFFmpeg extends ilFFmpeg {
 	 */
 	static public function convert($a_file, $a_target_mime, $a_target_dir = "", $a_target_filename = "") {
 		$target_file = self::getTargetFilePath($a_file, $a_target_mime, $a_target_dir, $a_target_filename);
-		$ret = self::exec(self::getFullCmd($a_file, $a_target_mime, $a_target_dir, $a_target_filename));
+		$cmd = self::getFullCmd($a_file, $a_target_mime, $a_target_dir, $a_target_filename);
+		$ret = self::exec($cmd);
 		self::$last_return = $ret;
 
 		if (is_file($target_file)) {
 			return $target_file;
 		} else {
 			include_once("./Services/MediaObjects/exceptions/class.ilFFmpegException.php");
-			throw new ilFFmpegException("It was not possible to convert file " . basename($a_file) . ".");
+			throw new ilFFmpegException("It was not possible to convert file " . basename($a_file) . "; Command used: " . $cmd);
 		}
 	}
 
