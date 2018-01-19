@@ -24,6 +24,7 @@ class vidmConfigFormGUI extends ilPropertyFormGUI {
 	 * @param ilVideoManagerConfigGUI $parent_gui
 	 */
 	public function __construct(ilVideoManagerConfigGUI $parent_gui) {
+		parent::__construct();
 		$this->parent_gui = $parent_gui;
 		$this->pl = ilVideoManagerPlugin::getInstance();
 		//		$this->pl->updateLanguageFiles();
