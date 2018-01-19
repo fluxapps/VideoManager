@@ -26,6 +26,10 @@ class ilVideoManagerAdminTableGUI extends ilTable2GUI{
      * @var ilVideoManagerPlugin
      */
     protected $pl;
+	/**
+	 * @var ilCtrl
+	 */
+    protected $ctrl;
 
     /**
      * @param $parent_obj
@@ -33,6 +37,8 @@ class ilVideoManagerAdminTableGUI extends ilTable2GUI{
      */
     public function __construct($parent_obj, $node_id = 0)
     {
+    	global $DIC;
+    	$this->ctrl = $DIC->ctrl();
         $this->pl = ilVideoManagerPlugin::getInstance();
         $this->tree = new ilVideoManagerTree(1);
         $this->setId('vidm_admin_tbl_'.$node_id);

@@ -18,13 +18,18 @@ class vidmConfigFormGUI extends ilPropertyFormGUI {
 	 * @var ilVideoManagerPlugin
 	 */
 	protected $pl;
-
+	/**
+	 * @var ilCtrl
+	 */
+	protected $ctrl;
 
 	/**
 	 * @param ilVideoManagerConfigGUI $parent_gui
 	 */
 	public function __construct(ilVideoManagerConfigGUI $parent_gui) {
 		parent::__construct();
+		global $DIC;
+		$this->ctrl = $DIC->ctrl();
 		$this->parent_gui = $parent_gui;
 		$this->pl = ilVideoManagerPlugin::getInstance();
 		//		$this->pl->updateLanguageFiles();

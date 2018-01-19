@@ -37,7 +37,10 @@ class ilVideoManagerVideoTableGUI extends ilTable2GUI {
 	 * @var int
 	 */
 	protected $max_desc_length;
-
+	/**
+	 * @var ilCtrl
+	 */
+	protected $ctrl;
 
 	/**
 	 * @param                     $parent_gui
@@ -47,6 +50,7 @@ class ilVideoManagerVideoTableGUI extends ilTable2GUI {
 	public function __construct($parent_gui, $options, ilVideoManagerVideo $video = null) {
 		global $DIC;
 		parent::__construct($parent_gui, $options['cmd']);
+		$this->ctrl = $DIC->ctrl();
 		$this->db = $DIC->database();
 		$this->tree = new ilVideoManagerTree(1);
 		$this->pl = ilVideoManagerPlugin::getInstance();

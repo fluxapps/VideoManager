@@ -24,7 +24,10 @@ class ilVideoManagerVideoFormGUI extends ilPropertyFormGUI {
 	 * @var ilVideoManagerPlugin
 	 */
 	protected $pl;
-
+	/**
+	 * @var ilCtrl
+	 */
+	protected $ctrl;
 
 	/**
 	 * @param                     $parent_gui
@@ -32,6 +35,8 @@ class ilVideoManagerVideoFormGUI extends ilPropertyFormGUI {
 	 */
 	public function __construct($parent_gui, ilVideoManagerVideo $video) {
 		parent::__construct();
+		global $DIC;
+		$this->ctrl = $DIC->ctrl();
 		$this->parent_gui = $parent_gui;
 		$this->video = $video;
 		$this->pl = ilVideoManagerPlugin::getInstance();
