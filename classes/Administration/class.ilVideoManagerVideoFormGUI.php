@@ -134,15 +134,17 @@ class ilVideoManagerVideoFormGUI extends ilPropertyFormGUI {
 			//rename each file in the directory
 			$dir = scandir($this->video->getPath());
 			foreach ($dir as $file) {
-				$suffix = array_pop(explode('.', $file));
+				if($file !== "." && $file !== "..") {
+					$suffix = array_pop(explode('.', $file));
 
-				$ending = '';
-				if (preg_match('/[.]*_poster[.]*/', $file)) {
-					$ending = '_poster';
-				} elseif (preg_match('/[.]*_preview[.]*/', $file)) {
-					$ending = '_preview';
+					$ending = '';
+					if (preg_match('/[.]*_poster[.]*/', $file)) {
+						$ending = '_poster';
+					} elseif (preg_match('/[.]*_preview[.]*/', $file)) {
+						$ending = '_preview';
+					}
+					rename($this->video->getPath() . '/' . $file, $this->video->getPath() . '/' . $this->video->getTitle() . $ending . '.' . $suffix);
 				}
-				rename($this->video->getPath() . '/' . $file, $this->video->getPath() . '/' . $this->video->getTitle() . $ending . '.' . $suffix);
 			}
 
 			//Extract image if changed
