@@ -40,7 +40,11 @@ class vidmCountTableGUI extends ilTable2GUI {
 		 */
 		$ilVideoManagerVideo = ilVideoManagerVideo::find($a_set['child']);
 
-		$this->tpl->setVariable('VIDEO', $ilVideoManagerVideo->getPreviewImageHttp());
+		if($a_set["type"] === $ilVideoManagerVideo::TYPE_VID) {
+			$this->tpl->setVariable('VIDEO', $ilVideoManagerVideo->getPreviewImageHttp());
+		} else {
+			$this->tpl->setVariable('VIDEO', ilUtil::getImagePath('icon_cat.svg'));
+		}
 		$this->tpl->setVariable('TITLE', $a_set['title']);
 		$this->tpl->setVariable('VIEWS', vidmCount::countV($a_set['child']));
 	}
