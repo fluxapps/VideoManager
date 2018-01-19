@@ -98,7 +98,7 @@ class ilVideoManagerAdminGUI {
 		if (! $_GET[self::PARAM_NODE_ID]) {
 			$_GET[self::PARAM_NODE_ID] = ilVideoManagerObject::__getRootFolder()->getId();
 		}
-		if (ilVideoManagerObject::__getTypeForId($_GET[self::PARAM_NODE_ID]) == 'vid') {
+		if (ilVideoManagerObject::__getTypeForId($_GET[self::PARAM_NODE_ID]) == ilVideoManagerObject::TYPE_VID) {
 			$this->object = new ilVideoManagerVideo($_GET[self::PARAM_NODE_ID]);
 		} else {
 			$this->object = new ilVideoManagerFolder($_GET[self::PARAM_NODE_ID]);
@@ -419,7 +419,7 @@ class ilVideoManagerAdminGUI {
 		$this->tabs->setBackTarget($this->pl->txt('common_back'), $this->ctrl->getLinkTarget($this, self::CMD_SHOW_FOLDER_CONTENT));
 		ilUtil::sendInfo($this->pl->txt('msg_choose_folder'));
 		$expl_tree = new ilVideoManagerTreeExplorerGUI('vidm_explorer', 'ilVideoManagerAdminGUI', 'performPaste', $this->tree);
-		$expl_tree->setTypeWhiteList(array( 'fld' ));
+		$expl_tree->setTypeWhiteList(array( ilVideoManagerObject::TYPE_FLD ));
 		$subtree = array();
 
 		if ($_POST['selected_cmd'] == 'moveMultiple') {

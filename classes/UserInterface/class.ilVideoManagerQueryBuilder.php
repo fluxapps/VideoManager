@@ -60,7 +60,7 @@ class ilVideoManagerQueryBuilder {
 		$sql .= ' FROM vidm_data
                     JOIN vidm_tree ON (vidm_tree.child = vidm_data.id)';
 
-		$sql .= ' WHERE vidm_data.type = ' . $ilDB->quote('vid', 'text');
+		$sql .= ' WHERE vidm_data.type = ' . $ilDB->quote(ilVideoManagerObject::TYPE_VID, 'text');
 
 		if ($hidden_nodes = $tree->getHiddenNodes()) {
 			$sql .= ' AND vidm_data.id NOT IN (' . implode(',', $hidden_nodes) . ')';

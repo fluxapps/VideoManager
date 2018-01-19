@@ -165,7 +165,7 @@ class ilVideoManagerPlayVideoGUI {
 	protected function initRating() {
 		$this->ctrl->setParameterByClass('ilRatingGUI', 'node_id', $_GET['node_id']);
 		$rating = new ilRatingGUI();
-		$rating->setObject($this->video->getId(), 'vid');
+		$rating->setObject($this->video->getId(), ilVideoManagerObject::TYPE_VID);
 		$this->tpl->setVariable('RATING', $rating->getHTML());
 	}
 

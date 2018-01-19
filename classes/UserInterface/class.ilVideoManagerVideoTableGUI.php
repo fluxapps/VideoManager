@@ -116,7 +116,7 @@ class ilVideoManagerVideoTableGUI extends ilTable2GUI {
 		$sql .= ' FROM vidm_data
                     JOIN vidm_tree ON (vidm_tree.child = vidm_data.id)';
 
-		$sql .= ' WHERE vidm_data.type = ' . $this->db->quote('vid', 'text');
+		$sql .= ' WHERE vidm_data.type = ' . $this->db->quote(ilVideoManagerObject::TYPE_VID, 'text');
 
 		if ($hidden_nodes = $tree->getHiddenNodes()) {
 			$sql .= ' AND vidm_data.id NOT IN (' . implode(',', $hidden_nodes) . ')';

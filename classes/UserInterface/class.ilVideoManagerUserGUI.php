@@ -66,7 +66,7 @@ class ilVideoManagerUserGUI {
 		switch ($next_class) {
 			case 'ilratinggui':
 				$rating = new ilRatingGUI();
-				$rating->setObject($_GET['node_id'], 'vid');
+				$rating->setObject($_GET['node_id'], ilVideoManagerObject::TYPE_VID);
 				$rating->saveRating();
 				$this->ctrl->setParameter($this, 'node_id', $_GET['node_id']);
 				$this->ctrl->redirect($this, self::CMD_PLAY_VIDEO);
@@ -235,7 +235,7 @@ class ilVideoManagerUserGUI {
 
 	protected function initLeftContent() {
 		// Left Content
-		$xvidChannelListGUI = new xvidChannelListGUI(ilVideoManagerFolder::where(array( 'type' => 'fld' ))->where('( hidden IS NULL OR hidden = 0)')
+		$xvidChannelListGUI = new xvidChannelListGUI(ilVideoManagerFolder::where(array( 'type' => ilVideoManagerObject::TYPE_FLD ))->where('( hidden IS NULL OR hidden = 0)')
 		                                                                 ->get());
 		$xvidChannelListGUI->setId('xvidm_channel_list');
 		$this->tpl->setLeftContent($xvidChannelListGUI->render());

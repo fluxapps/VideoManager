@@ -110,7 +110,7 @@ class ilVideoManagerVideoDetailsGUI {
 
 		// Rating
 		$rating = new ilRating();
-		$average = $rating->getOverallRatingForObject($this->video->getId(), 'vid', 0, '-');
+		$average = $rating->getOverallRatingForObject($this->video->getId(), ilVideoManagerObject::TYPE_VID, 0, '-');
 		$rating_gui = new ilNonEditableValueGUI($this->pl->txt('common_rating'));
 		if ($average['avg']) {
 			$rating_gui->setValue($average['avg'] . ' / 5 (' . $average['cnt'] . ' Rating(s))');

@@ -105,7 +105,7 @@ class ilVideoManagerTreeExplorerGUI extends ilTreeExplorerGUI {
 	 * @return bool
 	 */
 	public function isNodeClickable($node) {
-		if ($this->ctrl->getCmd() != 'insert' || ilVideoManagerObject::__getTypeForId($node['id']) == 'vid') {
+		if ($this->ctrl->getCmd() != 'insert' || ilVideoManagerObject::__getTypeForId($node['id']) == ilVideoManagerObject::TYPE_VID) {
 			return true;
 		} else {
 			return false;
