@@ -36,7 +36,7 @@ class vidmConfig extends ActiveRecord {
 	 *
 	 * @return string
 	 */
-	public static function get($id) {
+	public static function getV($id) {
 		/**
 		 * @var $obj vidmConfig
 		 */
@@ -53,7 +53,7 @@ class vidmConfig extends ActiveRecord {
 	 * @param $id
 	 * @param $value
 	 */
-	public static function set($id, $value) {
+	public static function setV($id, $value) {
 		/**
 		 * @var $obj vidmConfig
 		 */

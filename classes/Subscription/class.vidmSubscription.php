@@ -122,7 +122,7 @@ class vidmSubscription extends ActiveRecord {
 	 * @return string
 	 */
 	public static function isActive() {
-		return vidmConfig::get(vidmConfig::F_ACTIVATE_SUBSCRIPTION);
+		return vidmConfig::getV(vidmConfig::F_ACTIVATE_SUBSCRIPTION);
 	}
 
 

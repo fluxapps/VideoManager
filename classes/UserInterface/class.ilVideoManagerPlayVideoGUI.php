@@ -137,7 +137,7 @@ class ilVideoManagerPlayVideoGUI {
 		$this->tpl->setVariable('CATEGORY_KEY', $this->pl->txt('player_category_key'));
 		$this->tpl->setVariable('CATEGORY_VALUE', $category->getTitle());
 
-		if (vidmConfig::get(vidmConfig::F_ACTIVATE_SUBSCRIPTION)) {
+		if (vidmConfig::getV(vidmConfig::F_ACTIVATE_SUBSCRIPTION)) {
 			$sub = new vidmSubscriptionButtonGUI();
 			$sub->setSize(vidmSubscriptionButtonGUI::SIZE_SMALL);
 			$this->ctrl->setParameter($this->parent_gui, 'node_id', $_GET['node_id']);
@@ -147,7 +147,7 @@ class ilVideoManagerPlayVideoGUI {
 
 		if (vidmCount::isActive()) {
 			$this->tpl->setVariable('VIEWS_KEY', $this->pl->txt('player_views_key'));
-			$this->tpl->setVariable('VIEWS', vidmCount::count($this->video->getId()));
+			$this->tpl->setVariable('VIEWS', vidmCount::countV($this->video->getId()));
 		}
 
 		$this->ctrl->setParameterByClass('ilVideoManagerUserGUI', 'search_value', $category->getId());

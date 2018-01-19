@@ -87,7 +87,7 @@ class ilVideoManagerAdminTableGUI extends ilTable2GUI{
     /**
      * @param array $row
      */
-    public function fillRow(array $row)
+    public function fillRow($row)
     {
         $this->tpl->setVariable('ID', $row['node_id']);
         $this->tpl->setVariable('ICON', $row['icon']);

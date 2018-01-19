@@ -124,7 +124,7 @@ class ilVideoManagerVideoDetailsGUI {
 
 		if (vidmCount::isActive()) {
 			$views = new ilNonEditableValueGUI($this->pl->txt('stats_views'));
-			$views->setValue(vidmCount::count($this->video->getId()));
+			$views->setValue(vidmCount::countV($this->video->getId()));
 			$form->addItem($views);
 		}
 

@@ -72,7 +72,7 @@ class vidmCount extends ActiveRecord {
 	 *
 	 * @return int
 	 */
-	public static function count($video_id) {
+	public static function countV($video_id) {
 		if (! self::isActive()) {
 			return false;
 		}
@@ -85,7 +85,7 @@ class vidmCount extends ActiveRecord {
 	 * @return string
 	 */
 	public static function isActive() {
-		return vidmConfig::get(vidmConfig::F_ACTIVATE_VIEW_LOG);
+		return vidmConfig::getV(vidmConfig::F_ACTIVATE_VIEW_LOG);
 	}
 
 

@@ -65,7 +65,7 @@ class vidmSubscriptionButtonGUI {
 		self::$id_count ++;
 		$id = 'vidm_sub_' . self::$id_count;
 		if ($this->isShowTooltip()) {
-			ilTooltipGUI::initLibrary();
+			ilTooltipGUI::init();
 			ilTooltipGUI::addTooltip($id, $this->getTooltip(), '', 'left center', 'right center');
 		}
 

@@ -71,9 +71,9 @@ vidmCount::installDB();
 <?php
 require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/Config/class.vidmConfig.php');
 vidmConfig::installDB();
-vidmConfig::set(vidmConfig::F_ACTIVATE_SUBSCRIPTION, true);
-vidmConfig::set(vidmConfig::F_ACTIVATE_VIEW_LOG, true);
-vidmConfig::set(vidmConfig::F_ROLES, array( 2 ));
+vidmConfig::setV(vidmConfig::F_ACTIVATE_SUBSCRIPTION, true);
+vidmConfig::setV(vidmConfig::F_ACTIVATE_VIEW_LOG, true);
+vidmConfig::setV(vidmConfig::F_ROLES, array( 2 ));
 ?>
 <#4>
 <?php

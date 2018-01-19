@@ -79,7 +79,7 @@ class vidmConfigFormGUI extends ilPropertyFormGUI {
 	private function getValuesForItem($item, &$array) {
 		if (self::checkItem($item)) {
 			$key = $item->getPostVar();
-			$array[$key] = vidmConfig::get($key);
+			$array[$key] = vidmConfig::getV($key);
 			if (self::checkForSubItem($item)) {
 				foreach ($item->getSubItems() as $subitem) {
 					$this->getValuesForItem($subitem, $array);
@@ -110,7 +110,7 @@ class vidmConfigFormGUI extends ilPropertyFormGUI {
 	private function saveValueForItem($item) {
 		if (self::checkItem($item)) {
 			$key = $item->getPostVar();
-			vidmConfig::set($key, $this->getInput($key));
+			vidmConfig::setV($key, $this->getInput($key));
 
 			if (self::checkForSubItem($item)) {
 				foreach ($item->getSubItems() as $subitem) {

@@ -35,6 +35,7 @@ class ilVideoManagerVideoFormGUI extends ilPropertyFormGUI {
 	 * @param ilVideoManagerVideo $video
 	 */
 	public function __construct($parent_gui, ilVideoManagerVideo $video) {
+		parent::__construct();
 		global $ilCtrl;
 		$this->parent_gui = $parent_gui;
 		$this->video = $video;

@@ -37,7 +37,7 @@ class vidmCountTableGUI extends ilTable2GUI {
 
 		$this->tpl->setVariable('VIDEO', $ilVideoManagerVideo->getPreviewImageHttp());
 		$this->tpl->setVariable('TITLE', $a_set['title']);
-		$this->tpl->setVariable('VIEWS', vidmCount::count($a_set['child']));
+		$this->tpl->setVariable('VIEWS', vidmCount::countV($a_set['child']));
 	}
 }
 

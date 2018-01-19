@@ -47,7 +47,7 @@ class ilVideoManagerVideo extends ilVideoManagerObject {
 		}
 		if ($this->views === null) {
 			require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/Count/class.vidmCount.php');
-			$this->views = vidmCount::count($this->getId());
+			$this->views = vidmCount::countV($this->getId());
 		}
 	}
 
