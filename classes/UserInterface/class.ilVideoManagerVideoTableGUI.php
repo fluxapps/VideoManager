@@ -14,17 +14,9 @@ require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHoo
 class ilVideoManagerVideoTableGUI extends ilTable2GUI {
 
 	/**
-	 * @var
-	 */
-	protected $parent_gui;
-	/**
 	 * @var ilDB
 	 */
 	protected $db;
-	/**
-	 * @var ilCtrl
-	 */
-	protected $ctrl;
 	/**
 	 * @var ilVideoManagerPlugin
 	 */
@@ -53,10 +45,9 @@ class ilVideoManagerVideoTableGUI extends ilTable2GUI {
 	 * @param ilVideoManagerVideo $video
 	 */
 	public function __construct($parent_gui, $options, ilVideoManagerVideo $video = null) {
-		global $ilDB, $ilCtrl;
+		global $DIC;
 		parent::__construct($parent_gui, $options['cmd']);
-		$this->db = $ilDB;
-		$this->ctrl = $ilCtrl;
+		$this->db = $DIC->database();
 		$this->tree = new ilVideoManagerTree(1);
 		$this->pl = ilVideoManagerPlugin::getInstance();
 		$this->video = $video;
@@ -64,7 +55,7 @@ class ilVideoManagerVideoTableGUI extends ilTable2GUI {
 		$this->setId('video_tbl');
 		$this->setDefaultOrderField('sort');
 		$this->setShowRowsSelector(false);
-		$this->setFormAction($ilCtrl->getFormAction($parent_gui));
+		$this->setFormAction($this->ctrl->getFormAction($parent_gui));
 		$this->setEnableNumInfo(true);
 		$this->setExternalSorting(true);
 		$this->setEnableNumInfo(false);

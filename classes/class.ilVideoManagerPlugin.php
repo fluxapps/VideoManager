@@ -42,8 +42,8 @@ class ilVideoManagerPlugin extends ilUserInterfaceHookPlugin {
 	public static function checkPreconditions() {
 		require_once('class.videoman.php');
 		videoman::loadActiveRecord();
-		global $ilCtrl;
-		if (!class_exists('ActiveRecord') OR $ilCtrl->lookupClassPath('ilUIPluginRouterGUI') === null) {
+		global $DIC;
+		if (!class_exists('ActiveRecord') OR $DIC->ctrl()->lookupClassPath('ilUIPluginRouterGUI') === null) {
 			return false;
 		}
 

@@ -15,18 +15,16 @@ class vidmConfigFormGUI extends ilPropertyFormGUI {
 	 */
 	protected $parent_gui;
 	/**
-	 * @var  ilCtrl
+	 * @var ilVideoManagerPlugin
 	 */
-	protected $ctrl;
+	protected $pl;
 
 
 	/**
 	 * @param ilVideoManagerConfigGUI $parent_gui
 	 */
 	public function __construct(ilVideoManagerConfigGUI $parent_gui) {
-		global $ilCtrl;
 		$this->parent_gui = $parent_gui;
-		$this->ctrl = $ilCtrl;
 		$this->pl = ilVideoManagerPlugin::getInstance();
 		//		$this->pl->updateLanguageFiles();
 		$this->setFormAction($this->ctrl->getFormAction($this->parent_gui));
@@ -154,10 +152,10 @@ class vidmConfigFormGUI extends ilPropertyFormGUI {
 	 * @return array
 	 */
 	public static function getRoles($filter, $with_text = true) {
-		global $rbacreview;
+		global $DIC;
 		$opt = array();
 		$role_ids = array();
-		foreach ($rbacreview->getRolesByFilter($filter) as $role) {
+		foreach ($DIC->rbac()->review()->getRolesByFilter($filter) as $role) {
 			$opt[$role['obj_id']] = $role['title'] . ' (' . $role['obj_id'] . ')';
 			$role_ids[] = $role['obj_id'];
 		}

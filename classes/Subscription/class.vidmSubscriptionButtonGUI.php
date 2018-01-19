@@ -48,12 +48,23 @@ class vidmSubscriptionButtonGUI {
 	 */
 	protected $tpl;
 	/**
+	 * @var ilCtrl
+	 */
+	protected $ctrl;
+	/**
+	 * @var ilObjUser
+	 */
+	protected $usr;
+	/**
 	 * @var int
 	 */
 	protected static $id_count = 0;
 
 
 	public function __construct() {
+		global $DIC;
+		$this->ctrl = $DIC->ctrl();
+		$this->usr = $DIC->user();
 		$this->tpl = new ilTemplate('tpl.sub_button.html', false, false, 'Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager');
 	}
 
@@ -198,27 +209,22 @@ class vidmSubscriptionButtonGUI {
 	 * @param null                 $fallback_cmd
 	 */
 	public function generate(ilVideoManagerFolder $ilVideoManagerFolder, $fallback_cmd = NULL) {
-		global $ilUser, $ilCtrl;
-		/**
-		 * @var $ilCtrl ilCtrl
-		 */
-
 		$pl = ilVideoManagerPlugin::getInstance();
-		$ilCtrl->setParameterByClass('ilVideoManagerUserGUI', ilVideoManagerUserGUI::SUB_CAT_ID, $ilVideoManagerFolder->getId());
-		$ilCtrl->setParameterByClass('ilVideoManagerUserGUI', 'fallbackCmd', $fallback_cmd);
+		$this->ctrl->setParameterByClass('ilVideoManagerUserGUI', ilVideoManagerUserGUI::SUB_CAT_ID, $ilVideoManagerFolder->getId());
+		$this->ctrl->setParameterByClass('ilVideoManagerUserGUI', 'fallbackCmd', $fallback_cmd);
 		$this->setTooltip($pl->txt('player_sub_tooltip'));
-		$ilCtrl->saveParameterByClass('ilVideoManagerUserGUI', 'node_id');
+		$this->ctrl->saveParameterByClass('ilVideoManagerUserGUI', 'node_id');
 
-		if (vidmSubscription::isSubscribed($ilUser->getId(), $ilVideoManagerFolder->getId())) {
+		if (vidmSubscription::isSubscribed($this->usr->getId(), $ilVideoManagerFolder->getId())) {
 			$this->setIcon(self::ICON_UNSUBSCRIBE);
 			$this->setType(self::TYPE_UNSUBSCRIBE);
 			$this->setTitle($pl->txt('tbl_unsubscribe_action'));
-			$this->setLink($ilCtrl->getLinkTargetByClass('ilVideoManagerUserGUI', 'unsubscribe'));
+			$this->setLink($this->ctrl->getLinkTargetByClass('ilVideoManagerUserGUI', 'unsubscribe'));
 		} else {
 			$this->setIcon(self::ICON_SUBSCRIBE);
 			$this->setType(self::TYPE_SUBSCRIBE);
 			$this->setTitle($pl->txt('tbl_subscribe_action'));
-			$this->setLink($ilCtrl->getLinkTargetByClass('ilVideoManagerUserGUI', 'subscribe'));
+			$this->setLink($this->ctrl->getLinkTargetByClass('ilVideoManagerUserGUI', 'subscribe'));
 		}
 	}
 }

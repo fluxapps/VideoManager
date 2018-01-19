@@ -42,20 +42,25 @@ class ilVideoManagerPlayVideoGUI {
 	 * @var array
 	 */
 	protected $options;
+	/**
+	 * @var ilObjUser
+	 */
+	protected $usr;
 
 
 	/**
 	 * @param $parent_gui
 	 */
 	public function __construct($parent_gui) {
-		global $ilCtrl, $ilUser;
-		$this->ctrl = $ilCtrl;
+		global $DIC;
+		$this->ctrl = $DIC->ctrl();
+		$this->usr = $DIC->user();
 		$this->parent_gui = $parent_gui;
 		$this->pl = ilVideoManagerPlugin::getInstance();
-		//		$this->tpl = $tpl;
+		//		$this->tpl = $DIC->ui()->mainTemplate();
 		$this->tpl = new ilTemplate('tpl.video_player.html', false, false, 'Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager');
 		$this->video = new ilVideoManagerVideo($_GET['node_id']);
-		vidmCount::up($this->video->getId(), $ilUser->getId());
+		vidmCount::up($this->video->getId(), $this->usr->getId());
 	}
 
 
@@ -65,7 +70,8 @@ class ilVideoManagerPlayVideoGUI {
 		}
 		$this->initMediaPlayer();
 		$this->initDescription();
-		global $tpl;
+		global $DIC;
+		$tpl = $DIC->ui()->mainTemplate();
 		$this->tpl->setVariable('RELATED_VIDEOS_TABLE', $this->getRelatedVideosTableHTML());
 		$tpl->setContent($this->tpl->get());
 		$tpl->setTitle('Play Video');

@@ -28,7 +28,10 @@ class xvidListGUI implements xvidUIComponent {
 		self::SIZE_LARGE => 'col-lg-3 col-md-3 col-sm-4 col-xs-6',
 		self::SIZE_TINY  => 'col-lg-12 col-md-12 col-sm-12 col-xs-12',
 	);
-
+	/**
+	 * @var ilCtrl
+	 */
+	protected $ctrl;
 
 	/**
 	 * xvidListGUI constructor.
@@ -36,24 +39,25 @@ class xvidListGUI implements xvidUIComponent {
 	 * @param $videos
 	 */
 	public function __construct($videos) {
+		global $DIC;
 		$this->videos = $videos;
-		global $tpl;
+		$this->ctrl = $DIC->ctrl();
+		$tpl = $DIC->ui()->mainTemplate();
 		$tpl->addCss('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/templates/css/cards.css');
 		$tpl->addJavaScript('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/templates/js/cards.js');
 	}
 
 
 	protected function loadItems() {
-		global $ilCtrl;
 		foreach ($this->videos as $ilVideoManagerVideo) {
 			if (!$ilVideoManagerVideo instanceof ilVideoManagerVideo) {
 				continue;
 			}
-			$ilCtrl->setParameterByClass('ilvideomanagerusergui', 'node_id', $ilVideoManagerVideo->getId());
+			$this->ctrl->setParameterByClass('ilvideomanagerusergui', 'node_id', $ilVideoManagerVideo->getId());
 			$xvidListItemGUI = new xvidListItemGUI();
 			$xvidListItemGUI->setTitle($ilVideoManagerVideo->getTitle());
 			$xvidListItemGUI->setDescription($ilVideoManagerVideo->getDescription());
-			$xvidListItemGUI->setLink($ilCtrl->getLinkTargetByClass('ilvideomanagerusergui', 'playVideo'));
+			$xvidListItemGUI->setLink($this->ctrl->getLinkTargetByClass('ilvideomanagerusergui', 'playVideo'));
 			$xvidListItemGUI->setImgSrc($ilVideoManagerVideo->getPosterHttp());
 			$xvidListItemGUI->setCounter($ilVideoManagerVideo->getViews());
 

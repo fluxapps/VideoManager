@@ -130,7 +130,8 @@ class vidmSubscription extends ActiveRecord {
 	 * @param $cat_id
 	 */
 	public static function deleteAllForCatId($cat_id) {
-		global $ilDB;
+		global $DIC;
+		$ilDB = $DIC->database();
 		$q = 'DELETE FROM ' . self::returnDbTableName() . ' WHERE cat_id = ' . $ilDB->quote($cat_id, 'integer');
 		$ilDB->manipulate($q);
 	}

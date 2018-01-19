@@ -71,19 +71,23 @@ class ilVideoManagerAdminGUI {
 	 * @var ilVideoManagerPlugin
 	 */
 	protected $pl;
-
+	/**
+	 * @var ilRbacSystem
+	 */
+	protected $rbacsystem;
 
 	public function __construct() {
-		global $tpl, $ilCtrl, $ilAccess, $ilToolbar, $ilLocator, $ilTabs;
+		global $DIC;
 
-		$this->tabs = $ilTabs;
+		$this->tabs = $DIC->tabs();
 		$this->pl = ilVideoManagerPlugin::getInstance();
-		$this->tpl = $tpl;
-		$this->ctrl = $ilCtrl;
-		$this->ilAccess = $ilAccess;
-		$this->ilLocator = $ilLocator;
-		$this->toolbar = $ilToolbar;
+		$this->tpl = $DIC->ui()->mainTemplate();
+		$this->ctrl = $DIC->ctrl();
+		$this->ilAccess = $DIC->access();
+		$this->ilLocator = $DIC["ilLocator"];
+		$this->toolbar = $DIC->toolbar();
 		$this->tree = new ilVideoManagerTree(1);
+		$this->rbacsystem = $DIC->rbac()->system();
 
 		$this->tpl->addCss('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/templates/css/administration_gui.css');
 
@@ -164,12 +168,8 @@ class ilVideoManagerAdminGUI {
 				$this->$cmd();
 		}
 		if (videoman::is50()) {
-			/**
-			 * @var $tpl ilTemplate
-			 */
-			global $tpl;
-			$tpl->getStandardTemplate();
-			$tpl->show();
+			$this->tpl->getStandardTemplate();
+			$this->tpl->show();
 		}
 	}
 
@@ -187,11 +187,6 @@ class ilVideoManagerAdminGUI {
 
 
 	public function showFolderContent() {
-		global $ilToolbar;
-		/**
-		 * @var $ilToolbar ilToolbarGUI
-		 */
-
 		include_once("./Services/UIComponent/AdvancedSelectionList/classes/class.ilAdvancedSelectionListGUI.php");
 		$adv = new ilAdvancedSelectionListGUI();
 		$adv->setListTitle($this->pl->txt("admin_add_new_item"));
@@ -201,7 +196,7 @@ class ilVideoManagerAdminGUI {
 			$b = ilLinkButton::getInstance();
 			$b->setUrl($this->ctrl->getLinkTarget($this, self::CMD_SHOW_STATISTICS));
 			$b->setCaption('ui_uihk_video_man_admin_view_statistics');
-			$ilToolbar->addButtonInstance($b);
+			$this->toolbar->addButtonInstance($b);
 		}
 
 		include_once("./Services/UIComponent/GroupedList/classes/class.ilGroupedListGUI.php");
@@ -215,7 +210,7 @@ class ilVideoManagerAdminGUI {
 		$gl->setAsDropDown(true);
 		$adv->setGroupedList($gl);
 
-		$ilToolbar->addText($adv->getHTML());
+		$this->toolbar->addText($adv->getHTML());
 		//list items
 		$table = new ilVideoManagerAdminTableGUI($this);
 		$this->tpl->setContent($table->getHTML());
@@ -223,10 +218,9 @@ class ilVideoManagerAdminGUI {
 
 
 	public function showVideoDetails() {
-		global $ilTabs;
 		$parent_id = $this->tree->getParentId($this->object->getId());
 		$this->ctrl->setParameter($this, self::PARAM_NODE_ID, $parent_id);
-		$ilTabs->setBackTarget($this->pl->txt('common_back'), $this->ctrl->getLinkTarget($this, self::CMD_SHOW_FOLDER_CONTENT));
+		$this->tabs->setBackTarget($this->pl->txt('common_back'), $this->ctrl->getLinkTarget($this, self::CMD_SHOW_FOLDER_CONTENT));
 		$vm_video_details = new ilVideoManagerVideoDetailsGUI($this, $this->object);
 		$vm_video_details->init();
 	}
@@ -542,9 +536,7 @@ class ilVideoManagerAdminGUI {
 
 
 	protected function checkPermission() {
-		global $rbacsystem;
-
-		if (! $rbacsystem->checkAccess("visible", SYSTEM_FOLDER_ID)) {
+		if (!$this->rbacsystem->checkAccess("visible", SYSTEM_FOLDER_ID)) {
 			ilUtil::sendFailure($this->pl->txt('msg_no_permission'), true);
 			//			$this->ctrl->redirectByClass('ilRouterGUI');
 		}

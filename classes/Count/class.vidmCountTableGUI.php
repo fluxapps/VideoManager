@@ -10,6 +10,11 @@ require_once('class.vidmCount.php');
 class vidmCountTableGUI extends ilTable2GUI {
 
 	/**
+	 * @var ilVideoManagerPlugin
+	 */
+	protected $pl;
+
+	/**
 	 * @param                      $a_parent_obj
 	 * @param ilVideoManagerTree   $tree
 	 * @param ilVideoManagerFolder $node

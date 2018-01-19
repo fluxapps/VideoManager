@@ -48,7 +48,8 @@ class ilVideoManagerQueryBuilder {
 	 * @return array|int
 	 */
 	protected function loadData() {
-		global $ilDB, $ilCtrl;
+		global $DIC;
+		$ilDB = $DIC->database();
 		$tree = new ilVideoManagerTree(1);
 		if ($this->options['count']) {
 			$sql = 'SELECT COUNT(vidm_data.id) AS count';

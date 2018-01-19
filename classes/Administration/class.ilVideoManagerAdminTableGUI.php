@@ -15,10 +15,6 @@ require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHoo
 class ilVideoManagerAdminTableGUI extends ilTable2GUI{
 
     /**
-     * @var ilCtrl
-     */
-    protected $ctrl;
-    /**
      * @var ilVideoManagerTree
      */
     protected $tree;
@@ -30,10 +26,6 @@ class ilVideoManagerAdminTableGUI extends ilTable2GUI{
      * @var ilVideoManagerPlugin
      */
     protected $pl;
-    /**
-     * @var ilTemplate
-     */
-    protected $tpl;
 
     /**
      * @param $parent_obj
@@ -41,9 +33,6 @@ class ilVideoManagerAdminTableGUI extends ilTable2GUI{
      */
     public function __construct($parent_obj, $node_id = 0)
     {
-        global $ilCtrl, $tpl;
-        $this->ctrl = $ilCtrl;
-        $this->tpl = $tpl;
         $this->pl = ilVideoManagerPlugin::getInstance();
         $this->tree = new ilVideoManagerTree(1);
         $this->setId('vidm_admin_tbl_'.$node_id);
@@ -61,7 +50,7 @@ class ilVideoManagerAdminTableGUI extends ilTable2GUI{
             $this->objects[] = new ilVideoManagerObject($node['id']);
         }
 
-        $this->setFormAction($ilCtrl->getFormAction($parent_obj));
+        $this->setFormAction($this->ctrl->getFormAction($parent_obj));
         $this->addColumn("", "", "1", true);
         $this->addColumn('', '', 1);
         $this->addColumn('', '', 800);

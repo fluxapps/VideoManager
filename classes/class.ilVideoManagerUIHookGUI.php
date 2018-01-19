@@ -10,26 +10,7 @@ require_once('./Services/UIComponent/classes/class.ilUIHookPluginGUI.php');
  */
 class ilVideoManagerUIHookGUI extends ilUIHookPluginGUI {
 
-	/**
-	 * @var ilCtrl
-	 */
-	protected $ctrl;
-	/**
-	 * @var $ilTabs
-	 */
-	protected $tabs;
-	/**
-	 * @var ilAccessHandler
-	 */
-	protected $access;
-
-
 	public function __construct() {
-		global $ilCtrl, $ilTabs, $ilAccess;
-		$this->ctrl = $ilCtrl;
-		$this->tabs = $ilTabs;
-		$this->access = $ilAccess;
-		$this->pl = ilVideoManagerPlugin::getInstance();
 	}
 
 

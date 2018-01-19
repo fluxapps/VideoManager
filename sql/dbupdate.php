@@ -18,7 +18,8 @@ if($root_folder = ilVideoManagerFolder::__getRootFolder())
     $root_folder->create();
 }
 
-global $ilDB;
+global $DIC;
+$ilDB = $DIC->database();
 if(!$ilDB->tableExists('vidm_tree'))
 {
     $fields = array(
@@ -77,7 +78,8 @@ vidmConfig::setV(vidmConfig::F_ROLES, array( 2 ));
 ?>
 <#4>
 <?php
-global $ilDB;
+global $DIC;
+$ilDB = $DIC->database();
 if (!$ilDB->tableColumnExists('vidm_data', 'hidden')) {
    $ilDB->addTableColumn('vidm_data', 'hidden', array(
        'type' => 'integer',

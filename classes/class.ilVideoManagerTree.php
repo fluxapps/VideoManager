@@ -12,6 +12,10 @@ class ilVideoManagerTree extends ilTree {
 	 * @var ilVideoManagerTree
 	 */
 	protected static $instance;
+	/**
+	 * @var ilDB
+	 */
+	protected $db;
 
 
 	/**
@@ -21,6 +25,8 @@ class ilVideoManagerTree extends ilTree {
 	 */
 	function __construct($tree_id) {
 		parent::__construct($tree_id);
+		global $DIC;
+		$this->db = $DIC->database();
 		$this->setTableNames('vidm_tree', 'vidm_data');
 		$this->setObjectTablePK('id');
 		$this->setTreeTablePK('tree');
@@ -60,12 +66,10 @@ class ilVideoManagerTree extends ilTree {
 	 */
 	public function getChildIds($a_node)
 	{
-		global $ilDB;
-
 		$query = 'SELECT * FROM '.$this->getTreeTable() .
-			' WHERE parent = '.$ilDB->quote($a_node,'integer').' '.
-			'AND tree > '.$ilDB->quote(0,'integer');
-		$res = $ilDB->query($query);
+			' WHERE parent = '.$this->db->quote($a_node,'integer').' '.
+			'AND tree > '.$this->db->quote(0,'integer');
+		$res = $this->db->query($query);
 
 		$childs = array();
 		while($row = $res->fetchRow(DB_FETCHMODE_OBJECT))

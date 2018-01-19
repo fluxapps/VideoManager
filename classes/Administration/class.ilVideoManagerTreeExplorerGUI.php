@@ -28,20 +28,19 @@ class ilVideoManagerTreeExplorerGUI extends ilTreeExplorerGUI {
 
 
 	function getNodeHref($node) {
-		global $ilCtrl;
-		if ($ilCtrl->getCmd() == "cut" || $ilCtrl->getCmd() == "moveMultiple") {
-			$ilCtrl->saveParameterByClass("ilVideoManagerAdminGUI", "target_id");
-			$ilCtrl->setParameterByClass("ilVideoManagerAdminGUI", "node_id", $node["child"]);
+		if ($this->ctrl->getCmd() == "cut" || $this->ctrl->getCmd() == "moveMultiple") {
+			$this->ctrl->saveParameterByClass("ilVideoManagerAdminGUI", "target_id");
+			$this->ctrl->setParameterByClass("ilVideoManagerAdminGUI", "node_id", $node["child"]);
 
-			return $ilCtrl->getLinkTargetByClass("ilVideoManagerAdminGUI", 'performPaste');
-		} elseif ($ilCtrl->getCmd() == 'insert') {
-			$ilCtrl->setParameterByClass("ilVideoManagerTMEPluginGUI", 'video_id', $node['id']);
+			return $this->ctrl->getLinkTargetByClass("ilVideoManagerAdminGUI", 'performPaste');
+		} elseif ($this->ctrl->getCmd() == 'insert') {
+			$this->ctrl->setParameterByClass("ilVideoManagerTMEPluginGUI", 'video_id', $node['id']);
 
-			return $ilCtrl->getLinkTargetByClass("ilVideoManagerTMEPluginGUI", 'create');
+			return $this->ctrl->getLinkTargetByClass("ilVideoManagerTMEPluginGUI", 'create');
 		} else {
-			$ilCtrl->setParameterByClass("ilVideoManagerAdminGUI", "node_id", $node["child"]);
+			$this->ctrl->setParameterByClass("ilVideoManagerAdminGUI", "node_id", $node["child"]);
 
-			return $ilCtrl->getLinkTargetByClass("ilVideoManagerAdminGUI", 'view');
+			return $this->ctrl->getLinkTargetByClass("ilVideoManagerAdminGUI", 'view');
 		}
 	}
 
@@ -106,8 +105,7 @@ class ilVideoManagerTreeExplorerGUI extends ilTreeExplorerGUI {
 	 * @return bool
 	 */
 	public function isNodeClickable($node) {
-		global $ilCtrl;
-		if ($ilCtrl->getCmd() != 'insert' || ilVideoManagerObject::__getTypeForId($node['id']) == 'vid') {
+		if ($this->ctrl->getCmd() != 'insert' || ilVideoManagerObject::__getTypeForId($node['id']) == 'vid') {
 			return true;
 		} else {
 			return false;

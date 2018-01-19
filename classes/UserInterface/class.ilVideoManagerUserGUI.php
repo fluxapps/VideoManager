@@ -49,13 +49,13 @@ class ilVideoManagerUserGUI {
 
 
 	public function __construct() {
-		global $tpl, $ilUser, $ilCtrl, $ilToolbar;
+		global $DIC;
 
-		$this->usr = $ilUser;
+		$this->usr = $DIC->user();
 		$this->pl = ilVideoManagerPlugin::getInstance();
-		$this->tpl = $tpl;
-		$this->ctrl = $ilCtrl;
-		$this->toolbar = $ilToolbar;
+		$this->tpl = $DIC->ui()->mainTemplate();
+		$this->ctrl = $DIC->ctrl();
+		$this->toolbar = $DIC->toolbar();
 	}
 
 
@@ -102,9 +102,8 @@ class ilVideoManagerUserGUI {
 			/**
 			 * @var $tpl ilTemplate
 			 */
-			global $tpl;
-			$tpl->getStandardTemplate();
-			$tpl->show();
+			$this->tpl->getStandardTemplate();
+			$this->tpl->show();
 		}
 	}
 
@@ -144,8 +143,7 @@ class ilVideoManagerUserGUI {
 		$button->setUrl($this->ctrl->getLinkTarget($this, 'search'));
 		$this->toolbar->addButtonInstance($button);
 		$this->toolbar->setFormAction($this->ctrl->getLinkTarget($this, 'search'));
-		global $ilUser;
-		if ($ilUser->getId() == 6) {
+		if ($this->usr->getId() == 6) {
 			$button = ilLinkButton::getInstance();
 			$button->setCaption($this->pl->txt('common_back_to_channels'),false);
 			$button->setUrl($this->ctrl->getLinkTarget($this, 'view'));

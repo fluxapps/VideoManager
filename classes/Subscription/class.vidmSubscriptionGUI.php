@@ -9,15 +9,15 @@
 class vidmSubscriptionGUI {
 
 	public function __construct() {
-		global $tpl, $ilCtrl, $ilAccess, $ilToolbar, $ilLocator, $ilTabs;
+		global $DIC;
 
-		$this->tabs = $ilTabs;
+		$this->tabs = $DIC->tabs();
 		$this->pl = ilVideoManagerPlugin::getInstance();
-		$this->tpl = $tpl;
-		$this->ctrl = $ilCtrl;
-		$this->ilAccess = $ilAccess;
-		$this->ilLocator = $ilLocator;
-		$this->toolbar = $ilToolbar;
+		$this->tpl = $DIC->ui()->mainTemplate();
+		$this->ctrl = $DIC->ctrl();
+		$this->ilAccess = $DIC->access();
+		$this->ilLocator = $DIC["ilLocator"];
+		$this->toolbar = $DIC->toolbar();
 		$this->tree = new ilVideoManagerTree(1);
 		//$_GET['node_id'] ? $this->object = ilVideoManagerObject::find($_GET['node_id']) : $this->object = ilVideoManagerObject::__getRootFolder();
 	}

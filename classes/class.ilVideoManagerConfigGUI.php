@@ -25,9 +25,9 @@ class ilVideoManagerConfigGUI extends ilPluginConfigGUI {
 
 
 	public function __construct() {
-		global $tpl, $ilCtrl;
-		$this->tpl = $tpl;
-		$this->ctrl = $ilCtrl;
+		global $DIC;
+		$this->tpl = $DIC->ui()->mainTemplate();
+		$this->ctrl = $DIC->ctrl();
 	}
 
 

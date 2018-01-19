@@ -28,10 +28,6 @@ class ilVideoManagerVideoDetailsGUI {
 	 */
 	protected $tpl;
 	/**
-	 * @var ilCtrl
-	 */
-	protected $ctrl;
-	/**
 	 * @var ilVideoManagerAdminGUI
 	 */
 	protected $parent_gui;
@@ -57,7 +53,8 @@ class ilVideoManagerVideoDetailsGUI {
 
 		$this->initPropertiesForm();
 		$this->initMediaPlayer();
-		global $tpl;
+		global $DIC;
+		$tpl = $DIC->ui()->mainTemplate();
 		$tpl->addCss('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/templates/css/video_details.css');
 		$tpl->setContent($this->tpl->get());
 	}

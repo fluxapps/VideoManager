@@ -17,14 +17,6 @@ class ilVideoManagerFolderFormGUI extends ilPropertyFormGUI{
      */
     protected $pl;
     /**
-     * @var ilTemplate
-     */
-    protected $tpl;
-    /**
-     * @var ilCtrl
-     */
-    protected $ctrl;
-    /**
      * @var ilVideoManagerAdminGUI
      */
     protected $parent_gui;
@@ -34,12 +26,9 @@ class ilVideoManagerFolderFormGUI extends ilPropertyFormGUI{
      */
     public function __construct($parent_gui, $cmd)
     {
-        global $ilCtrl, $tpl;
         parent::__construct();
         $this->parent_gui = $parent_gui;
-        $this->ctrl = $ilCtrl;
         $this->pl = ilVideoManagerPlugin::getInstance();
-        $this->tpl = $tpl;
         $this->setTitle($this->pl->txt('form_add_folder'));
 
         $title = new ilTextInputGUI($this->pl->txt('common_title'), 'title');

@@ -20,6 +20,10 @@ class xvidChannelListGUI implements xvidUIComponent {
 	 * @var string
 	 */
 	protected $id = '';
+	/**
+	 * @var ilCtrl
+	 */
+	protected $ctrl;
 
 
 	/**
@@ -29,23 +33,24 @@ class xvidChannelListGUI implements xvidUIComponent {
 	 */
 	public function __construct(array $channels) {
 		$this->channels = $channels;
+		global $DIC;
+		$this->ctrl = $DIC->ctrl();
 	}
 
 
 	protected function loadItems() {
-		global $ilCtrl;
 		foreach ($this->channels as $ilVideoManagerFolder) {
 			if (!$ilVideoManagerFolder->getVideoCount()) {
 				continue;
 			}
 			// Link
-			$ilCtrl->setParameterByClass('ilVideoManagerUserGUI', 'search_value', $ilVideoManagerFolder->getId());
-			$ilCtrl->setParameterByClass('ilVideoManagerUserGUI', 'search_method', 'category');
+			$this->ctrl->setParameterByClass('ilVideoManagerUserGUI', 'search_value', $ilVideoManagerFolder->getId());
+			$this->ctrl->setParameterByClass('ilVideoManagerUserGUI', 'search_method', 'category');
 
 			$xvidChannelListItemGUI = new xvidChannelListItemGUI();
 			$xvidChannelListItemGUI->setTitle($ilVideoManagerFolder->getTitle());
 			$xvidChannelListItemGUI->setCounter($ilVideoManagerFolder->getVideoCount());
-			$xvidChannelListItemGUI->setLink($ilCtrl->getLinkTargetByClass('ilVideoManagerUserGUI', 'search'));
+			$xvidChannelListItemGUI->setLink($this->ctrl->getLinkTargetByClass('ilVideoManagerUserGUI', 'search'));
 			$this->addItem($xvidChannelListItemGUI);
 		}
 	}
