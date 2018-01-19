@@ -1,5 +1,4 @@
 <?php
-require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/class.videoman.php');
 require_once('./Services/Mail/classes/class.ilMail.php');
 require_once('./Services/UIComponent/Button/classes/class.ilLinkButton.php');
 require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/class.ilVideoManagerObject.php');
@@ -167,10 +166,9 @@ class ilVideoManagerAdminGUI {
 			default:
 				$this->$cmd();
 		}
-		if (videoman::is50()) {
-			$this->tpl->getStandardTemplate();
-			$this->tpl->show();
-		}
+
+		$this->tpl->getStandardTemplate();
+		$this->tpl->show();
 	}
 
 

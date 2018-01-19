@@ -1,6 +1,5 @@
 <?php
-require_once('class.videoman.php');
-videoman::loadActiveRecord();
+require_once('./Services/ActiveRecord/class.ActiveRecord.php');
 require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/class.ilVideoManagerTree.php');
 
 /**

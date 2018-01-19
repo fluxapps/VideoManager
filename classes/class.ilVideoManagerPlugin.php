@@ -36,31 +36,6 @@ class ilVideoManagerPlugin extends ilUserInterfaceHookPlugin {
 	}
 
 
-	/**
-	 * @return bool
-	 */
-	public static function checkPreconditions() {
-		require_once('class.videoman.php');
-		videoman::loadActiveRecord();
-		global $DIC;
-		if (!class_exists('ActiveRecord') OR $DIC->ctrl()->lookupClassPath('ilUIPluginRouterGUI') === null) {
-			return false;
-		}
-
-		return true;
-	}
-
-
-	public static function loadActiveRecord() {
-		require_once('class.videoman.php');
-		if (videoman::is50()) {
-			require_once('./Services/ActiveRecord/class.ActiveRecord.php');
-		} else {
-			require_once('./Customizing/global/plugins/Libraries/ActiveRecord/class.ActiveRecord.php');
-		}
-	}
-
-
 	public function isCtrlMainMenuActive() {
 		global $ilPluginAdmin;
 
@@ -122,7 +97,7 @@ class ilVideoManagerPlugin extends ilUserInterfaceHookPlugin {
 			}
 		}
 
-		return self::checkPreconditions();
+		return true;
 	}
 
 

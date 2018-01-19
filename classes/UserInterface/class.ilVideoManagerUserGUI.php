@@ -98,13 +98,9 @@ class ilVideoManagerUserGUI {
 						break;
 				}
 		}
-		if (videoman::is50()) {
-			/**
-			 * @var $tpl ilTemplate
-			 */
-			$this->tpl->getStandardTemplate();
-			$this->tpl->show();
-		}
+
+		$this->tpl->getStandardTemplate();
+		$this->tpl->show();
 	}
 
 
