@@ -347,8 +347,14 @@ class ilVideoManagerAdminGUI {
 		ilUtil::sendQuestion($this->pl->txt('admin_confirm_delete'));
 
 		$toolbar = new ilToolbarGUI();
-		$toolbar->addButton($this->pl->txt('common_confirm'), $this->ctrl->getLinkTarget($this, 'delete'));
-		$toolbar->addButton($this->pl->txt('common_cancel'), $this->ctrl->getLinkTarget($this, 'cancel'));
+		$button = ilLinkButton::getInstance();
+		$button->setCaption($this->pl->txt('common_confirm'),false);
+		$button->setUrl($this->ctrl->getLinkTarget($this, 'delete'));
+		$toolbar->addButtonInstance($button);
+		$button = ilLinkButton::getInstance();
+		$button->setCaption($this->pl->txt('common_cancel'),false);
+		$button->setUrl($this->ctrl->getLinkTarget($this, 'cancel'));
+		$toolbar->addButtonInstance($button);
 
 		$this->tpl->setContent($items_html . '</br>' . $toolbar->getHTML());
 	}

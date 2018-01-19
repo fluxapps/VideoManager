@@ -3,9 +3,9 @@
 require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/class.ilVideoManagerPlugin.php');
 ilVideoManagerPlugin::loadActiveRecord();
 require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/class.ilVideoManagerObject.php');
-ilVideoManagerObject::installDB();
+ilVideoManagerObject::updateDB();
 require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/Subscription/class.vidmSubscription.php');
-vidmSubscription::installDB();
+vidmSubscription::updateDB();
 require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/class.ilVideoManagerFolder.php');
 if($root_folder = ilVideoManagerFolder::__getRootFolder())
 {
@@ -65,12 +65,12 @@ $tree->addTree($tree->getTreeId());
 <#2>
 <?php
 require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/Count/class.vidmCount.php');
-vidmCount::installDB();
+vidmCount::updateDB();
 ?>
 <#3>
 <?php
 require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/Config/class.vidmConfig.php');
-vidmConfig::installDB();
+vidmConfig::updateDB();
 vidmConfig::setV(vidmConfig::F_ACTIVATE_SUBSCRIPTION, true);
 vidmConfig::setV(vidmConfig::F_ACTIVATE_VIEW_LOG, true);
 vidmConfig::setV(vidmConfig::F_ROLES, array( 2 ));

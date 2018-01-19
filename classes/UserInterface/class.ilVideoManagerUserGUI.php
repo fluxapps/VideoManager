@@ -139,11 +139,17 @@ class ilVideoManagerUserGUI {
 		}
 
 		$this->toolbar->addInputItem($textinput);
-		$this->toolbar->addFormButton($this->pl->txt('common_search'), 'search');
+		$button = ilLinkButton::getInstance();
+		$button->setCaption($this->pl->txt('common_search'),false);
+		$button->setUrl($this->ctrl->getLinkTarget($this, 'search'));
+		$this->toolbar->addButtonInstance($button);
 		$this->toolbar->setFormAction($this->ctrl->getLinkTarget($this, 'search'));
 		global $ilUser;
 		if ($ilUser->getId() == 6) {
-			$this->toolbar->addButton($this->pl->txt('common_back_to_channels'), $this->ctrl->getLinkTarget($this, 'view'));
+			$button = ilLinkButton::getInstance();
+			$button->setCaption($this->pl->txt('common_back_to_channels'),false);
+			$button->setUrl($this->ctrl->getLinkTarget($this, 'view'));
+			$this->toolbar->addButtonInstance($button);
 		}
 	}
 
