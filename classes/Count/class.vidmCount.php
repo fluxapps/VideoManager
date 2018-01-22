@@ -9,12 +9,12 @@ require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHoo
  * @version 1.0.0
  */
 class vidmCount extends ActiveRecord {
-
+	const TABLE_NAME = 'vidm_views';
 	/**
 	 * @return string
 	 */
 	static function returnDbTableName() {
-		return 'vidm_views';
+		return self::TABLE_NAME;
 	}
 
 

@@ -76,17 +76,18 @@ vidmConfig::setV(vidmConfig::F_ROLES, array( 2 ));
 ?>
 <#4>
 <?php
+require_once "Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/class.ilVideoManagerObject.php";
 global $DIC;
 $ilDB = $DIC->database();
-if (!$ilDB->tableColumnExists('vidm_data', 'hidden')) {
-   $ilDB->addTableColumn('vidm_data', 'hidden', array(
+if (!$ilDB->tableColumnExists(ilVideoManagerObject::TABLE_NAME, 'hidden')) {
+   $ilDB->addTableColumn(ilVideoManagerObject::TABLE_NAME, 'hidden', array(
        'type' => 'integer',
        'length' => 1,
        'notnull' => false,
    ));
 }
-if (!$ilDB->tableColumnExists('vidm_data', 'image_at_second')) {
-    $ilDB->addTableColumn('vidm_data', 'image_at_second', array(
+if (!$ilDB->tableColumnExists(ilVideoManagerObject::TABLE_NAME, 'image_at_second')) {
+    $ilDB->addTableColumn(ilVideoManagerObject::TABLE_NAME, 'image_at_second', array(
         'type' => 'integer',
         'length' => 8,
         'notnull' => false,

@@ -53,11 +53,11 @@ class xvidListGUI implements xvidUIComponent {
 			if (!$ilVideoManagerVideo instanceof ilVideoManagerVideo) {
 				continue;
 			}
-			$this->ctrl->setParameterByClass('ilvideomanagerusergui', 'node_id', $ilVideoManagerVideo->getId());
+			$this->ctrl->setParameterByClass(ilVideoManagerUserGUI::class, ilVideoManagerAdminGUI::PARAM_NODE_ID, $ilVideoManagerVideo->getId());
 			$xvidListItemGUI = new xvidListItemGUI();
 			$xvidListItemGUI->setTitle($ilVideoManagerVideo->getTitle());
 			$xvidListItemGUI->setDescription($ilVideoManagerVideo->getDescription());
-			$xvidListItemGUI->setLink($this->ctrl->getLinkTargetByClass('ilvideomanagerusergui', 'playVideo'));
+			$xvidListItemGUI->setLink($this->ctrl->getLinkTargetByClass(ilVideoManagerUserGUI::class, ilVideoManagerUserGUI::CMD_PLAY_VIDEO));
 			$xvidListItemGUI->setImgSrc($ilVideoManagerVideo->getPosterHttp());
 			$xvidListItemGUI->setCounter($ilVideoManagerVideo->getViews());
 

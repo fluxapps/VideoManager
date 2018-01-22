@@ -7,7 +7,7 @@ require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHoo
  * @author Theodor Truffer <tt@studer-raimann.ch>
  */
 class vidmSubscription extends ActiveRecord {
-
+	const TABLE_NAME = 'vidm_subscription';
 	/**
 	 * @var int
 	 *
@@ -131,7 +131,7 @@ class vidmSubscription extends ActiveRecord {
 	public static function deleteAllForCatId($cat_id) {
 		global $DIC;
 		$ilDB = $DIC->database();
-		$q = 'DELETE FROM ' . self::returnDbTableName() . ' WHERE cat_id = ' . $ilDB->quote($cat_id, 'integer');
+		$q = 'DELETE FROM ' . self::TABLE_NAME . ' WHERE cat_id = ' . $ilDB->quote($cat_id, 'integer');
 		$ilDB->manipulate($q);
 	}
 
@@ -142,6 +142,6 @@ class vidmSubscription extends ActiveRecord {
 	 * @deprecated
 	 */
 	static function returnDbTableName() {
-		return "vidm_subscription";
+		return self::TABLE_NAME;
 	}
 }

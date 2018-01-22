@@ -73,12 +73,12 @@ class ilVideoManagerPlugin extends ilUserInterfaceHookPlugin {
 
 				$admin = new ctrlmmEntryCtrl();
 				$admin->setParent($dropdown->getId());
-				$admin->setGuiClass('ilUIPluginRouterGUI,ilVideoManagerAdminGUI');
+				$admin->setGuiClass(ilUIPluginRouterGUI::class . ',' . ilVideoManagerAdminGUI::class);
 				$admin->create();
 
 				$channels = new ctrlmmEntryCtrl();
 				$channels->setParent($dropdown->getId());
-				$channels->setGuiClass('ilUIPluginRouterGUI,ilVideoManagerUserGUI');
+				$channels->setGuiClass(ilUIPluginRouterGUI::class . ',' . ilVideoManagerUserGUI::class);
 				$channels->create();
 
 				foreach (array( 'en', 'de' ) as $lang) {

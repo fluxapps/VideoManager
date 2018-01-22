@@ -59,7 +59,7 @@ class ilVideoManagerPlayVideoGUI {
 		$this->pl = ilVideoManagerPlugin::getInstance();
 		//		$this->tpl = $DIC->ui()->mainTemplate();
 		$this->tpl = new ilTemplate('tpl.video_player.html', false, false, 'Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager');
-		$this->video = new ilVideoManagerVideo($_GET['node_id']);
+		$this->video = new ilVideoManagerVideo($_GET[ilVideoManagerAdminGUI::PARAM_NODE_ID]);
 		vidmCount::up($this->video->getId(), $this->usr->getId());
 	}
 
@@ -130,9 +130,9 @@ class ilVideoManagerPlayVideoGUI {
 			$this->tpl->setVariable('TAGS_KEY', $this->pl->txt('player_tags_key'));
 			foreach ($this->video->getTags() as $tag) {
 				$this->tpl->setCurrentBlock('tags');
-				$this->ctrl->setParameterByClass('ilVideoManagerUserGUI', 'search_value', $tag);
-				$this->ctrl->setParameterByClass('ilVideoManagerUserGUI', 'search_method', 'tag');
-				$this->tpl->setVariable('TAG_SEARCH', $this->ctrl->getLinkTargetByClass('ilVideoManagerUserGUI', 'search'));
+				$this->ctrl->setParameterByClass(ilVideoManagerUserGUI::class, 'search_value', $tag);
+				$this->ctrl->setParameterByClass(ilVideoManagerUserGUI::class, 'search_method', 'tag');
+				$this->tpl->setVariable('TAG_SEARCH', $this->ctrl->getLinkTargetByClass(ilVideoManagerUserGUI::class, ilVideoManagerUserGUI::CMD_SEARCH));
 				$this->tpl->setVariable('TAGS_VALUE', $tag);
 				$this->tpl->parseCurrentBlock();
 			}
@@ -146,7 +146,7 @@ class ilVideoManagerPlayVideoGUI {
 		if (vidmConfig::getV(vidmConfig::F_ACTIVATE_SUBSCRIPTION)) {
 			$sub = new vidmSubscriptionButtonGUI();
 			$sub->setSize(vidmSubscriptionButtonGUI::SIZE_SMALL);
-			$this->ctrl->setParameter($this->parent_gui, 'node_id', $_GET['node_id']);
+			$this->ctrl->setParameter($this->parent_gui, ilVideoManagerAdminGUI::PARAM_NODE_ID, $_GET[ilVideoManagerAdminGUI::PARAM_NODE_ID]);
 			$sub->generate($category, ilVideoManagerUserGUI::CMD_PLAY_VIDEO);
 			$this->tpl->setVariable('SUBSCRIPTION_BUTTON', $sub->getHTML($category));
 		}
@@ -156,14 +156,14 @@ class ilVideoManagerPlayVideoGUI {
 			$this->tpl->setVariable('VIEWS', vidmCount::countV($this->video->getId()));
 		}
 
-		$this->ctrl->setParameterByClass('ilVideoManagerUserGUI', 'search_value', $category->getId());
-		$this->ctrl->setParameterByClass('ilVideoManagerUserGUI', 'search_method', 'category');
-		$this->tpl->setVariable('CATEGORY_SEARCH', $this->ctrl->getLinkTargetByClass('ilVideoManagerUserGUI', 'search'));
+		$this->ctrl->setParameterByClass(ilVideoManagerUserGUI::class, 'search_value', $category->getId());
+		$this->ctrl->setParameterByClass(ilVideoManagerUserGUI::class, 'search_method', 'category');
+		$this->tpl->setVariable('CATEGORY_SEARCH', $this->ctrl->getLinkTargetByClass(ilVideoManagerUserGUI::class, ilVideoManagerUserGUI::CMD_SEARCH));
 	}
 
 
 	protected function initRating() {
-		$this->ctrl->setParameterByClass('ilRatingGUI', 'node_id', $_GET['node_id']);
+		$this->ctrl->setParameterByClass(ilRatingGUI::class, ilVideoManagerAdminGUI::PARAM_NODE_ID, $_GET[ilVideoManagerAdminGUI::PARAM_NODE_ID]);
 		$rating = new ilRatingGUI();
 		$rating->setObject($this->video->getId(), ilVideoManagerObject::TYPE_VID);
 		$this->tpl->setVariable('RATING', $rating->getHTML());
@@ -178,7 +178,7 @@ class ilVideoManagerPlayVideoGUI {
 
 		ilUtil::sendSuccess($this->pl->txt('msg_subscribed_successfully'), true);
 		$this->ctrl->saveParameter($this, 'video_tbl_table_nav');
-		$this->ctrl->redirect($this, 'performSearch');
+		$this->ctrl->redirect($this, ilVideoManagerUserGUI::CMD_PERFORM_SEARCH);
 	}
 
 
@@ -191,6 +191,6 @@ class ilVideoManagerPlayVideoGUI {
 
 		ilUtil::sendSuccess($this->pl->txt('msg_unsubscribed_successfully'), true);
 		$this->ctrl->saveParameter($this, 'video_tbl_table_nav');
-		$this->ctrl->redirect($this, 'performSearch');
+		$this->ctrl->redirect($this, ilVideoManagerUserGUI::CMD_PERFORM_SEARCH);
 	}
 } 

@@ -112,18 +112,18 @@ class ilVideoManagerVideoTableGUI extends ilTable2GUI {
 	public function createData() {
 		$tree = new ilVideoManagerTree(1);
 		if ($this->options['count']) {
-			$sql = 'SELECT COUNT(vidm_data.id) AS count';
+			$sql = 'SELECT COUNT(' . ilVideoManagerObject::TABLE_NAME . '.id) AS count';
 		} else {
-			$sql = 'SELECT *, (SELECT COUNT(id) FROM vidm_views WHERE vidm_views.video_id = vidm_data.id) AS views';
+			$sql = 'SELECT *, (SELECT COUNT(id) FROM ' . vidmCount::TABLE_NAME . ' WHERE ' . vidmCount::TABLE_NAME . '.video_id = ' . ilVideoManagerObject::TABLE_NAME . '.id) AS views';
 		}
 
-		$sql .= ' FROM vidm_data
-                    JOIN vidm_tree ON (vidm_tree.child = vidm_data.id)';
+		$sql .= ' FROM ' . ilVideoManagerObject::TABLE_NAME . '
+                    JOIN vidm_tree ON (vidm_tree.child = ' . ilVideoManagerObject::TABLE_NAME . '.id)';
 
-		$sql .= ' WHERE vidm_data.type = ' . $this->db->quote(ilVideoManagerObject::TYPE_VID, 'text');
+		$sql .= ' WHERE ' . ilVideoManagerObject::TABLE_NAME . '.type = ' . $this->db->quote(ilVideoManagerObject::TYPE_VID, 'text');
 
 		if ($hidden_nodes = $tree->getHiddenNodes()) {
-			$sql .= ' AND vidm_data.id NOT IN (' . implode(',', $hidden_nodes) . ')';
+			$sql .= ' AND ' . ilVideoManagerObject::TABLE_NAME . '.id NOT IN (' . implode(',', $hidden_nodes) . ')';
 		}
 
 		foreach ($this->options as $option => $value) {
@@ -139,9 +139,9 @@ class ilVideoManagerVideoTableGUI extends ilTable2GUI {
 							}
 							foreach ($value['value'] as $word) {
 								$sql .= $or;
-								$sql .= 'vidm_data.title LIKE ' . $this->db->quote("%" . $word . "%", 'text');
-								$sql .= ' OR vidm_data.description LIKE ' . $this->db->quote("%" . $word . "%", 'text');
-								$sql .= ' OR vidm_data.tags LIKE ' . $this->db->quote("%" . $word . "%", 'text');
+								$sql .= ilVideoManagerObject::TABLE_NAME . '.title LIKE ' . $this->db->quote("%" . $word . "%", 'text');
+								$sql .= ' OR ' . ilVideoManagerObject::TABLE_NAME . '.description LIKE ' . $this->db->quote("%" . $word . "%", 'text');
+								$sql .= ' OR ' . ilVideoManagerObject::TABLE_NAME . '.tags LIKE ' . $this->db->quote("%" . $word . "%", 'text');
 								$or = ' OR ';
 							}
 							$sql .= ')';
@@ -152,23 +152,23 @@ class ilVideoManagerVideoTableGUI extends ilTable2GUI {
 
 							if ($this->video->getTags()) {
 								foreach ($this->video->getTags() as $tag) {
-									$sql .= ' OR vidm_data.tags LIKE ' . $this->db->quote("%" . $tag . "%", 'text');
+									$sql .= ' OR ' . ilVideoManagerObject::TABLE_NAME . '.tags LIKE ' . $this->db->quote("%" . $tag . "%", 'text');
 								}
 							}
 							$sql .= ')';
-							$sql .= ' AND vidm_data.id != ' . $this->video->getId();
+							$sql .= ' AND ' . ilVideoManagerObject::TABLE_NAME . '.id != ' . $this->video->getId();
 							break;
 						case 'category':
 							$sql .= ' AND vidm_tree.parent = ' . $value['value'];
 							break;
 						case 'tag':
-							$sql .= ' AND vidm_data.tags LIKE ' . $this->db->quote("%" . $value['value'] . "%", 'text');
+							$sql .= ' AND ' . ilVideoManagerObject::TABLE_NAME . '.tags LIKE ' . $this->db->quote("%" . $value['value'] . "%", 'text');
 							break;
 					}
 					break;
 
 				case 'sort_create_date':
-					$sql .= ' ORDER BY vidm_data.create_date ' . $value;
+					$sql .= ' ORDER BY ' . ilVideoManagerObject::TABLE_NAME . '.create_date ' . $value;
 					break;
 
 				case 'limit':
@@ -193,8 +193,8 @@ class ilVideoManagerVideoTableGUI extends ilTable2GUI {
 			$row['title'] = $video->getTitle();
 			$row['id'] = $video->getId();
 			$row['create_date'] = $video->getCreateDate();
-			$this->ctrl->setParameterByClass('ilvideomanagerusergui', 'node_id', $video->getId());
-			$row['link'] = $this->ctrl->getLinkTargetByClass('ilvideomanagerusergui', 'playVideo');
+			$this->ctrl->setParameterByClass(ilVideoManagerUserGUI::class, ilVideoManagerAdminGUI::PARAM_NODE_ID, $video->getId());
+			$row['link'] = $this->ctrl->getLinkTargetByClass(ilVideoManagerUserGUI::class, ilVideoManagerUserGUI::CMD_PLAY_VIDEO);
 			$row['description'] = $video->getDescription($this->max_desc_length);
 			$row['views'] = $result['views'];
 

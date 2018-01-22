@@ -16,11 +16,13 @@ require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHoo
  */
 class ilVideoManagerUserGUI {
 
-	const SUB_CAT_ID = 'sub_cat_id';
 	const CMD_PERFORM_SEARCH = 'performSearch';
 	const CMD_PLAY_VIDEO = 'playVideo';
+	const CMD_SEARCH = 'search';
 	const CMD_SUBSCRIBE = 'subscribe';
 	const CMD_UNSUBSCRIBE = 'unsubscribe';
+	const CMD_VIEW = 'view';
+	const SUB_CAT_ID = 'sub_cat_id';
 	const LIMIT_RECENTLY_UPLOADED = 12;
 	/**
 	 * @var ilCtrl
@@ -61,30 +63,30 @@ class ilVideoManagerUserGUI {
 
 	public function executeCommand() {
 		$next_class = $this->ctrl->getNextClass();
-		$cmd = $this->ctrl->getCmd('view');
+		$cmd = $this->ctrl->getCmd(self::CMD_VIEW);
 
 		switch ($next_class) {
 			case 'ilratinggui':
 				$rating = new ilRatingGUI();
-				$rating->setObject($_GET['node_id'], ilVideoManagerObject::TYPE_VID);
+				$rating->setObject($_GET[ilVideoManagerAdminGUI::PARAM_NODE_ID], ilVideoManagerObject::TYPE_VID);
 				$rating->saveRating();
-				$this->ctrl->setParameter($this, 'node_id', $_GET['node_id']);
+				$this->ctrl->setParameter($this, ilVideoManagerAdminGUI::PARAM_NODE_ID, $_GET[ilVideoManagerAdminGUI::PARAM_NODE_ID]);
 				$this->ctrl->redirect($this, self::CMD_PLAY_VIDEO);
 				break;
 			default:
-				if ($cmd == 'view') {
+				if ($cmd == self::CMD_VIEW) {
 					unset($_SESSION['search_value']);
 				}
 				$this->prepareOutput();
 
 				switch ($cmd) {
-					case 'view':
+					case self::CMD_VIEW:
 						$this->view();
 						break;
 					case self::CMD_PERFORM_SEARCH:
 						$this->performSearch();
 						break;
-					case 'search':
+					case self::CMD_SEARCH:
 						$this->search();
 						break;
 					case self::CMD_PLAY_VIDEO:
@@ -108,7 +110,7 @@ class ilVideoManagerUserGUI {
 		$this->tpl->addCss('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/templates/css/search_table.css');
 		$this->tpl->setTitle($this->pl->txt('common_title_home'));
 		$ilVideoManagerQueryBuilder = new ilVideoManagerQueryBuilder(array(
-			'cmd'              => 'view',
+			'cmd'              => self::CMD_VIEW,
 			'sort_create_date' => 'DESC',
 			'limit'            => self::LIMIT_RECENTLY_UPLOADED,
 		));
@@ -120,7 +122,7 @@ class ilVideoManagerUserGUI {
 
 	protected function playVideo() {
 		$video_gui = new ilVideoManagerPlayVideoGUI($this);
-		$this->ctrl->setParameter($video_gui, 'node_id', $_GET['node_id']);
+		$this->ctrl->setParameter($video_gui, ilVideoManagerAdminGUI::PARAM_NODE_ID, $_GET[ilVideoManagerAdminGUI::PARAM_NODE_ID]);
 		$video_gui->init();
 	}
 
@@ -136,13 +138,13 @@ class ilVideoManagerUserGUI {
 		$this->toolbar->addInputItem($textinput);
 		$button = ilLinkButton::getInstance();
 		$button->setCaption($this->pl->txt('common_search'),false);
-		$button->setUrl($this->ctrl->getLinkTarget($this, 'search'));
+		$button->setUrl($this->ctrl->getLinkTarget($this, self::CMD_SEARCH));
 		$this->toolbar->addButtonInstance($button);
-		$this->toolbar->setFormAction($this->ctrl->getLinkTarget($this, 'search'));
+		$this->toolbar->setFormAction($this->ctrl->getLinkTarget($this, self::CMD_SEARCH));
 		if ($this->usr->getId() == 6) {
 			$button = ilLinkButton::getInstance();
 			$button->setCaption($this->pl->txt('common_back_to_channels'),false);
-			$button->setUrl($this->ctrl->getLinkTarget($this, 'view'));
+			$button->setUrl($this->ctrl->getLinkTarget($this, self::CMD_VIEW));
 			$this->toolbar->addButtonInstance($button);
 		}
 	}
@@ -205,7 +207,7 @@ class ilVideoManagerUserGUI {
 		$this->ctrl->saveParameter($this, 'video_tbl_table_nav');
 
 		if ($_GET['fallbackCmd']) {
-			$this->ctrl->saveParameter($this, 'node_id');
+			$this->ctrl->saveParameter($this, ilVideoManagerAdminGUI::PARAM_NODE_ID);
 			$this->ctrl->redirect($this, $_GET['fallbackCmd']);
 		} else {
 			$this->ctrl->redirect($this, self::CMD_PERFORM_SEARCH);
@@ -225,7 +227,7 @@ class ilVideoManagerUserGUI {
 		ilUtil::sendSuccess($this->pl->txt('msg_unsubscribed_successfully'), true);
 		$this->ctrl->saveParameter($this, 'video_tbl_table_nav');
 		if ($_GET['fallbackCmd']) {
-			$this->ctrl->saveParameter($this, 'node_id');
+			$this->ctrl->saveParameter($this, ilVideoManagerAdminGUI::PARAM_NODE_ID);
 			$this->ctrl->redirect($this, $_GET['fallbackCmd']);
 		} else {
 			$this->ctrl->redirect($this, self::CMD_PERFORM_SEARCH);

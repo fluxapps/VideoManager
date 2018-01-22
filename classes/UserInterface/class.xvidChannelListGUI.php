@@ -44,13 +44,13 @@ class xvidChannelListGUI implements xvidUIComponent {
 				continue;
 			}
 			// Link
-			$this->ctrl->setParameterByClass('ilVideoManagerUserGUI', 'search_value', $ilVideoManagerFolder->getId());
-			$this->ctrl->setParameterByClass('ilVideoManagerUserGUI', 'search_method', 'category');
+			$this->ctrl->setParameterByClass(ilVideoManagerUserGUI::class, 'search_value', $ilVideoManagerFolder->getId());
+			$this->ctrl->setParameterByClass(ilVideoManagerUserGUI::class, 'search_method', 'category');
 
 			$xvidChannelListItemGUI = new xvidChannelListItemGUI();
 			$xvidChannelListItemGUI->setTitle($ilVideoManagerFolder->getTitle());
 			$xvidChannelListItemGUI->setCounter($ilVideoManagerFolder->getVideoCount());
-			$xvidChannelListItemGUI->setLink($this->ctrl->getLinkTargetByClass('ilVideoManagerUserGUI', 'search'));
+			$xvidChannelListItemGUI->setLink($this->ctrl->getLinkTargetByClass(ilVideoManagerUserGUI::class, ilVideoManagerUserGUI::CMD_SEARCH));
 			$this->addItem($xvidChannelListItemGUI);
 		}
 	}

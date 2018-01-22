@@ -19,7 +19,7 @@ class vidmSubscriptionGUI {
 		$this->ilLocator = $DIC["ilLocator"];
 		$this->toolbar = $DIC->toolbar();
 		$this->tree = new ilVideoManagerTree(1);
-		//$_GET['node_id'] ? $this->object = ilVideoManagerObject::find($_GET['node_id']) : $this->object = ilVideoManagerObject::__getRootFolder();
+		//$_GET[ilVideoManagerAdminGUI::PARAM_NODE_ID] ? $this->object = ilVideoManagerObject::find($_GET[ilVideoManagerAdminGUI::PARAM_NODE_ID]) : $this->object = ilVideoManagerObject::__getRootFolder();
 	}
 
 

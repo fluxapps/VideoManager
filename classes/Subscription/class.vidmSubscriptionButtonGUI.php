@@ -210,21 +210,21 @@ class vidmSubscriptionButtonGUI {
 	 */
 	public function generate(ilVideoManagerFolder $ilVideoManagerFolder, $fallback_cmd = NULL) {
 		$pl = ilVideoManagerPlugin::getInstance();
-		$this->ctrl->setParameterByClass('ilVideoManagerUserGUI', ilVideoManagerUserGUI::SUB_CAT_ID, $ilVideoManagerFolder->getId());
-		$this->ctrl->setParameterByClass('ilVideoManagerUserGUI', 'fallbackCmd', $fallback_cmd);
+		$this->ctrl->setParameterByClass(ilVideoManagerUserGUI::class, ilVideoManagerUserGUI::SUB_CAT_ID, $ilVideoManagerFolder->getId());
+		$this->ctrl->setParameterByClass(ilVideoManagerUserGUI::class, 'fallbackCmd', $fallback_cmd);
 		$this->setTooltip($pl->txt('player_sub_tooltip'));
-		$this->ctrl->saveParameterByClass('ilVideoManagerUserGUI', 'node_id');
+		$this->ctrl->saveParameterByClass(ilVideoManagerUserGUI::class, ilVideoManagerAdminGUI::PARAM_NODE_ID);
 
 		if (vidmSubscription::isSubscribed($this->usr->getId(), $ilVideoManagerFolder->getId())) {
 			$this->setIcon(self::ICON_UNSUBSCRIBE);
 			$this->setType(self::TYPE_UNSUBSCRIBE);
 			$this->setTitle($pl->txt('tbl_unsubscribe_action'));
-			$this->setLink($this->ctrl->getLinkTargetByClass('ilVideoManagerUserGUI', 'unsubscribe'));
+			$this->setLink($this->ctrl->getLinkTargetByClass(ilVideoManagerUserGUI::class, ilVideoManagerUserGUI::CMD_UNSUBSCRIBE));
 		} else {
 			$this->setIcon(self::ICON_SUBSCRIBE);
 			$this->setType(self::TYPE_SUBSCRIBE);
 			$this->setTitle($pl->txt('tbl_subscribe_action'));
-			$this->setLink($this->ctrl->getLinkTargetByClass('ilVideoManagerUserGUI', 'subscribe'));
+			$this->setLink($this->ctrl->getLinkTargetByClass(ilVideoManagerUserGUI::class, ilVideoManagerUserGUI::CMD_SUBSCRIBE));
 		}
 	}
 }

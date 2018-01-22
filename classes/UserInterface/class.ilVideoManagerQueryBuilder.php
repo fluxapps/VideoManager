@@ -52,18 +52,18 @@ class ilVideoManagerQueryBuilder {
 		$ilDB = $DIC->database();
 		$tree = new ilVideoManagerTree(1);
 		if ($this->options['count']) {
-			$sql = 'SELECT COUNT(vidm_data.id) AS count';
+			$sql = 'SELECT COUNT(' . ilVideoManagerObject::TABLE_NAME . '.id) AS count';
 		} else {
-			$sql = 'SELECT *, (SELECT COUNT(id) FROM vidm_views WHERE vidm_views.video_id = vidm_data.id) AS views';
+			$sql = 'SELECT *, (SELECT COUNT(id) FROM ' . vidmCount::TABLE_NAME . ' WHERE ' . vidmCount::TABLE_NAME . '.video_id = ' . ilVideoManagerObject::TABLE_NAME . '.id) AS views';
 		}
 
-		$sql .= ' FROM vidm_data
-                    JOIN vidm_tree ON (vidm_tree.child = vidm_data.id)';
+		$sql .= ' FROM ' . ilVideoManagerObject::TABLE_NAME . '
+                    JOIN vidm_tree ON (vidm_tree.child = ' . ilVideoManagerObject::TABLE_NAME . '.id)';
 
-		$sql .= ' WHERE vidm_data.type = ' . $ilDB->quote(ilVideoManagerObject::TYPE_VID, 'text');
+		$sql .= ' WHERE ' . ilVideoManagerObject::TABLE_NAME . '.type = ' . $ilDB->quote(ilVideoManagerObject::TYPE_VID, 'text');
 
 		if ($hidden_nodes = $tree->getHiddenNodes()) {
-			$sql .= ' AND vidm_data.id NOT IN (' . implode(',', $hidden_nodes) . ')';
+			$sql .= ' AND ' . ilVideoManagerObject::TABLE_NAME . '.id NOT IN (' . implode(',', $hidden_nodes) . ')';
 		}
 
 		if ($this->getLimit()) {
@@ -83,9 +83,9 @@ class ilVideoManagerQueryBuilder {
 							}
 							foreach ($value['value'] as $word) {
 								$sql .= $or;
-								$sql .= 'vidm_data.title LIKE ' . $ilDB->quote("%" . $word . "%", 'text');
-								$sql .= ' OR vidm_data.description LIKE ' . $ilDB->quote("%" . $word . "%", 'text');
-								$sql .= ' OR vidm_data.tags LIKE ' . $ilDB->quote("%" . $word . "%", 'text');
+								$sql .= ilVideoManagerObject::TABLE_NAME . '.title LIKE ' . $ilDB->quote("%" . $word . "%", 'text');
+								$sql .= ' OR ' . ilVideoManagerObject::TABLE_NAME . '.description LIKE ' . $ilDB->quote("%" . $word . "%", 'text');
+								$sql .= ' OR ' . ilVideoManagerObject::TABLE_NAME . '.tags LIKE ' . $ilDB->quote("%" . $word . "%", 'text');
 								$or = ' OR ';
 							}
 							$sql .= ')';
@@ -96,23 +96,23 @@ class ilVideoManagerQueryBuilder {
 
 							if ($this->video->getTags()) {
 								foreach ($this->video->getTags() as $tag) {
-									$sql .= ' OR vidm_data.tags LIKE ' . $ilDB->quote("%" . $tag . "%", 'text');
+									$sql .= ' OR ' . ilVideoManagerObject::TABLE_NAME . '.tags LIKE ' . $ilDB->quote("%" . $tag . "%", 'text');
 								}
 							}
 							$sql .= ')';
-							$sql .= ' AND vidm_data.id != ' . $this->video->getId();
+							$sql .= ' AND ' . ilVideoManagerObject::TABLE_NAME . '.id != ' . $this->video->getId();
 							break;
 						case 'category':
 							$sql .= ' AND vidm_tree.parent = ' . $value['value'];
 							break;
 						case 'tag':
-							$sql .= ' AND vidm_data.tags LIKE ' . $ilDB->quote("%" . $value['value'] . "%", 'text');
+							$sql .= ' AND ' . ilVideoManagerObject::TABLE_NAME . '.tags LIKE ' . $ilDB->quote("%" . $value['value'] . "%", 'text');
 							break;
 					}
 					break;
 
 				case 'sort_create_date':
-					$sql .= ' ORDER BY vidm_data.create_date ' . $value;
+					$sql .= ' ORDER BY ' . ilVideoManagerObject::TABLE_NAME . '.create_date ' . $value;
 					break;
 
 				case 'limit':

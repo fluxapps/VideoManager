@@ -13,6 +13,7 @@ require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHoo
 class ilVideoManagerConfigGUI extends ilPluginConfigGUI {
 
 	const CMD_DEFAULT = 'index';
+	const CMD_CANCEL = 'cancel';
 	const CMD_SAVE = 'save';
 	/**
 	 * @var ilCtrl

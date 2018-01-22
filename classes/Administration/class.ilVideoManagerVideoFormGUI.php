@@ -48,7 +48,7 @@ class ilVideoManagerVideoFormGUI extends ilPropertyFormGUI {
 		$this->setFormAction($this->ctrl->getFormAction($this->parent_gui));
 
 		switch ($this->ctrl->getCmd()) {
-			case 'editvid':
+			case ilVideoManagerAdminGUI::CMD_EDIT_VIDEO:
 				$this->setTitle($this->pl->txt('form_edit_vid'));
 
 				$title = new ilTextInputGUI($this->pl->txt('common_title'), 'title');
@@ -66,15 +66,15 @@ class ilVideoManagerVideoFormGUI extends ilPropertyFormGUI {
                 $num_input->setRequired(true);
 				$this->addItem($num_input);
 
-				$this->addCommandButton('updateVideo', $this->pl->txt('common_save'));
-				$this->addCommandButton('cancel', $this->pl->txt('common_cancel'));
+				$this->addCommandButton(ilVideoManagerAdminGUI::CMD_UPDATE_VIDEO, $this->pl->txt('common_save'));
+				$this->addCommandButton(ilVideoManagerAdminGUI::CMD_CANCEL, $this->pl->txt('common_cancel'));
 
-				$this->ctrl->saveParameterByClass('ilvideomanageradmingui', 'target_id');
-				$this->setFormAction($this->ctrl->getFormActionByClass('ilVideoManagerAdminGUI', 'update'));
+				$this->ctrl->saveParameterByClass(ilVideoManagerAdminGUI::class, 'target_id');
+				$this->setFormAction($this->ctrl->getFormActionByClass(ilVideoManagerAdminGUI::class, 'update'));
 
 				break;
 
-			case 'addVideo':
+			case ilVideoManagerAdminGUI::CMD_ADD_VIDEO:
 				$this->setTitle($this->pl->txt('form_upload_vid'));
 				$this->setMultipart(true);
 
@@ -91,9 +91,9 @@ class ilVideoManagerVideoFormGUI extends ilPropertyFormGUI {
                 $num_input->setValue(1);
 				$this->addItem($num_input);
 
-				$this->addCommandButton('create', $this->pl->txt('common_add'));
-				$this->addCommandButton('cancel', $this->pl->txt('common_cancel'));
-				$this->setFormAction($this->ctrl->getFormActionByClass('ilVideoManagerAdminGUI', 'create'));
+				$this->addCommandButton(ilVideoManagerAdminGUI::CMD_CREATE, $this->pl->txt('common_add'));
+				$this->addCommandButton(ilVideoManagerAdminGUI::CMD_CANCEL, $this->pl->txt('common_cancel'));
+				$this->setFormAction($this->ctrl->getFormActionByClass(ilVideoManagerAdminGUI::class, ilVideoManagerAdminGUI::CMD_CREATE));
 
 				break;
 		}
@@ -159,7 +159,7 @@ class ilVideoManagerVideoFormGUI extends ilPropertyFormGUI {
 			}
 
 			$this->video->update();
-			$this->ctrl->redirect($this->parent_gui, 'view');
+			$this->ctrl->redirect($this->parent_gui, ilVideoManagerUserGUI::CMD_VIEW);
 		} else {
 			$video_file = $_FILES['video_file'];
 			$suffix = pathinfo($video_file['name'], PATHINFO_EXTENSION);

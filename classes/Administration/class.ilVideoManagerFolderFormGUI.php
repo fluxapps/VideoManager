@@ -45,21 +45,21 @@ class ilVideoManagerFolderFormGUI extends ilPropertyFormGUI{
 
         $this->setItems(array($title, $description, $hidden));
         $this->setValuesByPost();
-        $this->ctrl->saveParameterByClass('ilVideoManagerAdminGUI', 'target_id');
+        $this->ctrl->saveParameterByClass(ilVideoManagerAdminGUI::class, 'target_id');
         $this->setFormAction($this->ctrl->getFormAction($this->parent_gui));
 
         switch($cmd)
         {
-            case 'create':
-                $this->addCommandButton('createFolder', $this->pl->txt('common_add'));
+	        case ilVideoManagerAdminGUI::CMD_CREATE:
+                $this->addCommandButton(ilVideoManagerAdminGUI::CMD_CREATE_FOLDER, $this->pl->txt('common_add'));
                 break;
-            case 'edit':
-                $this->addCommandButton('saveFolder', $this->pl->txt('common_save'));
+	        case ilVideoManagerAdminGUI::CMD_EDIT:
+                $this->addCommandButton(ilVideoManagerAdminGUI::CMD_SAVE_FOLDER, $this->pl->txt('common_save'));
                 $this->fillForm();
                 break;
         }
 
-        $this->addCommandButton('cancel', $this->pl->txt('common_cancel'));
+        $this->addCommandButton(ilVideoManagerAdminGUI::CMD_CANCEL, $this->pl->txt('common_cancel'));
     }
 
     public function createFolder()
@@ -75,8 +75,8 @@ class ilVideoManagerFolderFormGUI extends ilPropertyFormGUI{
         $newFolder->setHidden($_POST['hidden']);
         $newFolder->create();
         ilUtil::sendSuccess($this->pl->txt('msg_fld_created'), true);
-        $this->ctrl->setParameterByClass('ilvideomanageradmingui', 'node_id', $newFolder->getId());
-        $this->ctrl->redirectByClass('ilvideomanageradmingui', 'view');
+        $this->ctrl->setParameterByClass(ilVideoManagerAdminGUI::class, ilVideoManagerAdminGUI::PARAM_NODE_ID, $newFolder->getId());
+        $this->ctrl->redirectByClass(ilVideoManagerAdminGUI::class, ilVideoManagerAdminGUI::CMD_VIEW);
     }
 
     public function fillForm()

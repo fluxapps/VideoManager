@@ -28,19 +28,19 @@ class ilVideoManagerTreeExplorerGUI extends ilTreeExplorerGUI {
 
 
 	function getNodeHref($node) {
-		if ($this->ctrl->getCmd() == "cut" || $this->ctrl->getCmd() == "moveMultiple") {
-			$this->ctrl->saveParameterByClass("ilVideoManagerAdminGUI", "target_id");
-			$this->ctrl->setParameterByClass("ilVideoManagerAdminGUI", "node_id", $node["child"]);
+		if ($this->ctrl->getCmd() == "cut" || $this->ctrl->getCmd() == ilVideoManagerAdminGUI::CMD_MOVE_MULTIPLE) {
+			$this->ctrl->saveParameterByClass(ilVideoManagerAdminGUI::class, "target_id");
+			$this->ctrl->setParameterByClass(ilVideoManagerAdminGUI::class, ilVideoManagerAdminGUI::PARAM_NODE_ID, $node["child"]);
 
-			return $this->ctrl->getLinkTargetByClass("ilVideoManagerAdminGUI", 'performPaste');
+			return $this->ctrl->getLinkTargetByClass(ilVideoManagerAdminGUI::class, ilVideoManagerAdminGUI::CMD_PERFORM_PASTE);
 		} elseif ($this->ctrl->getCmd() == 'insert') {
 			$this->ctrl->setParameterByClass("ilVideoManagerTMEPluginGUI", 'video_id', $node['id']);
 
 			return $this->ctrl->getLinkTargetByClass("ilVideoManagerTMEPluginGUI", 'create');
 		} else {
-			$this->ctrl->setParameterByClass("ilVideoManagerAdminGUI", "node_id", $node["child"]);
+			$this->ctrl->setParameterByClass(ilVideoManagerAdminGUI::class, ilVideoManagerAdminGUI::PARAM_NODE_ID, $node["child"]);
 
-			return $this->ctrl->getLinkTargetByClass("ilVideoManagerAdminGUI", 'view');
+			return $this->ctrl->getLinkTargetByClass(ilVideoManagerAdminGUI::class, ilVideoManagerAdminGUI::CMD_VIEW);
 		}
 	}
 

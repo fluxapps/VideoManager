@@ -8,7 +8,7 @@ require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHoo
  * @author Theodor Truffer <tt@studer-raimann.ch>
  */
 class ilVideoManagerObject extends ActiveRecord {
-
+	const TABLE_NAME = 'vidm_data';
 	const TYPE_VID = 'vid';
 	const TYPE_FLD = 'fld';
 	/**
@@ -306,19 +306,19 @@ class ilVideoManagerObject extends ActiveRecord {
 	 * @deprecated
 	 */
 	static function returnDbTableName() {
-		return 'vidm_data';
+		return self::TABLE_NAME;
 	}
 
 
 	/**
-	 * the id of this objects parent has to be stored in $_GET['node_id'] to create it properly
+	 * the id of this objects parent has to be stored in $_GET[ilVideoManagerAdminGUI::PARAM_NODE_ID] to create it properly
 	 */
 	public function create() {
 		parent::create();
 
-		if ($_GET['node_id']) {
+		if ($_GET[ilVideoManagerAdminGUI::PARAM_NODE_ID]) {
 			$tree = new ilVideoManagerTree(1);
-			$tree->insertNode($this->getId(), $_GET['node_id']);
+			$tree->insertNode($this->getId(), $_GET[ilVideoManagerAdminGUI::PARAM_NODE_ID]);
 			$this->recursiveMkdir($this->getPath());
 		}
 	}

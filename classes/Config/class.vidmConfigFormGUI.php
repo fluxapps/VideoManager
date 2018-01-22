@@ -146,8 +146,8 @@ class vidmConfigFormGUI extends ilPropertyFormGUI {
 
 
 	protected function addCommandButtons() {
-		$this->addCommandButton('save', $this->pl->txt('admin_form_button_save'));
-		$this->addCommandButton('cancel', $this->pl->txt('admin_form_button_cancel'));
+		$this->addCommandButton(ilVideoManagerConfigGUI::CMD_SAVE, $this->pl->txt('admin_form_button_save'));
+		$this->addCommandButton(ilVideoManagerConfigGUI::CMD_CANCEL, $this->pl->txt('admin_form_button_cancel'));
 	}
 
 
