@@ -1,6 +1,7 @@
 <?php
 require_once('./Services/UIComponent/Explorer2/classes/class.ilTreeExplorerGUI.php');
 require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/class.ilVideoManagerObject.php');
+require_once "Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/Administration/class.ilVideoManagerAdminGUI.php";
 
 /**
  * Class ilVideoManagerTreeExplorerGUI
@@ -28,15 +29,15 @@ class ilVideoManagerTreeExplorerGUI extends ilTreeExplorerGUI {
 
 
 	function getNodeHref($node) {
-		if ($this->ctrl->getCmd() == "cut" || $this->ctrl->getCmd() == ilVideoManagerAdminGUI::CMD_MOVE_MULTIPLE) {
+		if ($this->ctrl->getCmd() == ilVideoManagerAdminGUI::CMD_CUT || $this->ctrl->getCmd() == ilVideoManagerAdminGUI::CMD_MOVE_MULTIPLE) {
 			$this->ctrl->saveParameterByClass(ilVideoManagerAdminGUI::class, "target_id");
 			$this->ctrl->setParameterByClass(ilVideoManagerAdminGUI::class, ilVideoManagerAdminGUI::PARAM_NODE_ID, $node["child"]);
 
 			return $this->ctrl->getLinkTargetByClass(ilVideoManagerAdminGUI::class, ilVideoManagerAdminGUI::CMD_PERFORM_PASTE);
-		} elseif ($this->ctrl->getCmd() == 'insert') {
-			$this->ctrl->setParameterByClass("ilVideoManagerTMEPluginGUI", 'video_id', $node['id']);
+		} elseif (class_exists("ilVideoManagerTMEPluginGUI") && $this->ctrl->getCmd() == ilVideoManagerTMEPluginGUI::CMD_INSERT) {
+			$this->ctrl->setParameterByClass(ilVideoManagerTMEPluginGUI::class, 'video_id', $node['id']);
 
-			return $this->ctrl->getLinkTargetByClass("ilVideoManagerTMEPluginGUI", 'create');
+			return $this->ctrl->getLinkTargetByClass(ilVideoManagerTMEPluginGUI::class, ilVideoManagerTMEPluginGUI::CMD_CREATE);
 		} else {
 			$this->ctrl->setParameterByClass(ilVideoManagerAdminGUI::class, ilVideoManagerAdminGUI::PARAM_NODE_ID, $node["child"]);
 
@@ -52,7 +53,7 @@ class ilVideoManagerTreeExplorerGUI extends ilTreeExplorerGUI {
 		$subtree = $this->tree->getSubTree($this->getRootNode());
 		foreach ($subtree as $s) {
 			$wl = $this->getTypeWhiteList();
-			if (is_array($wl) && count($wl) > 0 && ! in_array($s["type"], $wl)) {
+			if (is_array($wl) && count($wl) > 0 && !in_array($s["type"], $wl)) {
 				continue;
 			}
 			$bl = $this->getTypeBlackList();

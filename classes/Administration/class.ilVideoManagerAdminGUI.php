@@ -123,7 +123,7 @@ class ilVideoManagerAdminGUI {
 		$cmd = $this->ctrl->getCmd(self::CMD_VIEW);
 
 		//Otherwise move-Objects would not work
-		if ($cmd != "cut" && $cmd != self::CMD_MOVE_MULTIPLE) {
+		if ($cmd != self::CMD_CUT && $cmd != self::CMD_MOVE_MULTIPLE) {
 			$this->showTree();
 		}
 
