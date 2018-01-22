@@ -136,9 +136,9 @@ class ilVideoManagerUserGUI {
 		}
 
 		$this->toolbar->addInputItem($textinput);
-		$button = ilLinkButton::getInstance();
+		$button = ilSubmitButton::getInstance();
 		$button->setCaption($this->pl->txt('common_search'),false);
-		$button->setUrl($this->ctrl->getLinkTarget($this, self::CMD_SEARCH));
+		$button->setCommand(self::CMD_SEARCH);
 		$this->toolbar->addButtonInstance($button);
 		$this->toolbar->setFormAction($this->ctrl->getLinkTarget($this, self::CMD_SEARCH));
 		if ($this->usr->getId() == 6) {
