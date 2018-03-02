@@ -5,6 +5,7 @@ ilVideoManagerObject::updateDB();
 require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/Subscription/class.vidmSubscription.php');
 vidmSubscription::updateDB();
 require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/class.ilVideoManagerFolder.php');
+require_once 'Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/UserInterface/class.ilVideoManagerVideoTree.php';
 if($root_folder = ilVideoManagerFolder::__getRootFolder())
 {
     $root_folder->setTitle('Video Manager');
@@ -18,7 +19,7 @@ if($root_folder = ilVideoManagerFolder::__getRootFolder())
 
 global $DIC;
 $ilDB = $DIC->database();
-if(!$ilDB->tableExists('vidm_tree'))
+if(!$ilDB->tableExists(ilVideoManagerVideoTree::TABLE_NAME))
 {
     $fields = array(
         'tree' => array(
@@ -54,7 +55,7 @@ if(!$ilDB->tableExists('vidm_tree'))
             'notnull' => true
         )
     );
-    $ilDB->createTable('vidm_tree', $fields);
+    $ilDB->createTable(ilVideoManagerVideoTree::TABLE_NAME, $fields);
 }
 
 require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/class.ilVideoManagerTree.php');

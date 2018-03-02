@@ -3,6 +3,7 @@ require_once('./Services/Table/classes/class.ilTable2GUI.php');
 require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/class.ilVideoManagerPlugin.php');
 require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/class.ilVideoManagerVideo.php');
 require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/class.ilVideoManagerTree.php');
+require_once 'Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/UserInterface/class.ilVideoManagerVideoTree.php';
 
 /**
  * Class ilVideoManagerVideoTableGUI
@@ -118,7 +119,7 @@ class ilVideoManagerVideoTableGUI extends ilTable2GUI {
 		}
 
 		$sql .= ' FROM ' . ilVideoManagerObject::TABLE_NAME . '
-                    JOIN vidm_tree ON (vidm_tree.child = ' . ilVideoManagerObject::TABLE_NAME . '.id)';
+                    JOIN ' . ilVideoManagerVideoTree::TABLE_NAME . ' ON (' . ilVideoManagerVideoTree::TABLE_NAME . '.child = ' . ilVideoManagerObject::TABLE_NAME . '.id)';
 
 		$sql .= ' WHERE ' . ilVideoManagerObject::TABLE_NAME . '.type = ' . $this->db->quote(ilVideoManagerObject::TYPE_VID, 'text');
 
@@ -148,7 +149,7 @@ class ilVideoManagerVideoTableGUI extends ilTable2GUI {
 							break;
 						case 'related':
 							//related videos search for same tags/categories
-							$sql .= ' AND (vidm_tree.parent = ' . $tree->getParentId($this->video->getId()); //categories names must be unique
+							$sql .= ' AND (' . ilVideoManagerVideoTree::TABLE_NAME . '.parent = ' . $tree->getParentId($this->video->getId()); //categories names must be unique
 
 							if ($this->video->getTags()) {
 								foreach ($this->video->getTags() as $tag) {
@@ -159,7 +160,7 @@ class ilVideoManagerVideoTableGUI extends ilTable2GUI {
 							$sql .= ' AND ' . ilVideoManagerObject::TABLE_NAME . '.id != ' . $this->video->getId();
 							break;
 						case 'category':
-							$sql .= ' AND vidm_tree.parent = ' . $value['value'];
+							$sql .= ' AND ' . ilVideoManagerVideoTree::TABLE_NAME . '.parent = ' . $value['value'];
 							break;
 						case 'tag':
 							$sql .= ' AND ' . ilVideoManagerObject::TABLE_NAME . '.tags LIKE ' . $this->db->quote("%" . $value['value'] . "%", 'text');

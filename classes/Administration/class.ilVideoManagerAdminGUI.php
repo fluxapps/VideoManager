@@ -15,6 +15,7 @@ require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHoo
 require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/Subscription/class.vidmSubscription.php');
 require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/Count/class.vidmCountTableGUI.php');
 require_once "Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/UserInterface/class.ilVideoManagerUserGUI.php";
+require_once 'Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/UserInterface/class.ilVideoManagerVideoTree.php';
 
 /**
  * Class ilVideoManagerGUI
@@ -391,7 +392,7 @@ class ilVideoManagerAdminGUI {
 			foreach ($subtree as $node) {
 				$object = new ilVideoManagerObject($node['id']);
 				$object->delete();
-				$this->tree->_removeEntry(1, $node['id'], 'vidm_tree');
+				$this->tree->_removeEntry(1, $node['id'], ilVideoManagerVideoTree::TABLE_NAME);
 			}
 		}
 
@@ -483,7 +484,7 @@ class ilVideoManagerAdminGUI {
 		foreach ($ids as $id) {
 			$obj = new ilVideoManagerObject($id);
 			$old_path = $obj->getPath();
-			$this->tree->_removeEntry(1, $id, 'vidm_tree');
+			$this->tree->_removeEntry(1, $id, ilVideoManagerVideoTree::TABLE_NAME);
 			$this->tree->insertNode($id, $_GET[self::PARAM_NODE_ID]);
 			rename($old_path, $obj->getPath());
 		}

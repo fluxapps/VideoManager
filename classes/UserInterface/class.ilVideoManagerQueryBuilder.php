@@ -58,7 +58,7 @@ class ilVideoManagerQueryBuilder {
 		}
 
 		$sql .= ' FROM ' . ilVideoManagerObject::TABLE_NAME . '
-                    JOIN vidm_tree ON (vidm_tree.child = ' . ilVideoManagerObject::TABLE_NAME . '.id)';
+                    JOIN ' . ilVideoManagerVideoTree::TABLE_NAME . ' ON (' . ilVideoManagerVideoTree::TABLE_NAME . '.child = ' . ilVideoManagerObject::TABLE_NAME . '.id)';
 
 		$sql .= ' WHERE ' . ilVideoManagerObject::TABLE_NAME . '.type = ' . $ilDB->quote(ilVideoManagerObject::TYPE_VID, 'text');
 
@@ -92,7 +92,7 @@ class ilVideoManagerQueryBuilder {
 							break;
 						case 'related':
 							//related videos search for same tags/categories
-							$sql .= ' AND (vidm_tree.parent = ' . $tree->getParentId($this->video->getId()); //categories names must be unique
+							$sql .= ' AND (' . ilVideoManagerVideoTree::TABLE_NAME . '.parent = ' . $tree->getParentId($this->video->getId()); //categories names must be unique
 
 							if ($this->video->getTags()) {
 								foreach ($this->video->getTags() as $tag) {
@@ -103,7 +103,7 @@ class ilVideoManagerQueryBuilder {
 							$sql .= ' AND ' . ilVideoManagerObject::TABLE_NAME . '.id != ' . $this->video->getId();
 							break;
 						case 'category':
-							$sql .= ' AND vidm_tree.parent = ' . $value['value'];
+							$sql .= ' AND ' . ilVideoManagerVideoTree::TABLE_NAME . '.parent = ' . $value['value'];
 							break;
 						case 'tag':
 							$sql .= ' AND ' . ilVideoManagerObject::TABLE_NAME . '.tags LIKE ' . $ilDB->quote("%" . $value['value'] . "%", 'text');

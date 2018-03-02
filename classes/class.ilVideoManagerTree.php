@@ -1,5 +1,6 @@
 <?php
 require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/class.ilVideoManagerObject.php');
+require_once 'Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/UserInterface/class.ilVideoManagerVideoTree.php';
 
 /**
  * Class ilObjVideoManagerTree
@@ -27,7 +28,7 @@ class ilVideoManagerTree extends ilTree {
 		parent::__construct($tree_id);
 		global $DIC;
 		$this->db = $DIC->database();
-		$this->setTableNames('vidm_tree', ilVideoManagerObject::TABLE_NAME);
+		$this->setTableNames(ilVideoManagerVideoTree::TABLE_NAME, ilVideoManagerObject::TABLE_NAME);
 		$this->setObjectTablePK('id');
 		$this->setTreeTablePK('tree');
 		$this->setRootId(ilVideoManagerObject::__getRootFolder()->getId());
