@@ -56,6 +56,10 @@ class vidmSubscriptionButtonGUI {
 	 */
 	protected $usr;
 	/**
+	 * @var ilVideoManagerPlugin
+	 */
+	protected $pl;
+	/**
 	 * @var int
 	 */
 	protected static $id_count = 0;
@@ -65,7 +69,8 @@ class vidmSubscriptionButtonGUI {
 		global $DIC;
 		$this->ctrl = $DIC->ctrl();
 		$this->usr = $DIC->user();
-		$this->tpl = new ilTemplate('tpl.sub_button.html', false, false, 'Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager');
+		$this->pl = ilVideoManagerPlugin::getInstance();
+		$this->tpl = new ilTemplate('tpl.sub_button.html', false, false, $this->pl->getDirectory());
 	}
 
 

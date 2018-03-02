@@ -58,7 +58,7 @@ class ilVideoManagerPlayVideoGUI {
 		$this->parent_gui = $parent_gui;
 		$this->pl = ilVideoManagerPlugin::getInstance();
 		//		$this->tpl = $DIC->ui()->mainTemplate();
-		$this->tpl = new ilTemplate('tpl.video_player.html', false, false, 'Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager');
+		$this->tpl = new ilTemplate('tpl.video_player.html', false, false, $this->pl->getDirectory());
 		$this->video = new ilVideoManagerVideo($_GET[ilVideoManagerAdminGUI::PARAM_NODE_ID]);
 		vidmCount::up($this->video->getId(), $this->usr->getId());
 	}

@@ -107,7 +107,7 @@ class ilVideoManagerUserGUI {
 
 
 	protected function view() {
-		$this->tpl->addCss('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/templates/css/search_table.css');
+		$this->tpl->addCss($this->pl->getDirectory() . '/templates/css/search_table.css');
 		$this->tpl->setTitle($this->pl->txt('common_title_home'));
 		$ilVideoManagerQueryBuilder = new ilVideoManagerQueryBuilder(array(
 			'cmd'              => self::CMD_VIEW,
@@ -128,7 +128,7 @@ class ilVideoManagerUserGUI {
 
 
 	public function prepareOutput() {
-		$this->tpl->addCss('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/templates/css/video_player.css');
+		$this->tpl->addCss($this->pl->getDirectory() . '/templates/css/video_player.css');
 
 		$textinput = new ilTextInputGUI('search_input', 'search_value');
 		if (!$_SESSION['search_method'] == 'category') {

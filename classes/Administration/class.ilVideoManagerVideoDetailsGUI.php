@@ -40,12 +40,12 @@ class ilVideoManagerVideoDetailsGUI {
 		$this->parent_gui = $parent_gui;
 		$this->video = $video;
 		$this->pl = ilVideoManagerPlugin::getInstance();
-		$this->tpl = new ilTemplate('tpl.video_player.html', false, false, 'Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager');;
+		$this->tpl = new ilTemplate('tpl.video_player.html', false, false, $this->pl->getDirectory());
 	}
 
 
 	public function init() {
-		if (! ilVideoManagerObject::__checkConverting($this->video->getId())) {
+		if (!ilVideoManagerObject::__checkConverting($this->video->getId())) {
 			ilUtil::sendInfo($this->pl->txt('msg_vid_converting'), true);
 		}
 
@@ -55,7 +55,7 @@ class ilVideoManagerVideoDetailsGUI {
 		$this->initMediaPlayer();
 		global $DIC;
 		$tpl = $DIC->ui()->mainTemplate();
-		$tpl->addCss('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/templates/css/video_details.css');
+		$tpl->addCss($this->pl->getDirectory() . '/templates/css/video_details.css');
 		$tpl->setContent($this->tpl->get());
 	}
 
@@ -71,7 +71,7 @@ class ilVideoManagerVideoDetailsGUI {
 		//Description
 		$description = new ilNonEditableValueGUI($this->pl->txt('common_description'));
 		$description->setValue($this->video->getDescription(200));
-		if (! $description->getValue()) {
+		if (!$description->getValue()) {
 			$description->setValue('-');
 		}
 		$form->addItem($description);
@@ -79,7 +79,7 @@ class ilVideoManagerVideoDetailsGUI {
 		//Tags
 		$tags = new ilNonEditableValueGUI($this->pl->txt('common_tags'));
 		$tags->setValue(implode(';', $this->video->getTags()));
-		if (! $tags->getValue()) {
+		if (!$tags->getValue()) {
 			$tags->setValue('-');
 		}
 		$form->addItem($tags);
@@ -130,8 +130,8 @@ class ilVideoManagerVideoDetailsGUI {
 
 
 	protected function initMediaPlayer() {
-//		require_once('./Services/MediaObjects/classes/class.ilPlayerUtil.php');
-//		ilPlayerUtil::initMediaElementJs();
+		//		require_once('./Services/MediaObjects/classes/class.ilPlayerUtil.php');
+		//		ilPlayerUtil::initMediaElementJs();
 		$this->tpl->setVariable('POSTER_SRC', $this->video->getPosterHttp());
 		$this->tpl->setVariable('VIDEO_SRC', $this->video->getHttpPath() . '/' . $this->video->getTitle());
 	}

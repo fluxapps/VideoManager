@@ -26,12 +26,17 @@ class xvidListGUI implements xvidUIComponent {
 	 */
 	protected static $class_map = array(
 		self::SIZE_LARGE => 'col-lg-3 col-md-3 col-sm-4 col-xs-6',
-		self::SIZE_TINY  => 'col-lg-12 col-md-12 col-sm-12 col-xs-12',
+		self::SIZE_TINY => 'col-lg-12 col-md-12 col-sm-12 col-xs-12',
 	);
 	/**
 	 * @var ilCtrl
 	 */
 	protected $ctrl;
+	/**
+	 * @var ilVideoManagerPlugin
+	 */
+	protected $pl;
+
 
 	/**
 	 * xvidListGUI constructor.
@@ -43,8 +48,9 @@ class xvidListGUI implements xvidUIComponent {
 		$this->videos = $videos;
 		$this->ctrl = $DIC->ctrl();
 		$tpl = $DIC->ui()->mainTemplate();
-		$tpl->addCss('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/templates/css/cards.css');
-		$tpl->addJavaScript('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/templates/js/cards.js');
+		$this->pl = ilVideoManagerPlugin::getInstance();
+		$tpl->addCss($this->pl->getDirectory() . '/templates/css/cards.css');
+		$tpl->addJavaScript($this->pl->getDirectory() . '/templates/js/cards.js');
 	}
 
 
@@ -70,7 +76,7 @@ class xvidListGUI implements xvidUIComponent {
 	 * @return string
 	 */
 	public function render() {
-		$tpl = new ilTemplate('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/templates/default/tpl.card_list.html', true, false);
+		$tpl = new ilTemplate($this->pl->getDirectory() . '/templates/default/tpl.card_list.html', true, false);
 		$this->loadItems();
 		if (count($this->items) === 0) {
 			$no_items = '<div class="panel panel-default">
@@ -305,7 +311,7 @@ class xvidListItemGUI implements xvidUIComponent {
 	 * @return string
 	 */
 	public function render() {
-		$tpl = new ilTemplate('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/templates/default/tpl.card.html', true, false);
+		$tpl = new ilTemplate($this->pl->getDirectory() . '/templates/default/tpl.card.html', true, false);
 		$tpl->setVariable('CLASSES', $this->getClasses());
 		$tpl->setVariable('TITLE', $this->getTitle());
 		$tpl->setVariable('DESCRIPTION', $this->getDescription());

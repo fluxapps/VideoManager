@@ -14,6 +14,7 @@ class vidmCountTableGUI extends ilTable2GUI {
 	 */
 	protected $pl;
 
+
 	/**
 	 * @param                      $a_parent_obj
 	 * @param ilVideoManagerTree   $tree
@@ -27,7 +28,7 @@ class vidmCountTableGUI extends ilTable2GUI {
 		$this->addColumn($this->pl->txt('common_title'));
 		$this->addColumn($this->pl->txt('stats_views'));
 		$this->setData($tree->getChilds($node->getId()));
-		$this->setRowTemplate('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/templates/default/tpl.stats_row.html');
+		$this->setRowTemplate($this->pl->getDirectory() . '/templates/default/tpl.stats_row.html');
 	}
 
 
@@ -40,7 +41,7 @@ class vidmCountTableGUI extends ilTable2GUI {
 		 */
 		$ilVideoManagerVideo = ilVideoManagerVideo::find($a_set['child']);
 
-		if($a_set["type"] === $ilVideoManagerVideo::TYPE_VID) {
+		if ($a_set["type"] === $ilVideoManagerVideo::TYPE_VID) {
 			$this->tpl->setVariable('VIDEO', $ilVideoManagerVideo->getPreviewImageHttp());
 		} else {
 			$this->tpl->setVariable('VIDEO', ilUtil::getImagePath('icon_cat.svg'));
