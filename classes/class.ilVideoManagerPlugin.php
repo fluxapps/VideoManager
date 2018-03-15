@@ -10,6 +10,8 @@ require_once('./Services/MainMenu/classes/class.ilMainMenuGUI.php');
  */
 class ilVideoManagerPlugin extends ilUserInterfaceHookPlugin {
 
+	const PLUGIN_ID = 'video_man';
+	const PLUGIN_NAME = 'VideoManager';
 	/**
 	 * @var ilSubscriptionPlugin
 	 */
@@ -47,7 +49,7 @@ class ilVideoManagerPlugin extends ilUserInterfaceHookPlugin {
 	 * @return string
 	 */
 	public function getPluginName() {
-		return 'VideoManager';
+		return self::PLUGIN_NAME;
 	}
 
 
