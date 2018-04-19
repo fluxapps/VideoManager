@@ -193,6 +193,15 @@ class xvidListItemGUI implements xvidUIComponent {
 	 * @var string
 	 */
 	protected $classes = 'col-lg-3 col-md-3 col-sm-4 col-xs-6';
+	/**
+	 * @var ilVideoManagerPlugin
+	 */
+	protected $pl;
+
+
+	public function __construct() {
+		$this->pl = ilVideoManagerPlugin::getInstance();
+	}
 
 
 	/**
