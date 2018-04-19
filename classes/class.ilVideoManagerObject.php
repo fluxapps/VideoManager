@@ -1,6 +1,7 @@
 <?php
 require_once('./Services/ActiveRecord/class.ActiveRecord.php');
 require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/class.ilVideoManagerTree.php');
+require_once "Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/VideoManager/classes/Administration/class.ilVideoManagerAdminGUI.php";
 
 /**
  * Class ilVideoManagerObject
@@ -8,6 +9,7 @@ require_once('./Customizing/global/plugins/Services/UIComponent/UserInterfaceHoo
  * @author Theodor Truffer <tt@studer-raimann.ch>
  */
 class ilVideoManagerObject extends ActiveRecord {
+
 	const TABLE_NAME = 'vidm_data';
 	const TYPE_VID = 'vid';
 	const TYPE_FLD = 'fld';
@@ -463,7 +465,7 @@ class ilVideoManagerObject extends ActiveRecord {
 				break;
 		}
 
-		return null;
+		return NULL;
 	}
 
 
